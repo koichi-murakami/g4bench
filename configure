@@ -1,6 +1,6 @@
 #!/bin/sh -
 # ======================================================================
-#  Configure script for MPEXS
+#  Configure script for G4Bench
 #
 #  Note:
 #  This script is an alternative cmake wrapper.
