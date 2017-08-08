@@ -1,0 +1,197 @@
+#!/bin/sh -
+# ======================================================================
+#  Configure script for MPEXS
+#
+#  Note:
+#  This script is an alternative cmake wrapper.
+#  The script generates a cmake build directory in "build" directory.
+#  You can do the same things with cmake command using -DXXX=VVV options.
+# ======================================================================
+export LANG=C
+
+# ======================================================================
+# testing the echo features
+# ======================================================================
+if `(echo "testing\c"; echo 1,2,3) | grep c > /dev/null` ; then
+  if `(echo -n testing; echo 1,2,3) | sed s/-n/xn/ | grep xn > /dev/null`; then
+    ac_n= ac_c='
+' ac_t='  '
+  else
+    ac_n=-n ac_c= ac_t=
+  fi
+else
+  ac_n= ac_c='\c' ac_t=
+fi
+
+# ======================================================================
+# help message
+# ======================================================================
+show_help() {
+cat <<EOF
+
+\`configure' cmake configure script for mpexs library.
+
+Usage: configure [OPTION]... [VAR=VALUE]...
+
+Options:
+  -h, --help                display this help and exit
+
+Installation directories:
+  --prefix=PREFIX           installation prefix [config.cmake]
+
+Fine tuning of the library build:
+  --with-geant4-dir=DIR     Geant4 installed dir [config.cmake]
+  --with-nvcc-arch=ARCH     CUDA compute capability [config.cmake]
+
+Enable/disable options: prefix with either --enable- or --disable-
+  vis      OpenGL support [disable]
+  opt      optimization (O3) [enable]
+  debug    debug mode [disable]
+  dev      development mode [enable]
+  fastmath fast-math option [disable]
+  l1cache  L1 cache option [disable]
+
+After configuration is done,
+cd build
+make
+make install
+EOF
+}
+
+# ======================================================================
+# functions
+# ======================================================================
+check_error() {
+  if [ $? -ne 0 ]; then
+    exit -1
+  fi
+}
+
+show_line() {
+echo "========================================================================"
+}
+
+# ======================================================================
+# main
+# ======================================================================
+# default values
+prefix=_cmake
+g4_install=_cmake
+nvcc_arch=_cmake
+enable_vis=0
+enable_opt=1
+enable_debug=0
+enable_dev=1
+enable_fastmath=0
+enable_l1cache=0
+
+# parsing options
+while test $# -gt 0
+do
+  case $1 in
+    -*=*) optarg=`echo "$1" | sed 's/[-_a-zA-Z0-9]*=//'` ;;
+    *) optarg= ;;
+  esac
+
+  case $1 in
+    --help|-h) show_help;  exit 0 ;;
+    # ---------------------------------------------------------------
+    --prefix=*)                prefix=$optarg                    ;;
+    --with-geant4-dir=*)       g4_install=$optarg                ;;
+    --with-nvcc-arch=*)        nvcc_arch=$optarg                 ;;
+    # ---------------------------------------------------------------
+    --enable-vis )         enable_vis=1                          ;;
+    --disable-vis )        enable_vis=0                          ;;
+    --enable-opt )         enable_opt=1                          ;;
+    --disable-opt )        enable_opt=0                          ;;
+    --enable-debug )       enable_debug=1                        ;;
+    --disable-debug )       enable_debug=0                        ;;
+    --enable-dev )         enable_dev=1                          ;;
+    --disable-dev )        enable_dev=0                          ;;
+    --enable-fastmath )    enable_fastmath=1                     ;;
+    --disable-fastmath )   enable_fastmath=0                     ;;
+    --enable-l1cache )     enable_l1cache=1                      ;;
+    --disable-l1cache )    enable_l1cache=0                      ;;
+    # ---------------------------------------------------------------
+    -*)
+      echo "Unrecognized option: $1"
+      exit -1
+      ;;
+    *)
+      echo "Invalid argument: $1"
+      exit -1
+      ;;
+  esac
+  shift
+done
+
+# ======================================================================
+cmake_option=""
+
+echo "Build configuration:"
+echo $ac_n "MPEXS prefix   ... "
+if [ $prefix = _cmake ];then
+  echo "[config.cmake]"
+else
+  echo $prefix
+  cmake_option="-DCMAKE_INSTALL_PREFIX=${prefix}"
+fi
+
+echo $ac_n "Geant4 dir     ... "
+if [ $g4_install = _cmake ];then
+  echo "[config.cmake]"
+else
+  echo $g4_install
+  cmake_option="${cmake_option} -DGEANT4_INSTALL=${g4_install}"
+fi
+
+echo $ac_n "NVCC arch      ... "
+if [ "$nvcc_arch" = _cmake ];then
+  echo "[config.cmake]"
+else
+  echo $nvcc_arch
+  cmake_option="${cmake_option} -DNVCC_ARCH=${nvcc_arch}"
+fi
+
+echo ""
+echo $ac_n "Enabled support for [ "
+if [ $enable_vis = 1 ]; then
+  echo $ac_n "vis "
+  cmake_option="${cmake_option} -DENABLE_VIS=TRUE"
+fi
+
+if [ $enable_debug = 1 ]; then
+  echo $ac_n "debug "
+  cmake_option="${cmake_option} -DDEBUG=TRUE -DNVCC_DEBUG=TRUE"
+  if [ $enable_opt == 1 ]; then
+    enable_opt=0
+    cmake_option="${cmake_option} -DOPTIMIZE=FALSE"
+  fi
+fi
+
+if [ $enable_opt = 1 ]; then
+  echo $ac_n "opt "
+else
+  cmake_option="${cmake_option} -DOPTIMIZE=FALSE"
+fi
+
+if [ $enable_dev = 1 ]; then
+  echo $ac_n "dev "
+else
+  cmake_option="${cmake_option} -DDEVMODE=FALSE"
+fi
+
+echo "]"
+echo " "
+echo "cmake flags:${cmake_option}"
+# ======================================================================
+show_line
+echo "@@ execute cmake..."
+if [ -d build ]; then
+  rm -r -f build
+fi
+mkdir build
+cd build
+cmake $cmake_option ..
+check_error
+exit 0
