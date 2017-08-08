@@ -1,13 +1,13 @@
 #==============================================================================
-#  CMakeLists.txt for buidlig MPEXS
+#  CMakeLists.txt for buidlig G4Bench
 #
-#  Copyright 2017 MPEXS Project
+#  Copyright 2017 Koichi Murakami
 #
 #  ***************************
 #  !! DONOT EDIT THIS FILE  !!
 #  ***************************
 #==============================================================================
-project(MPEXS)
+project(G4Bench)
 #==============================================================================
 cmake_minimum_required(VERSION 3.7)
 
