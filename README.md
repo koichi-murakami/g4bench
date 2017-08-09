@@ -4,7 +4,7 @@
 G4Bench is a set of benchmark tests of Geant4 detector simulation toolkit.
 
 * Releases
-* Install Instructions
+* [Install Instructions] (https://bitbucket.org/koichi_murakami/g4bench/wiki/Installation)
 * Issues
 * Roadmap
 
