@@ -1,4 +1,4 @@
-![g4bench](docs/img/logo.png)
+[g4bench](docs/img/logo.png)
 
 # G4Bench
 G4Bench is a set of benchmark tests of Geant4 detector simulation toolkit.
