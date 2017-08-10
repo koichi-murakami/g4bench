@@ -1,8 +1,8 @@
 /*============================================================================
-  Copyright 2017 MPEXS Project
+  Copyright 2017 Koichi Murakami
 
   Distributed under the OSI-approved BSD License (the "License");
-  see accompanying file Copyright.txt for details.
+  see accompanying file LICENSE for details.
 
   This software is distributed WITHOUT ANY WARRANTY; without even the
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -11,13 +11,13 @@
 #ifndef VERSION_H_
 #define VERSION_H_
 
-#define MPEXS_VERSION_MAJOR "@MPEXS_VERSION_MAJOR@"
-#define MPEXS_VERSION_MINOR "@MPEXS_VERSION_MINOR@"
-#define MPEXS_VERSION_BUILD 0x@MPEXS_VERSION_BUILD@
+#define G4BENCH_VERSION_MAJOR "@G4BENCH_VERSION_MAJOR@"
+#define G4BENCH_VERSION_MINOR "@G4BENCH_VERSION_MINOR@"
+#define G4BENCH_VERSION_BUILD 0x@G4BENCH_VERSION_BUILD@
 
 namespace {
-  const int build_head = (MPEXS_VERSION_BUILD & 0xffff000) >> 12;
-  const int build_tail = MPEXS_VERSION_BUILD & 0xfff;
+  const int build_head = (G4BENCH_VERSION_BUILD & 0xffff000) >> 12;
+  const int build_tail = G4BENCH_VERSION_BUILD & 0xfff;
 } // namespace
 
 #endif
