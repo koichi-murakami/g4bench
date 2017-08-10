@@ -41,15 +41,12 @@ Installation directories:
 
 Fine tuning of the library build:
   --with-geant4-dir=DIR     Geant4 installed dir [config.cmake]
-  --with-nvcc-arch=ARCH     CUDA compute capability [config.cmake]
 
 Enable/disable options: prefix with either --enable- or --disable-
-  vis      OpenGL support [disable]
+  vis      OpenGL support [enable]
   opt      optimization (O3) [enable]
   debug    debug mode [disable]
   dev      development mode [enable]
-  fastmath fast-math option [disable]
-  l1cache  L1 cache option [disable]
 
 After configuration is done,
 cd build
@@ -77,13 +74,10 @@ echo "========================================================================"
 # default values
 prefix=_cmake
 g4_install=_cmake
-nvcc_arch=_cmake
-enable_vis=0
+enable_vis=1
 enable_opt=1
 enable_debug=0
 enable_dev=1
-enable_fastmath=0
-enable_l1cache=0
 
 # parsing options
 while test $# -gt 0
@@ -98,20 +92,15 @@ do
     # ---------------------------------------------------------------
     --prefix=*)                prefix=$optarg                    ;;
     --with-geant4-dir=*)       g4_install=$optarg                ;;
-    --with-nvcc-arch=*)        nvcc_arch=$optarg                 ;;
     # ---------------------------------------------------------------
     --enable-vis )         enable_vis=1                          ;;
     --disable-vis )        enable_vis=0                          ;;
     --enable-opt )         enable_opt=1                          ;;
     --disable-opt )        enable_opt=0                          ;;
     --enable-debug )       enable_debug=1                        ;;
-    --disable-debug )       enable_debug=0                        ;;
+    --disable-debug )      enable_debug=0                        ;;
     --enable-dev )         enable_dev=1                          ;;
     --disable-dev )        enable_dev=0                          ;;
-    --enable-fastmath )    enable_fastmath=1                     ;;
-    --disable-fastmath )   enable_fastmath=0                     ;;
-    --enable-l1cache )     enable_l1cache=1                      ;;
-    --disable-l1cache )    enable_l1cache=0                      ;;
     # ---------------------------------------------------------------
     -*)
       echo "Unrecognized option: $1"
@@ -145,38 +134,33 @@ else
   cmake_option="${cmake_option} -DGEANT4_INSTALL=${g4_install}"
 fi
 
-echo $ac_n "NVCC arch      ... "
-if [ "$nvcc_arch" = _cmake ];then
-  echo "[config.cmake]"
-else
-  echo $nvcc_arch
-  cmake_option="${cmake_option} -DNVCC_ARCH=${nvcc_arch}"
-fi
-
 echo ""
 echo $ac_n "Enabled support for [ "
 if [ $enable_vis = 1 ]; then
   echo $ac_n "vis "
   cmake_option="${cmake_option} -DENABLE_VIS=TRUE"
+else
+  cmake_option="${cmake_option} -DENABLE_VIS=FALSE"
 fi
 
 if [ $enable_debug = 1 ]; then
   echo $ac_n "debug "
-  cmake_option="${cmake_option} -DDEBUG=TRUE -DNVCC_DEBUG=TRUE"
-  if [ $enable_opt == 1 ]; then
-    enable_opt=0
-    cmake_option="${cmake_option} -DOPTIMIZE=FALSE"
-  fi
+  cmake_option="${cmake_option} -DDEBUG=TRUE"
+  enable_opt=0
+else
+  cmake_option="${cmake_option} -DDEBUG=FALSE"
 fi
 
-if [ $enable_opt = 1 ]; then
+if [ $enable_opt == 1 ]; then
   echo $ac_n "opt "
+  cmake_option="${cmake_option} -DOPTIMIZE=TRUE"
 else
   cmake_option="${cmake_option} -DOPTIMIZE=FALSE"
 fi
 
 if [ $enable_dev = 1 ]; then
   echo $ac_n "dev "
+  cmake_option="${cmake_option} -DDEVMODE=TRUE"
 else
   cmake_option="${cmake_option} -DDEVMODE=FALSE"
 fi
