@@ -89,7 +89,6 @@ endif()
 
 #------------------------------------------------------------------------------
 # adding sub directories to the project
-# libraries
-#add_subdirectory(ecal)
-#add_subdirectory(hcal)
-#add_subdirectory(vgeo)
+add_subdirectory(ecal)
+add_subdirectory(hcal)
+add_subdirectory(vgeo)
