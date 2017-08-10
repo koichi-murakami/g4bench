@@ -8,9 +8,7 @@
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   See the License for more information.
 ============================================================================*/
-#include "mpexs/util/stopwatch.h"
-
-namespace mpexs {
+#include "util/stopwatch.h"
 
 // --------------------------------------------------------------------------
 Stopwatch::Stopwatch()
@@ -64,5 +62,3 @@ const char* Stopwatch::GetClockTime() const
 
    return ctime(&timer);
 }
-
-} // namespace mpexs

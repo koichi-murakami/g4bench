@@ -15,8 +15,6 @@
 #include <time.h>
 #include <unistd.h>
 
-namespace mpexs {
-
 class Stopwatch {
 public:
   Stopwatch();
@@ -36,7 +34,5 @@ private:
   tms start_time_, end_time_;
 
 };
-
-} // namespace mpexs
 
 #endif

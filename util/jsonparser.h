@@ -13,15 +13,13 @@
 
 #include <string>
 #include <vector>
-#include "mpexs/util/picojson.h"
+#include "util/picojson.h"
 
 #ifndef DISALLOW_COPY_AND_ASSIGN
 #define DISALLOW_COPY_AND_ASSIGN(TypeName) \
   TypeName(const TypeName&) = delete;      \
   void operator=(const TypeName&) = delete
 #endif
-
-namespace mpexs {
 
 class JsonParser {
 public:
@@ -56,7 +54,5 @@ private:
   picojson::value data_map_;
 
 };
-
-} // namespace mpexs
 
 #endif

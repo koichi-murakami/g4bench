@@ -10,9 +10,8 @@
 ============================================================================*/
 #include <iostream>
 #include <iomanip>
-#include "mpexs/util/timehistory.h"
+#include "util/timehistory.h"
 
-namespace mpexs {
 // --------------------------------------------------------------------------
 TimeHistory* TimeHistory::GetTimeHistory()
 {
@@ -105,5 +104,3 @@ void TimeHistory::ShowClock(const std::string& prefix) const
 {
   std::cout << prefix << " " << sw_.GetClockTime() << std::flush;
 }
-
-} // namespace mpexs

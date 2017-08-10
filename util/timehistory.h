@@ -13,15 +13,13 @@
 
 #include <map>
 #include <string>
-#include "mpexs/util/stopwatch.h"
+#include "util/stopwatch.h"
 
 #ifndef DISALLOW_COPY_AND_ASSIGN
 #define DISALLOW_COPY_AND_ASSIGN(TypeName) \
   TypeName(const TypeName&);               \
   void operator=(const TypeName&)
 #endif
-
-namespace mpexs {
 
 class TimeHistory {
 public:
@@ -49,7 +47,5 @@ private:
   std::map<std::string, double> split_history_;
 
 };
-
-} // namespace mpexs
 
 #endif

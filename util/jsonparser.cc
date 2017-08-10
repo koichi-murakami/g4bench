@@ -12,7 +12,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <vector>
-#include "mpexs/util/jsonparser.h"
+#include "util/jsonparser.h"
 
 using namespace picojson;
 
@@ -274,8 +274,6 @@ void DumpObject(const picojson::object& obj, int level)
 }
 
 } // end of namespace
-
-namespace mpexs {
 
 // --------------------------------------------------------------------------
 JsonParser* JsonParser::GetJsonParser()
@@ -598,5 +596,3 @@ void JsonParser::DumpAll() const
   const picojson::object& obj = data_map_.get<picojson::object>();
   ::DumpObject(obj, 0);
 }
-
-} // namespace mpexs
