@@ -1,26 +1,24 @@
 /*============================================================================
-  CUGEANT4 - CUDA Geant4 Project
-  Copyright 2012 [[@copyright]]
+Copyright 2017 Koichi Murakami
 
-  Distributed under the OSI-approved BSD License (the "License");
-  see accompanying file Copyright.txt for details.
+Distributed under the OSI-approved BSD License (the "License");
+see accompanying file LICENSE for details.
 
-  This software is distributed WITHOUT ANY WARRANTY; without even the
-  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-  See the License for more information.
+This software is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the License for more information.
 ============================================================================*/
 #include <vector>
 #include <boost/lexical_cast.hpp>
-
 #include "G4ParticleGun.hh"
 #include "G4RunManager.hh"
 #include "G4UImanager.hh"
-
+#include "FTFP_BERT.hh"
 //#include "analyzer.h"
 #include "appbuilder.h"
 //#include "eventaction.h"
 //#include "gsimgeom.h"
-//#include "particlegun.h"
+#include "particlegun.h"
 //#include "runaction.h"
 //#include "simdata.h"
 #include "util/jsonparser.h"
@@ -35,7 +33,7 @@ JsonParser* jparser = nullptr;
 
 // --------------------------------------------------------------------------
 /// setup geometry
-void SetupGeomtry(SimData* data)
+void SetupGeomtry()
 {
 }
 
@@ -93,16 +91,13 @@ void SetupParticleGun()
 /// setup primary generator action
 void SetupPGA()
 {
-  // primary type
   std::string primary_type = jparser-> GetStringValue("primary_type");
   if ( primary_type == "gun" ) {
     SetupParticleGun();
   } else if ( primary_type == "beam" ) {
-    SetupMedicalBeam();
+    //...
   } else {
-    std::cout << "[ ERROR ] invalid primary type. "
-              << primary_type << std::endl;
-    std::exit(EXIT_FAILURE);
+    SetupParticleGun();
   }
 }
 
@@ -110,16 +105,8 @@ void SetupPGA()
 
 // ==========================================================================
 AppBuilder::AppBuilder()
-//  : simdata_(NULL)
+//  : simdata_(nullptr)
 {
-  JsonParser* jparser = JsonParser::GetJsonParser();
-  bool qload = jparser-> LoadFile(config_file);
-  if ( ! qload ) {
-    std::cout << "[ ERROR ] failed on loading a config file. "
-              << config_file << std::endl;
-    std::exit(EXIT_FAILURE);
-  }
-
   ::run_manager = G4RunManager::GetRunManager();
   ::ui_manager = G4UImanager::GetUIpointer();
   ::jparser = JsonParser::GetJsonParser();
