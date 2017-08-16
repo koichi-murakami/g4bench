@@ -8,7 +8,7 @@ link_directories(${GEANT4_LIBRARY_DIR})
 
 # executable
 add_executable(${APP_NAME}
-  appbuilder.cc geometry.cc main.cc
+  appbuilder.cc geometry.cc main.cc particlegun.cc
   ../util/jsonparser.cc
   ../util/stopwatch.cc
   ../util/timehistory.cc
@@ -20,6 +20,8 @@ set_target_properties(${APP_NAME}
                       PROPERTIES INSTALL_RPATH
                       ${GEANT4_LIBRARY_DIR}
                       BUILD_WITH_INSTALL_RPATH TRUE)
+
+file(COPY config.json5 DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 install(FILES config.json DESTINATION ${CMAKE_INSTALL_PREFIX}/share)
