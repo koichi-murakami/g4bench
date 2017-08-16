@@ -9,7 +9,6 @@ implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License for more information.
 ============================================================================*/
 #include <getopt.h>
-#include <signal.h>
 #include <boost/lexical_cast.hpp>
 #include "G4RunManager.hh"
 #include "G4Run.hh"
@@ -19,6 +18,7 @@ See the License for more information.
 #include "G4UItcsh.hh"
 #include "G4VisExecutive.hh"
 #include "appbuilder.h"
+#include "version.h"
 #include "util/jsonparser.h"
 #include "util/timehistory.h"
 
@@ -43,7 +43,7 @@ void show_help()
   std::cout << "   -h, --help          show this message." << std::endl
             << "   -v  --version       show program name/version." << std::endl
             << "   -c, --config        "
-               "specify configuratioon file [config.json]" << std::endl
+               "specify configuratioon file [config.json5]" << std::endl
             << "   -s, --session=type  specify session type" << std::endl
             << "   -i, --init=macro    specify initial macro"
             << std::endl;
@@ -61,7 +61,7 @@ int main(int argc, char** argv)
   std::string str_density = "";
   std::string session_type = "";
   std::string init_macro = "";
-  std::string config_file = "config.json";
+  std::string config_file = "config.json5";
   std::string str_nhistories = "";
 
   int c;
@@ -113,6 +113,15 @@ int main(int argc, char** argv)
 
   if ( qhelp || qversion ) {
     std::exit(EXIT_SUCCESS);
+  }
+
+  // load config
+  JsonParser* jparser = JsonParser::GetJsonParser();
+  bool qload = jparser-> LoadFile(config_file);
+  if ( ! qload ) {
+    std::cout << "[ ERROR ] failed on loading a config file. "
+              << config_file << std::endl;
+    std::exit(EXIT_FAILURE);
   }
 
   // #histories
@@ -175,22 +184,22 @@ int main(int argc, char** argv)
   // start session
   bool qbatch = nhistories > 0;
   if ( qbatch ) { // batch mode
-    gtimer.TakeSplit("BeamOn");
+    gtimer-> TakeSplit("BeamOn");
     G4String command = "/run/beamOn " + str_nhistories;
     ui_manager-> ApplyCommand( command );
-    gtimer.TakeSplit("BeamEnd");
+    gtimer-> TakeSplit("BeamEnd");
 
   } else {  // interactive mode
-    gtimer.TakeSplit("SessionStart");
+    gtimer-> TakeSplit("SessionStart");
     ui_session-> SetPrompt("[40;01;33mecal[40;31m(%s)"
                            "[40;36m[%/][00;01;30m:");
     ui_session-> SetLsColor(BLUE, RED);
     ui_session-> SessionStart();
-    gtimer.TakeSplit("SessionEnd");
+    gtimer-> TakeSplit("SessionEnd");
   }
 
   // show all timer histories
-  gtimer.ShowAllHistories();
+  gtimer-> ShowAllHistories();
 
   // ----------------------------------------------------------------------
   // terminate
@@ -199,7 +208,7 @@ int main(int argc, char** argv)
   delete appbuilder;
   delete run_manager;
 
-  gtimer.ShowClock("[MESSAGE] End:");
+  gtimer-> ShowClock("[MESSAGE] End:");
 
   return EXIT_SUCCESS;
 }
