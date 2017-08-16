@@ -29,6 +29,18 @@ set(CMAKE_MODULE_PATH
     ${PROJECT_SOURCE_DIR}/cmake/Modules
     ${CMAKE_MODULE_PATH})
 
+# library path (lib or lib64)
+if(NOT DEFINED CMAKE_INSTALL_LIBDIR)
+  set(_LIBDIR_DEFAULT "lib")
+  if(CMAKE_SYSTEM_NAME MATCHES "Linux"
+      AND NOT EXISTS "/etc/debian_version")
+    if("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
+      set(_LIBDIR_DEFAULT "lib64")
+    endif()
+  endif()
+  set(CMAKE_INSTALL_LIBDIR "${_LIBDIR_DEFAULT}")
+endif()
+
 # find packages
 find_package(Geant4 REQUIRED)
 find_package(Boost 1.53.0)
@@ -50,18 +62,6 @@ if(NOT CMAKE_BUILD_TYPE)
   endif()
 endif()
 
-# library path (lib or lib64)
-if(NOT DEFINED CMAKE_INSTALL_LIBDIR)
-  set(_LIBDIR_DEFAULT "lib")
-  if(CMAKE_SYSTEM_NAME MATCHES "Linux"
-      AND NOT EXISTS "/etc/debian_version")
-    if("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
-      set(_LIBDIR_DEFAULT "lib64")
-    endif()
-  endif()
-  set(CMAKE_INSTALL_LIBDIR "${_LIBDIR_DEFAULT}")
-endif()
-
 #------------------------------------------------------------------------------
 # parameters for building
 message(STATUS "--------------------------------------------------------")
@@ -69,9 +69,8 @@ message(STATUS "Parameters for building")
 message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 message(STATUS "CMAKE_CXX_COMPILER: ${CMAKE_CXX_COMPILER}")
 message(STATUS "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
-if(DEVMODE)
-message(STATUS "CPPUTEST_FOUND: ${CPPUTEST_FOUND}")
-endif()
+message(STATUS "GEANT4_LIBRARY_DIR: ${GEANT4_LIBRARY_DIR}")
+
 message(STATUS "--------------------------------------------------------")
 
 #------------------------------------------------------------------------------
