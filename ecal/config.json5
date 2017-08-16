@@ -4,7 +4,6 @@
   // Run Configuration
   Run : {
     Seed : 1234567,
-    },
   },
   // -----------------------------------------------------------------
   // Primary setting (Generic)
