@@ -1,0 +1,20 @@
+// - G4Bench config file written in JSON5
+{
+  // -----------------------------------------------------------------
+  // Run Configuration
+  Run : {
+    Seed : 1234567,
+    },
+  },
+  // -----------------------------------------------------------------
+  // Primary setting (Generic)
+  Primary : {
+    // generic primary type [gun, beam]
+    type      : 'gun',
+    particle  : "e-",
+    energy    : 20.0,
+    // particle starting position (x,y,z) (cm)
+    position  : [ 0., 0., 0. ],
+    direction : [ 0., 0., 1.],
+  }
+}
