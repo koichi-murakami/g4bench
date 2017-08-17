@@ -1,3 +1,7 @@
+#
+# set environment vars for data files
+#
+
 export G4NEUTRONHPDATA=/opt/geant4/data/10.3.2/G4NDL4.5
 export G4LEDATA=/opt/geant4/data/10.3.2/G4EMLOW6.50
 export G4LEVELGAMMADATA=/opt/geant4/data/10.3.2/PhotonEvaporation4.3.2
