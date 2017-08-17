@@ -5,7 +5,10 @@
 # CACHE variables can be changed in CMake CLI with -D option.
 #==============================================================================
 # Installation prefixes for MPEXS libraries
-set(CMAKE_INSTALL_PREFIX $ENV{HOME}/Library/g4bench
+#set(CMAKE_INSTALL_PREFIX $ENV{HOME}/Library/g4bench
+#    CACHE STRING "Install prefix")
+
+set(CMAKE_INSTALL_PREFIX /home/kmura/work/g4bench/work
     CACHE STRING "Install prefix")
 
 # Geant4 installation path
@@ -20,4 +23,4 @@ set(OPTIMIZE TRUE CACHE BOOL "Optimizaton flag (O3)")
 set(DEBUG FALSE CACHE BOOL "Debug mode")
 
 # Development flag (set false for release)
-set(DEVMODE TRUE CACHE BOOL "Development mode (Unit Testing)")
+set(DEVMODE TRUE CACHE BOOL "Development mode")
