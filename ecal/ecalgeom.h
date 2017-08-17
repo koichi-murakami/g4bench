@@ -13,11 +13,10 @@ See the License for more information.
 
 #include "G4VUserDetectorConstruction.hh"
 
-class QDetectorConstruction : public G4VUserDetectorConstruction {
-
+class EcalGeom : public G4VUserDetectorConstruction {
 public:
-  QDetectorConstruction();
-  ~QDetectorConstruction();
+  EcalGeom();
+  ~EcalGeom();
 
   virtual G4VPhysicalVolume* Construct();
 

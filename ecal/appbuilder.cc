@@ -14,14 +14,14 @@ See the License for more information.
 #include "G4RunManager.hh"
 #include "G4UImanager.hh"
 #include "FTFP_BERT.hh"
-//#include "analyzer.h"
 #include "appbuilder.h"
-//#include "eventaction.h"
-//#include "gsimgeom.h"
+#include "ecalgeom.h"
 #include "particlegun.h"
+#include "util/jsonparser.h"
+//#include "analyzer.h"
+//#include "eventaction.h"
 //#include "runaction.h"
 //#include "simdata.h"
-#include "util/jsonparser.h"
 
 // --------------------------------------------------------------------------
 namespace {
@@ -32,13 +32,13 @@ JsonParser* jparser = nullptr;
 //Analyzer* analyzer = NULL;
 
 // --------------------------------------------------------------------------
-/// setup geometry
 void SetupGeomtry()
 {
+  EcalGeom* geom = new EcalGeom();
+  run_manager-> SetUserInitialization(geom);
 }
 
 // --------------------------------------------------------------------------
-// setup particle gun
 void SetupParticleGun()
 {
   // particle generator
@@ -88,10 +88,9 @@ void SetupParticleGun()
 }
 
 // --------------------------------------------------------------------------
-/// setup primary generator action
 void SetupPGA()
 {
-  std::string primary_type = jparser-> GetStringValue("primary_type");
+  std::string primary_type = jparser-> GetStringValue("Primary/type");
   if ( primary_type == "gun" ) {
     SetupParticleGun();
   } else if ( primary_type == "beam" ) {
@@ -126,9 +125,9 @@ AppBuilder::~AppBuilder()
 // --------------------------------------------------------------------------
 void AppBuilder::SetupApplication()
 {
-  //::SetupGeomtry(simdata_);
+  ::SetupGeomtry();
   ::run_manager-> SetUserInitialization(new FTFP_BERT);
-  //::SetupPGA();
+  ::SetupPGA();
 
   //RunAction* runaction = new RunAction;
   //::run_manager-> SetUserAction(runaction);
