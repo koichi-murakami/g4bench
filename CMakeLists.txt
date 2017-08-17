@@ -1,4 +1,4 @@
-#==============================================================================
+#
 #  CMakeLists.txt for buidlig G4Bench
 #
 #  Copyright 2017 Koichi Murakami
@@ -6,14 +6,13 @@
 #  ***************************
 #  !! DONOT EDIT THIS FILE  !!
 #  ***************************
+#
+cmake_minimum_required(VERSION 3.8)
+include(config.cmake)
 #==============================================================================
 project(G4Bench)
 #==============================================================================
-cmake_minimum_required(VERSION 3.8)
 
-include(config.cmake)
-
-#------------------------------------------------------------------------------
 # version.h generation (true for release)
 if(DEVMODE)
   set(SKIP_VERSION FALSE)
