@@ -24,6 +24,8 @@ public:
   ParticleGun();
   ~ParticleGun();
 
+  G4ParticleGun* GetGun() const;
+
   virtual void GeneratePrimaries(G4Event* event);
 
 private:
@@ -32,5 +34,11 @@ private:
   G4ParticleGun* gun_;
 
 };
+
+// ==========================================================================
+inline G4ParticleGun* ParticleGun::GetGun() const
+{
+  return gun_;
+}
 
 #endif
