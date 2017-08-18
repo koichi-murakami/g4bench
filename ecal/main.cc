@@ -29,7 +29,7 @@ void show_version()
   const char* version_str = G4BENCH_VERSION_MAJOR "."
                             G4BENCH_VERSION_MINOR ".";
 
-  std::cout << "G4Bench ecal version " << version_str << ::build_head << "."
+  std::cout << "G4Bench/ecal version " << version_str << ::build_head << "."
             << ::build_tail << std::endl;
 }
 
@@ -58,13 +58,11 @@ int main(int argc, char** argv)
   // optional parameters
   bool qhelp = false;
   bool qversion = false;
-  std::string str_density = "";
   std::string session_type = "";
   std::string init_macro = "";
   std::string config_file = "config.json5";
   std::string str_nhistories = "";
 
-  int c;
   struct option long_options[] = {
     {"help",    no_argument,       NULL, 'h'},
     {"version", no_argument,       NULL, 'v'},
@@ -77,7 +75,7 @@ int main(int argc, char** argv)
   while (1) {
     int option_index = -1;
 
-    c = getopt_long(argc, argv, "hvc:s:i:", long_options, &option_index);
+    int c = getopt_long(argc, argv, "hvc:s:i:", long_options, &option_index);
 
     if (c == -1) break;
 
@@ -137,27 +135,21 @@ int main(int argc, char** argv)
     }
     if(nhistories <= 0 ) {
       std::cout << "[ ERROR ] #histories should be more than 0." << std::endl;
-      std::exit(EXIT_SUCCESS);
+      std::exit(EXIT_FAILURE);
     }
   }
 
   // ----------------------------------------------------------------------
-  // timer for time profiling
-  TimeHistory* gtimer = TimeHistory::GetTimeHistory();
-  gtimer-> ShowClock("[MESSAGE] Start:");
+  const char* version_str = G4BENCH_VERSION_MAJOR "."
+                            G4BENCH_VERSION_MINOR ".";
 
-
-  // ----------------------------------------------------------------------
-  // G4 managers & setup application
-  G4RunManager* run_manager = new G4RunManager();
-  G4UImanager* ui_manager = G4UImanager::GetUIpointer();
-
-  AppBuilder* appbuilder = new AppBuilder();
-  appbuilder-> SetupApplication();
+  std::cout << "G4Bench/ecal version " << version_str << ::build_head << "."
+            << ::build_tail << std::endl;
 
   std::cout << "=============================================================="
             << std::endl
-            << "  ecal" << std::endl
+            << "  ecal ver.l" << version_str << ::build_head
+            << "." << ::build_tail << std::endl
             << "   * config file = " << config_file << std::endl
             << "   * # of histories = " << nhistories
             << std::endl;
@@ -165,49 +157,50 @@ int main(int argc, char** argv)
             << std::endl;
 
   // ----------------------------------------------------------------------
-  // initialize...
-  run_manager-> Initialize();
+  TimeHistory* gtimer = TimeHistory::GetTimeHistory();
+  gtimer-> ShowClock("[MESSAGE] Start:");
 
-  // vis.
+  // G4 managers & setup application
+  G4RunManager* run_manager = new G4RunManager();
+  G4UImanager* ui_manager = G4UImanager::GetUIpointer();
+
+  AppBuilder* appbuilder = new AppBuilder();
+  appbuilder-> SetupApplication();
+
+  // ----------------------------------------------------------------------
   G4VisManager* vis_manager = new G4VisExecutive("quiet");
   vis_manager-> Initialize();
 
-  // ui session
   G4UIExecutive* ui_session = new G4UIExecutive(argc, argv, session_type);
 
   // do init macro
   if (init_macro != "" ) {
     G4String command = "/control/execute ";
-    ui_manager-> ApplyCommand( command + init_macro );
+    ui_manager-> ApplyCommand(command + init_macro);
   }
 
   // start session
   bool qbatch = nhistories > 0;
-  if ( qbatch ) { // batch mode
+  if ( qbatch ) {
     gtimer-> TakeSplit("BeamOn");
-    G4String command = "/run/beamOn " + str_nhistories;
-    ui_manager-> ApplyCommand( command );
+    run_manager-> BeamOn(nhistories);
     gtimer-> TakeSplit("BeamEnd");
 
-  } else {  // interactive mode
+  } else {
     gtimer-> TakeSplit("SessionStart");
-    ui_session-> SetPrompt("[40;01;33mecal[40;31m(%s)"
-                           "[40;36m[%/][00;01;30m:");
+    ui_session-> SetPrompt("[40;01;33mecal[40;31m(%s)[40;36m[%/][00;01;30m:");
     ui_session-> SetLsColor(BLUE, RED);
     ui_session-> SessionStart();
     gtimer-> TakeSplit("SessionEnd");
   }
 
-  // show all timer histories
-  gtimer-> ShowAllHistories();
-
   // ----------------------------------------------------------------------
-  // terminate
   delete vis_manager;
   delete ui_session;
   delete appbuilder;
   delete run_manager;
 
+  gtimer-> ShowAllHistories();
   gtimer-> ShowClock("[MESSAGE] End:");
 
   return EXIT_SUCCESS;
