@@ -29,6 +29,8 @@ private:
 
   //SimData* simdata_;
 
+  bool CheckVPrimaryPosition(const G4ThreeVector& pos);
+
 };
 
 #endif
