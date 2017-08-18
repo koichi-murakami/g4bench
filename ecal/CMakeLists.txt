@@ -12,7 +12,8 @@ endif()
 
 # executable
 add_executable(${APP_NAME}
-  appbuilder.cc ecalgeom.cc main.cc particlegun.cc
+  appbuilder.cc ecalgeom.cc eventaction.cc
+  main.cc particlegun.cc runaction.cc
   ../util/jsonparser.cc
   ../util/stopwatch.cc
   ../util/timehistory.cc
@@ -26,4 +27,4 @@ set_target_properties(${APP_NAME}
                       BUILD_WITH_INSTALL_RPATH TRUE)
 
 install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/ecal)
-install(FILES config.json5 DESTINATION ${CMAKE_INSTALL_PREFIX}/ecal)
+install(FILES config.tmpl DESTINATION ${CMAKE_INSTALL_PREFIX}/ecal)
