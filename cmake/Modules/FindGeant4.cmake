@@ -32,7 +32,7 @@ endif()
 
 set(GEANT4_INCLUDE_DIR ${GEANT4_PREFIX}/include/Geant4)
 set(GEANT4_LIBRARY_DIR ${GEANT4_PREFIX}/${_LIBDIR_DEFAULT})
-set(GEANT4_LIBRARIES  G4vis_management G4modeling G4interfaces G4persistency G4analysis
+set(GEANT4_LIBRARIES  G4interfaces G4persistency G4analysis
                       G4error_propagation G4readout G4physicslists
                       G4run G4event G4tracking G4parmodels G4processes
                       G4digits_hits G4track G4particles G4geometry

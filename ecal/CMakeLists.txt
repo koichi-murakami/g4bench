@@ -8,6 +8,7 @@ link_directories(${GEANT4_LIBRARY_DIR})
 
 if(ENABLE_VIS)
   add_definitions(-DG4INTY_USE_X -DG4VIS_USE_OPENGLX -DG4VIS_USE_OPENGLQT)
+  add_definitions(-DENABLE_VIS)
 endif()
 
 # executable

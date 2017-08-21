@@ -168,8 +168,10 @@ int main(int argc, char** argv)
   appbuilder-> SetupApplication();
 
   // ----------------------------------------------------------------------
+#ifdef ENABLE_VIS
   G4VisManager* vis_manager = new G4VisExecutive("quiet");
   vis_manager-> Initialize();
+#endif
 
   G4UIExecutive* ui_session = new G4UIExecutive(argc, argv, session_type);
 
