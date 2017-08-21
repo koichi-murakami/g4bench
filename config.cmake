@@ -23,4 +23,4 @@ set(OPTIMIZE TRUE CACHE BOOL "Optimizaton flag (O3)")
 set(DEBUG FALSE CACHE BOOL "Debug mode")
 
 # Development flag (set false for release)
-set(DEVMODE TRUE CACHE BOOL "Development mode")
+set(DEVMODE FALSE CACHE BOOL "Development mode")
