@@ -15,7 +15,7 @@ See the License for more information.
   TypeName(const TypeName&);               \
   void operator=(const TypeName&)
 
-//class SimData;
+class SimData;
 
 class AppBuilder {
 public:
@@ -27,7 +27,7 @@ public:
 private:
   DISALLOW_COPY_AND_ASSIGN(AppBuilder);
 
-  //SimData* simdata_;
+  SimData* simdata_;
 
   bool CheckVPrimaryPosition(const G4ThreeVector& pos);
 
