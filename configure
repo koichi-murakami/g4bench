@@ -10,20 +10,6 @@
 export LANG=C
 
 # ======================================================================
-# testing the echo features
-# ======================================================================
-if `(echo "testing\c"; echo 1,2,3) | grep c > /dev/null` ; then
-  if `(echo -n testing; echo 1,2,3) | sed s/-n/xn/ | grep xn > /dev/null`; then
-    ac_n= ac_c='
-' ac_t='  '
-  else
-    ac_n=-n ac_c= ac_t=
-  fi
-else
-  ac_n= ac_c='\c' ac_t=
-fi
-
-# ======================================================================
 # help message
 # ======================================================================
 show_help() {
@@ -118,7 +104,7 @@ done
 cmake_option=""
 
 echo "Build configuration:"
-echo $ac_n "G4Bench prefix   ... "
+echo -n "G4Bench prefix   ... "
 if [ $prefix = _cmake ]; then
   echo "[config.cmake]"
 else
@@ -126,7 +112,7 @@ else
   cmake_option="-DCMAKE_INSTALL_PREFIX=${prefix}"
 fi
 
-echo $ac_n "Geant4 dir     ... "
+echo -n "Geant4 dir     ... "
 if [ $g4_install = _cmake ]; then
   echo "[config.cmake]"
 else
@@ -135,16 +121,16 @@ else
 fi
 
 echo ""
-echo $ac_n "Enabled support for [ "
+echo -n "Enabled support for [ "
 if [ $enable_vis = 1 ]; then
-  echo $ac_n "vis "
+  echo -n "vis "
   cmake_option="${cmake_option} -DENABLE_VIS=TRUE"
 else
   cmake_option="${cmake_option} -DENABLE_VIS=FALSE"
 fi
 
 if [ $enable_debug = 1 ]; then
-  echo $ac_n "debug "
+  echo -n "debug "
   cmake_option="${cmake_option} -DDEBUG=TRUE"
   enable_opt=0
 else
@@ -152,7 +138,7 @@ else
 fi
 
 if [ $enable_opt = 1 ]; then
-  echo $ac_n "opt "
+  echo -n "opt "
   cmake_option="${cmake_option} -DOPTIMIZE=TRUE"
 else
   cmake_option="${cmake_option} -DOPTIMIZE=FALSE"
@@ -160,7 +146,7 @@ fi
 
 if [ $enable_dev != _cmake ]; then
   if [ $enable_dev = 1 ]; then
-    echo $ac_n "dev "
+    echo -n "dev "
     cmake_option="${cmake_option} -DDEVMODE=TRUE"
   else
     cmake_option="${cmake_option} -DDEVMODE=FALSE"
