@@ -76,7 +76,7 @@ message(STATUS "--------------------------------------------------------")
 # version.h (#.##d# + rev# / dev flag d/a/b/rc)
 if(NOT SKIP_VERSION)
 set(G4BENCH_VERSION_MAJOR 1)
-set(G4BENCH_VERSION_MINOR 0.1rc1)
+set(G4BENCH_VERSION_MINOR 0.2)
 execute_process (COMMAND git rev-parse --short HEAD OUTPUT_VARIABLE
                  G4BENCH_VERSION_BUILD OUTPUT_STRIP_TRAILING_WHITESPACE)
 configure_file(
