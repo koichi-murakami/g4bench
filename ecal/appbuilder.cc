@@ -24,10 +24,10 @@ See the License for more information.
 #include "ecalgeom.h"
 #include "particlegun.h"
 #include "util/jsonparser.h"
-//#include "analyzer.h"
 #include "eventaction.h"
 #include "runaction.h"
-//#include "simdata.h"
+#include "simdata.h"
+#include "stepaction.h"
 
 // --------------------------------------------------------------------------
 namespace {
@@ -35,12 +35,12 @@ namespace {
 G4RunManager* run_manager = nullptr;
 G4UImanager* ui_manager = nullptr;
 JsonParser* jparser = nullptr;
-//Analyzer* analyzer = NULL;
 
 // --------------------------------------------------------------------------
-void SetupGeomtry()
+void SetupGeomtry(SimData* data)
 {
   EcalGeom* geom = new EcalGeom();
+  geom-> SetSimData(data);
   run_manager-> SetUserInitialization(geom);
 }
 
@@ -109,32 +109,33 @@ AppBuilder::AppBuilder()
   ::ui_manager = G4UImanager::GetUIpointer();
   ::jparser = JsonParser::GetJsonParser();
 
-  //simdata_ = new SimData;
-  //::analyzer = Analyzer::GetAnalyzer();
-  //::analyzer-> SetSimData(simdata_);
+  simdata_ = new SimData;
 }
 
 // --------------------------------------------------------------------------
 AppBuilder::~AppBuilder()
 {
-  //delete simdata_;
+  delete simdata_;
 }
 
 // --------------------------------------------------------------------------
 void AppBuilder::SetupApplication()
 {
-  ::SetupGeomtry();
+  ::SetupGeomtry(simdata_);
   ::run_manager-> SetUserInitialization(new FTFP_BERT);
   ::SetupPGA();
 
   RunAction* runaction = new RunAction;
+  runaction-> SetSimData(simdata_);
   ::run_manager-> SetUserAction(runaction);
+
 
   EventAction* eventaction = new EventAction;
   ::run_manager-> SetUserAction(eventaction);
 
-  // initialize analyzer (allocate data memory)
-  //::analyzer-> Initialize();
+  StepAction* stepaction = new StepAction;
+  stepaction-> SetSimData(simdata_);
+  ::run_manager-> SetUserAction(stepaction);
 
   ::run_manager-> Initialize();
 
