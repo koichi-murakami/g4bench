@@ -9,22 +9,55 @@ implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License for more information.
 ============================================================================*/
 #include "G4Run.hh"
-//#include "analyzer.h"
+#include "G4SystemOfUnits.hh"
 #include "runaction.h"
+#include "simdata.h"
 #include "util/timehistory.h"
 
 // --------------------------------------------------------------------------
 namespace {
 
-//Analyzer* analyzer = nullptr;
 TimeHistory* gtimer = nullptr;
 
-/// show run information
-void ShowRunSummary(const G4Run* run)
+} // end of namespace
+
+// --------------------------------------------------------------------------
+RunAction::RunAction()
+  : simdata_(nullptr)
+{
+  ::gtimer = TimeHistory::GetTimeHistory();
+}
+
+// --------------------------------------------------------------------------
+RunAction::~RunAction()
+{
+}
+
+// --------------------------------------------------------------------------
+void RunAction::BeginOfRunAction(const G4Run*)
+{
+  simdata_-> Initialize();
+
+  std::cout << std::endl;
+  ::gtimer-> TakeSplit("RunBegin");
+}
+
+// --------------------------------------------------------------------------
+void RunAction::EndOfRunAction(const G4Run* run)
+{
+  ::gtimer-> TakeSplit("RunEnd");
+  ShowRunSummary(run);
+}
+
+// --------------------------------------------------------------------------
+void RunAction::ShowRunSummary(const G4Run* run)
 {
   // # of processed events
   int nevents_to_be = run-> GetNumberOfEventToBeProcessed();
   int nevents = run-> GetNumberOfEvent();
+
+  // Edep information
+  double edep_cal = simdata_-> GetEdep() / nevents / MeV;
 
   // elapsed time
   double t_start = 0;
@@ -49,8 +82,11 @@ void ShowRunSummary(const G4Run* run)
   double proc_time_per_event = proc_time / nevents / msec ;
 
   // events/msec
-  double average_eps = nevents / elapsed_time * msec;
   double proc_eps = nevents / proc_time * msec;
+
+  // steps/msec
+  double sps = simdata_-> GetStepCount() / proc_time * msec;
+
 
   std::cout << std::endl;
   std::cout << "=============================================================="
@@ -60,45 +96,18 @@ void ShowRunSummary(const G4Run* run)
             << nevents_to_be << std::endl
             << " - elapsed cpu time = " << elapsed_time << " sec" << std::endl
             << " - initialization time = " << init_time << " sec" << std::endl
+            << " *** Physics regression ***" << std::endl
+            << " - edep in cal per event = " << edep_cal << " MeV/event"
+            << std::endl
+            << " *** EPS Score ***" << std::endl
             << " - average time per event = " << average_time_per_event
             << " msec" << std::endl
             << " - processed time per event = " << proc_time_per_event
             << " msec" << std::endl
-            << " - average EPS = " << average_eps << "/msec" << std::endl
-            << " - processed EPS = " << proc_eps << "/msec"
+            << " - processed EPS = " << proc_eps << " /msec" << std::endl
+            <<" *** SPS Score ***" << std::endl
+            << " - steps per msec = " << sps << " steps/msec"
             << std::endl;
   std::cout << "=============================================================="
             << std::endl << std::endl;
-}
-
-} // end of namespace
-
-// --------------------------------------------------------------------------
-RunAction::RunAction()
-{
-  //::analyzer = Analyzer::GetAnalyzer();
-  ::gtimer = TimeHistory::GetTimeHistory();
-}
-
-// --------------------------------------------------------------------------
-RunAction::~RunAction()
-{
-}
-
-// --------------------------------------------------------------------------
-void RunAction::BeginOfRunAction(const G4Run*)
-{
-  std::cout << std::endl;
-  ::gtimer-> TakeSplit("RunBegin");
-  //::analyzer-> ZeroClear();
-}
-
-// --------------------------------------------------------------------------
-void RunAction::EndOfRunAction(const G4Run* run)
-{
-  //::analyzer-> SaveToROOT();
-  //::analyzer-> SaveToGDD();
-  ::gtimer-> TakeSplit("RunEnd");
-
-  ::ShowRunSummary(run);
 }
