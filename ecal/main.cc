@@ -148,10 +148,9 @@ int main(int argc, char** argv)
             << ::build_tail << std::endl;
 
   std::cout << "=============================================================="
-            << std::endl
-            << "  ecal ver.l" << version_str << ::build_head
-            << "." << ::build_tail << std::endl
-            << "   * config file = " << config_file << std::endl
+            << std::endl;
+  ::show_version();
+  std::cout << "   * config file = " << config_file << std::endl
             << "   * # of histories = " << nhistories
             << std::endl;
   std::cout << "=============================================================="
