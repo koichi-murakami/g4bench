@@ -37,7 +37,7 @@ set(GEANT4_LIBRARIES  G4interfaces G4persistency G4analysis
                       G4run G4event G4tracking G4parmodels G4processes
                       G4digits_hits G4track G4particles G4geometry
                       G4materials G4graphics_reps G4intercoms
-                      G4global G4clhep)
+                      G4global G4clhep G4zlib)
 
 set(GEANT4_LIBRARIES_WITH_VIS
                       G4OpenGL G4gl2ps G4Tree G4FR G4GMocren G4visHepRep
@@ -47,4 +47,4 @@ set(GEANT4_LIBRARIES_WITH_VIS
                       G4run G4event G4tracking G4parmodels G4processes
                       G4digits_hits G4track G4particles G4geometry
                       G4materials G4graphics_reps G4intercoms
-                      G4global G4clhep)
+                      G4global G4clhep G4zlib)

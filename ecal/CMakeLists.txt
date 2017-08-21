@@ -21,9 +21,9 @@ add_executable(${APP_NAME}
 )
 
 if(ENABLE_VIS)
-  target_link_libraries(${APP_NAME} ${GEANT4_LIBRARIES_WITH_VIS} z)
+  target_link_libraries(${APP_NAME} ${GEANT4_LIBRARIES_WITH_VIS})
 else()
-  target_link_libraries(${APP_NAME} ${GEANT4_LIBRARIES} z)
+  target_link_libraries(${APP_NAME} ${GEANT4_LIBRARIES})
 endif()
 
 set_target_properties(${APP_NAME}
