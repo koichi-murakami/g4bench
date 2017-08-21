@@ -12,8 +12,8 @@ endif()
 
 # executable
 add_executable(${APP_NAME}
-  appbuilder.cc ecalgeom.cc eventaction.cc
-  main.cc particlegun.cc runaction.cc
+  appbuilder.cc calscorer.cc ecalgeom.cc eventaction.cc main.cc
+  particlegun.cc runaction.cc simdata.cc stepaction.cc
   ../util/jsonparser.cc
   ../util/stopwatch.cc
   ../util/timehistory.cc
