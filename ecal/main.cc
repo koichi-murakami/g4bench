@@ -29,8 +29,9 @@ void show_version()
   const char* version_str = G4BENCH_VERSION_MAJOR "."
                             G4BENCH_VERSION_MINOR ".";
 
-  std::cout << "G4Bench/ecal version " << version_str << ::build_head << "."
-            << ::build_tail << std::endl;
+  std::cout << "G4Bench/ecal version 1.0.1"
+            << " (" << version_str << ::build_head << "."
+            << ::build_tail << ")" << std::endl;
 }
 
 // --------------------------------------------------------------------------
