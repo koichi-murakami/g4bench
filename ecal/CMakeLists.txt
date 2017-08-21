@@ -19,7 +19,11 @@ add_executable(${APP_NAME}
   ../util/timehistory.cc
 )
 
-target_link_libraries(${APP_NAME} ${GEANT4_LIBRARIES_WITH_VIS} z)
+if(ENABLE_VIS)
+  target_link_libraries(${APP_NAME} ${GEANT4_LIBRARIES_WITH_VIS} z)
+else()
+  target_link_libraries(${APP_NAME} ${GEANT4_LIBRARIES} z)
+endif()
 
 set_target_properties(${APP_NAME}
                       PROPERTIES INSTALL_RPATH
