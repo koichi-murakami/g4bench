@@ -10,6 +10,7 @@ See the License for more information.
 ============================================================================*/
 #include <vector>
 #include <boost/lexical_cast.hpp>
+#include "FTFP_BERT.hh"
 #include "G4Navigator.hh"
 #include "G4ParticleGun.hh"
 #include "G4ParticleTable.hh"
@@ -19,7 +20,9 @@ See the License for more information.
 #include "G4UImanager.hh"
 #include "G4VPhysicalVolume.hh"
 #include "G4VSolid.hh"
-#include "FTFP_BERT.hh"
+#include "CLHEP/Random/MTwistEngine.h"
+//#include "CLHEP/Random/Ranlux64Engine.h"
+#include "CLHEP/Random/Random.h"
 #include "appbuilder.h"
 #include "ecalgeom.h"
 #include "particlegun.h"
@@ -110,6 +113,18 @@ AppBuilder::AppBuilder()
   ::jparser = JsonParser::GetJsonParser();
 
   simdata_ = new SimData;
+
+  CLHEP::MTwistEngine* rand_engine = new CLHEP::MTwistEngine();
+  //CLHEP::Ranlux64Engine* rand_engine = new CLHEP::Ranlux64Engine();
+
+  long seed = 0L;
+  if ( jparser-> Contains("Run/Seed") ) {
+    long seed = jparser-> GetLongValue("Run/Seed");
+  }
+
+  const int kK = 12345;
+  rand_engine-> setSeed(seed, kK);
+  CLHEP::HepRandom::setTheEngine(rand_engine);
 }
 
 // --------------------------------------------------------------------------
