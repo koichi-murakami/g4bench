@@ -100,9 +100,9 @@ void RunAction::ShowRunSummary(const G4Run* run)
             << " - edep in cal per event = " << edep_cal << " MeV/event"
             << std::endl
             << " *** EPS Score ***" << std::endl
-            << " - average time per event = " << average_time_per_event
+            << " - average TPE = " << average_time_per_event
             << " msec" << std::endl
-            << " - processed time per event = " << proc_time_per_event
+            << " - processed TPE = " << proc_time_per_event
             << " msec" << std::endl
             << " - processed EPS = " << proc_eps << " /msec" << std::endl
             <<" *** SPS Score ***" << std::endl
