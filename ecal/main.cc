@@ -197,10 +197,12 @@ int main(int argc, char** argv)
   }
 
   // ----------------------------------------------------------------------
-  delete vis_manager;
   delete ui_session;
   delete appbuilder;
   delete run_manager;
+#ifdef ENABLE_VIS
+  delete vis_manager;
+#endif
 
   gtimer-> ShowAllHistories();
   gtimer-> ShowClock("[MESSAGE] End:");
