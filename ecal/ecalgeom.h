@@ -13,13 +13,26 @@ See the License for more information.
 
 #include "G4VUserDetectorConstruction.hh"
 
+class SimData;
+
 class EcalGeom : public G4VUserDetectorConstruction {
 public:
   EcalGeom();
   ~EcalGeom();
 
+  void SetSimData(SimData* data);
+
   virtual G4VPhysicalVolume* Construct();
 
+private:
+  SimData* simdata_;
+
 };
+
+// ==========================================================================
+inline void EcalGeom::SetSimData(SimData* data)
+{
+  simdata_ = data;
+}
 
 #endif
