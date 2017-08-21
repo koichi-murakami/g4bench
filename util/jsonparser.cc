@@ -395,6 +395,31 @@ int JsonParser::GetIntValue(const char* key) const
 }
 
 // --------------------------------------------------------------------------
+long JsonParser::GetLongValue(const char* key) const
+{
+  const picojson::object& obj = data_map_.get<picojson::object>();
+  bool is_found{false};
+  picojson::value val = ::SearchKeyValue(key, obj, is_found);
+
+  if ( ! is_found ) {
+    std::stringstream ss;
+    ss << "JsonParser::GetIntValue() key is not found." << std::endl
+       << key;
+    ::ThrowException(ss.str());
+  }
+
+  if ( ! val.is<double>() ) {
+    std::stringstream ss;
+    ss << "JsonParser::GetIntValue() not a double/int." << std::endl
+       << key;
+    ::ThrowException(ss.str());
+  }
+
+  long long_value = val.get<double>();
+  return long_value;
+}
+
+// --------------------------------------------------------------------------
 double JsonParser::GetDoubleValue(const char* key) const
 {
   const picojson::object& obj = data_map_.get<picojson::object>();

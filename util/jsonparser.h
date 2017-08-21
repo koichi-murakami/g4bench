@@ -37,6 +37,7 @@ public:
 
   bool GetBoolValue(const char* key) const;
   int GetIntValue(const char* key) const;
+  long GetLongValue(const char* key) const;
   double GetDoubleValue(const char* key) const;
   std::string GetStringValue(const char* key) const;
 
