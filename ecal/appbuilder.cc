@@ -90,17 +90,8 @@ void SetupParticleGun()
 // --------------------------------------------------------------------------
 void SetupPGA()
 {
-  std::string primary_type = jparser-> GetStringValue("Primary/type");
-  if ( primary_type == "gun" ) {
-    std::cout << "[ MESSAGE ] primary type : gun" << std::endl;
-    SetupParticleGun();
-  } else if ( primary_type == "beam" ) {
-    std::cout << "[ MESSAGE ] primary type : beam" << std::endl;
-    //...
-  } else {
-    std::cout << "[ MESSAGE ] primary type : gun" << std::endl;
-    SetupParticleGun();
-  }
+  std::cout << "[ MESSAGE ] primary type : gun" << std::endl;
+  SetupParticleGun();
 }
 
 } // end of namespace
