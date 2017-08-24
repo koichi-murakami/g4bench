@@ -42,7 +42,7 @@ G4VPhysicalVolume* EcalGeom::Construct()
   G4LogicalVolume* world_lv = new G4LogicalVolume(world_box, air, "world");
 
   G4PVPlacement* world_pv = new G4PVPlacement(nullptr, G4ThreeVector(), "world",
-                                              world_lv, 0, false, 0);
+                                              world_lv, nullptr, false, 0);
 
   // voxel
   const double kDXZ_Voxel = 20.*mm;
