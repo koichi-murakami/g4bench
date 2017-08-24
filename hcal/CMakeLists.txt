@@ -31,5 +31,5 @@ set_target_properties(${APP_NAME}
                       ${GEANT4_LIBRARY_DIR}
                       BUILD_WITH_INSTALL_RPATH TRUE)
 
-install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/ecal)
-install(FILES config.tmpl DESTINATION ${CMAKE_INSTALL_PREFIX}/ecal)
+install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/hcal)
+install(FILES config.tmpl DESTINATION ${CMAKE_INSTALL_PREFIX}/hcal)
