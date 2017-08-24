@@ -4,9 +4,8 @@
 G4Bench is a set of benchmark tests of Geant4 detector simulation toolkit.
 
 * [Releases](https://github.com/koichi-murakami/g4bench/releases)
-* [Install Instructions](https://bitbucket.org/koichi_murakami/g4bench/wiki/Installation)
-* [Issues](https://bitbucket.org/koichi_murakami/g4bench/issues?status=new&status=open)
-* [Roadmap](https://bitbucket.org/koichi_murakami/g4bench/issues/1/roadmap-001)
+* [Install Instructions](https://github.com/koichi-murakami/g4bench/wiki/Installation)
+* [Issues](https://github.com/koichi-murakami/g4bench/issues)
 
 ## Benchmarks
 * ecal : Simulation of EM calorimeter array
