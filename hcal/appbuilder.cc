@@ -24,7 +24,7 @@ See the License for more information.
 //#include "CLHEP/Random/Ranlux64Engine.h"
 #include "CLHEP/Random/Random.h"
 #include "appbuilder.h"
-#include "ecalgeom.h"
+#include "hcalgeom.h"
 #include "particlegun.h"
 #include "util/jsonparser.h"
 #include "eventaction.h"
@@ -42,7 +42,7 @@ JsonParser* jparser = nullptr;
 // --------------------------------------------------------------------------
 void SetupGeomtry(SimData* data)
 {
-  EcalGeom* geom = new EcalGeom();
+  HcalGeom* geom = new HcalGeom();
   geom-> SetSimData(data);
   run_manager-> SetUserInitialization(geom);
 }
@@ -90,17 +90,8 @@ void SetupParticleGun()
 // --------------------------------------------------------------------------
 void SetupPGA()
 {
-  std::string primary_type = jparser-> GetStringValue("Primary/type");
-  if ( primary_type == "gun" ) {
-    std::cout << "[ MESSAGE ] primary type : gun" << std::endl;
-    SetupParticleGun();
-  } else if ( primary_type == "beam" ) {
-    std::cout << "[ MESSAGE ] primary type : beam" << std::endl;
-    //...
-  } else {
-    std::cout << "[ MESSAGE ] primary type : gun" << std::endl;
-    SetupParticleGun();
-  }
+  std::cout << "[ MESSAGE ] primary type : gun" << std::endl;
+  SetupParticleGun();
 }
 
 } // end of namespace
