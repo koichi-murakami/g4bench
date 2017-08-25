@@ -8,17 +8,17 @@ This software is distributed WITHOUT ANY WARRANTY; without even the
 implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License for more information.
 ============================================================================*/
-#ifndef ECAL_GEOM_H_
-#define ECAL_GEOM_H_
+#ifndef VOXEL_GEOM_H_
+#define VOXEL_GEOM_H_
 
 #include "G4VUserDetectorConstruction.hh"
 
 class SimData;
 
-class EcalGeom : public G4VUserDetectorConstruction {
+class VoxelGeom : public G4VUserDetectorConstruction {
 public:
-  EcalGeom();
-  ~EcalGeom();
+  VoxelGeom();
+  ~VoxelGeom();
 
   void SetSimData(SimData* data);
 
@@ -30,7 +30,7 @@ private:
 };
 
 // ==========================================================================
-inline void EcalGeom::SetSimData(SimData* data)
+inline void VoxelGeom::SetSimData(SimData* data)
 {
   simdata_ = data;
 }
