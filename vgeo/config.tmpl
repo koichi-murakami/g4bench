@@ -6,12 +6,20 @@
     Seed : 123456789,
   },
   // -----------------------------------------------------------------
-  // Primary setting (Generic)
+  // Primary setting for particle gun
   Primary : {
     type : "gun",
     particle  : "e-",
     energy    : 20.0,   // MeV
     position  : [ 0., 0., -65. ],  // cm
     direction : [ 0., 0., 1.],
+  }
+  // -----------------------------------------------------------------
+  // Primary setting for beam
+  Primary : {
+    type : "beam",
+    particle  : "e-",
+    energy    : 20.0,   // MeV
+    position  : [ 0., 0., -65. ],  // cm
   }
 }
