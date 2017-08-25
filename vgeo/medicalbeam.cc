@@ -1,13 +1,12 @@
 /*============================================================================
-  CUGEANT4 - CUDA Geant4 Project
-  Copyright 2012 [[@copyright]]
+Copyright 2017 Koichi Murakami
 
-  Distributed under the OSI-approved BSD License (the "License");
-  see accompanying file Copyright.txt for details.
+Distributed under the OSI-approved BSD License (the "License");
+see accompanying file LICENSE for details.
 
-  This software is distributed WITHOUT ANY WARRANTY; without even the
-  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-  See the License for more information.
+This software is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the License for more information.
 ============================================================================*/
 #include <algorithm>
 #include <cmath>
@@ -16,17 +15,18 @@
 #include "G4Electron.hh"
 #include "G4Gamma.hh"
 #include "G4PrimaryVertex.hh"
+#include "G4PhysicalConstants.hh"
+#include "G4SystemOfUnits.hh"
 #include "G4ThreeVector.hh"
 #include "CLHEP/Random/RandFlat.h"
 #include "medicalbeam.h"
 
 namespace {
 
-/// photon voltage
+// photon voltage
 enum { k6MV = 6, k18MV = 18 };
 
 // --------------------------------------------------------------------------
-/// calculate beam direction
 G4ThreeVector GenerateBeamDirection(double ssd, double fxy)
 {
   const double dr = std::sqrt(2.) * fxy / 2.;
@@ -49,7 +49,6 @@ G4ThreeVector GenerateBeamDirection(double ssd, double fxy)
 }
 
 // --------------------------------------------------------------------------
-/// photon energy spectrum
   const double kEbin = 250.*keV;
 
   // 6 MV
@@ -86,7 +85,6 @@ G4ThreeVector GenerateBeamDirection(double ssd, double fxy)
   std::vector<double> vec_energy18(kSize18), vec_cprob18(kSize18);
 
 // --------------------------------------------------------------------------
-/// initialize photon spectrum
 void InitializePhotnSpectrum()
 {
   for ( int i = 0; i < kSize6; i++ ) {
@@ -103,7 +101,6 @@ void InitializePhotnSpectrum()
 }
 
 // --------------------------------------------------------------------------
-/// generate photon energy (6MV)
 double GeneratePhotonEnergy6MV()
 {
   double rand_max = vec_cprob6[kSize6-1];
