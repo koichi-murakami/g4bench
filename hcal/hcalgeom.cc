@@ -14,7 +14,6 @@ See the License for more information.
 #include "G4PVPlacement.hh"
 #include "G4PVReplica.hh"
 #include "G4SystemOfUnits.hh"
-#include "G4Tubs.hh"
 #include "G4VisAttributes.hh"
 #include "calscorer.h"
 #include "hcalgeom.h"
