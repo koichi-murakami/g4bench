@@ -24,7 +24,6 @@ See the License for more information.
 #include "G4VisExecutive.hh"
 #endif
 
-
 namespace {
 // --------------------------------------------------------------------------
 void show_version()
