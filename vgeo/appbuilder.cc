@@ -24,13 +24,14 @@ See the License for more information.
 //#include "CLHEP/Random/Ranlux64Engine.h"
 #include "CLHEP/Random/Random.h"
 #include "appbuilder.h"
-#include "voxelgeom.h"
-#include "particlegun.h"
-#include "util/jsonparser.h"
 #include "eventaction.h"
+#include "medicalbeam.h"
+#include "particlegun.h"
 #include "runaction.h"
 #include "simdata.h"
 #include "stepaction.h"
+#include "voxelgeom.h"
+#include "util/jsonparser.h"
 
 // --------------------------------------------------------------------------
 namespace {
@@ -88,6 +89,13 @@ void SetupParticleGun()
 }
 
 // --------------------------------------------------------------------------
+void SetupMedicalBeam()
+{
+  MedicalBeam* pga = new MedicalBeam();
+
+}
+
+// --------------------------------------------------------------------------
 void SetupPGA()
 {
   std::string primary_type = jparser-> GetStringValue("Primary/type");
@@ -96,7 +104,7 @@ void SetupPGA()
     SetupParticleGun();
   } else if ( primary_type == "beam" ) {
     std::cout << "[ MESSAGE ] primary type : beam" << std::endl;
-    //...
+    SetupMedicalBeam();
   } else {
     std::cout << "[ MESSAGE ] primary type : gun" << std::endl;
     SetupParticleGun();
