@@ -20,7 +20,6 @@ See the License for more information.
 #include "version.h"
 #include "util/jsonparser.h"
 #include "util/timehistory.h"
-
 #ifdef ENABLE_VIS
 #include "G4VisExecutive.hh"
 #endif
@@ -33,7 +32,7 @@ void show_version()
   const char* version_str = G4BENCH_VERSION_MAJOR "."
                             G4BENCH_VERSION_MINOR ".";
 
-  std::cout << "G4Bench/ecal version 1.0.3"
+  std::cout << "G4Bench/vgeo version 1.1"
             << " (" << version_str << ::build_head << "."
             << ::build_tail << ")" << std::endl;
 }
@@ -41,7 +40,7 @@ void show_version()
 // --------------------------------------------------------------------------
 void show_help()
 {
-  std::cout << "G4Bench ecal" << std::endl;
+  std::cout << "G4Bench vgeo" << std::endl;
   std::cout << "usage:" << std::endl;
   std::cout << "ecal [options] [#histories]"
             << std::endl << std::endl;
@@ -145,12 +144,6 @@ int main(int argc, char** argv)
   }
 
   // ----------------------------------------------------------------------
-  const char* version_str = G4BENCH_VERSION_MAJOR "."
-                            G4BENCH_VERSION_MINOR ".";
-
-  std::cout << "G4Bench/ecal version " << version_str << ::build_head << "."
-            << ::build_tail << std::endl;
-
   std::cout << "=============================================================="
             << std::endl;
   ::show_version();
