@@ -24,7 +24,7 @@ See the License for more information.
 //#include "CLHEP/Random/Ranlux64Engine.h"
 #include "CLHEP/Random/Random.h"
 #include "appbuilder.h"
-#include "ecalgeom.h"
+#include "voxelgeom.h"
 #include "particlegun.h"
 #include "util/jsonparser.h"
 #include "eventaction.h"
@@ -42,7 +42,7 @@ JsonParser* jparser = nullptr;
 // --------------------------------------------------------------------------
 void SetupGeomtry(SimData* data)
 {
-  EcalGeom* geom = new EcalGeom();
+  VoxelGeom* geom = new VoxelGeom();
   geom-> SetSimData(data);
   run_manager-> SetUserInitialization(geom);
 }
