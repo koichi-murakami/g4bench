@@ -11,10 +11,13 @@ See the License for more information.
 #include "G4Box.hh"
 #include "G4LogicalVolume.hh"
 #include "G4NistManager.hh"
+#include "G4PVParameterised.hh"
 #include "G4PVPlacement.hh"
+#include "G4PVReplica.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4VisAttributes.hh"
 #include "voxelgeom.h"
+#include "phantom_pvp.h"
 #include "calscorer.h"
 
 // --------------------------------------------------------------------------
@@ -56,13 +59,44 @@ G4VPhysicalVolume* VoxelGeom::Construct()
     new G4PVPlacement(0, G4ThreeVector(0., 0., kZ_Phantom), phantom_lv,
                       "phantom", world_lv, false, 0);
 
+  // voxel params.
+  const int kNxy_Voxel = 61;
+  const int kNz_Voxel = 150;
+  const double kDXY_Voxel = 5. * mm;
+  const double kDZ_Voxel = 2. * mm;
 
+  // 1st, replication along z-axis
+  G4Box* voxel_dz_solid =
+    new G4Box("vz", kDXY_Phantom/2., kDXY_Phantom/2., kDZ_Voxel/2.);
+  G4LogicalVolume* voxel_dz_lv =
+    new G4LogicalVolume(voxel_dz_solid, water, "vz");
+  G4PVReplica* voxel_dz =
+    new G4PVReplica("vz", voxel_dz_lv, phantom_lv, kZAxis, kNz_Voxel, kDZ_Voxel);
 
+  // 2nd, replication along y-axis
+  G4Box* voxel_dyz_solid =
+    new G4Box("vyz", kDXY_Phantom/2., kDXY_Voxel/2., kDZ_Voxel/2.);
+  G4LogicalVolume* voxel_dyz_lv =
+    new G4LogicalVolume(voxel_dyz_solid, water, "vyz");
+  G4PVReplica* phantom_dyz =
+    new G4PVReplica("vyz", voxel_dyz_lv, voxel_dz_lv,
+                    kYAxis, kNxy_Voxel, kDXY_Voxel);
 
+  // 3rd, nested parameterization
+  G4Box* voxel_dxyz_solid =
+    new G4Box("vxyz", kDXY_Voxel/2., kDXY_Voxel/2., kDZ_Voxel/2.);
+  G4LogicalVolume* voxel_dxyz_lv =
+    new G4LogicalVolume(voxel_dxyz_solid, water, "vxyz");
+
+  G4VNestedParameterisation* param = nullptr;
+  PhantomPVP* wp_param = new PhantomPVP();
+  wp_param-> SetSegment(kNxy_Voxel, kDXY_Voxel);
+  new G4PVParameterised("vxyz", voxel_dxyz_lv,
+                        voxel_dyz_lv, kXAxis, kNxy_Voxel, wp_param);
 
   CalScorer* cal_scorer = new CalScorer();
   cal_scorer-> SetSimData(simdata_);
-  //cal_lv-> SetSensitiveDetector(cal_scorer);
+  voxel_dxyz_lv-> SetSensitiveDetector(cal_scorer);
 
   // vis attributes
   G4VisAttributes* va = nullptr;
@@ -70,9 +104,15 @@ G4VPhysicalVolume* VoxelGeom::Construct()
   va-> SetVisibility(true);
   world_lv-> SetVisAttributes(va);
 
-  va= new G4VisAttributes(G4Color(0.,0.8,0.8));
+  va = new G4VisAttributes(G4Color(0.,0.8,0.8));
   va-> SetVisibility(true);
+  voxel_dz_lv-> SetVisAttributes(va);
+
+  va = new G4VisAttributes();
+  va-> SetVisibility(false);
   phantom_lv-> SetVisAttributes(va);
+  voxel_dyz_lv-> SetVisAttributes(va);
+  voxel_dxyz_lv-> SetVisAttributes(va);
 
   return world_pv;
 }
