@@ -52,12 +52,11 @@ void SetupGeomtry(SimData* data)
 G4ThreeVector GetPrimaryPosition()
 {
   G4ThreeVector pos = G4ThreeVector();
-  if ( jparser-> Contains("Primary/Gun/position") ) {
-    std::vector<double> dvec;
-    dvec.clear();
-    jparser-> GetDoubleArray("Primary/Gun/position", dvec);
-    pos = G4ThreeVector(dvec[0]*cm, dvec[1]*cm, dvec[2]*cm);
-  }
+  std::vector<double> dvec;
+  dvec.clear();
+  jparser-> GetDoubleArray("Primary/Gun/position", dvec);
+  pos = G4ThreeVector(dvec[0]*cm, dvec[1]*cm, dvec[2]*cm);
+
   return pos;
 }
 
@@ -77,12 +76,11 @@ void SetupParticleGun()
   gun-> SetParticleEnergy(pkin*MeV);
 
   std::vector<double> dvec;
-  if ( jparser-> Contains("Primary/Gun/direction") ) {
-    dvec.clear();
-    jparser-> GetDoubleArray("Primary/Gun/direction", dvec);
-    G4ThreeVector pvec(dvec[0], dvec[1], dvec[2]);
-    gun-> SetParticleMomentumDirection(pvec);
-  }
+  dvec.clear();
+  jparser-> GetDoubleArray("Primary/Gun/direction", dvec);
+  G4ThreeVector pvec(dvec[0], dvec[1], dvec[2]);
+  gun-> SetParticleMomentumDirection(pvec);
+
   G4ThreeVector pos = GetPrimaryPosition();
   gun-> SetParticlePosition(pos);
 }
