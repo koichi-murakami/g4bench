@@ -1,6 +1,7 @@
 ![g4bench](docs/img/logo.png)
 
 # G4Bench
+Copyright (c) 2017, Koichi Murakami
 G4Bench is a set of benchmark tests of Geant4 detector simulation toolkit.
 
 * [Releases](https://github.com/koichi-murakami/g4bench/releases)
@@ -38,3 +39,8 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+The above copyright and license notice applies to distributions of
+G4Bench software in source and binary form.  Some source files contain
+additional notices of original copyright by their contributors;
+see each source for details.
