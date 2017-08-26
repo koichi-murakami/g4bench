@@ -6,20 +6,24 @@
     Seed : 123456789,
   },
   // -----------------------------------------------------------------
-  // Primary setting for particle gun
+  // Primary Configuration
   Primary : {
     type : "gun",
-    particle  : "e-",
-    energy    : 20.0,   // MeV
-    position  : [ 0., 0., -65. ],  // cm
-    direction : [ 0., 0., 1.],
-  }
-  // -----------------------------------------------------------------
-  // Primary setting for beam
+  },
   Primary : {
-    type : "beam",
-    particle  : "e-",
-    energy    : 20.0,   // MeV
-    position  : [ 0., 0., -65. ],  // cm
+    Gun : {
+      particle  : "e-",
+      energy    : 20.0,   // MeV
+      position  : [ 0., 0., -65. ],  // cm
+      direction : [ 0., 0., 1.],
+    },
+  },
+  Primary : {
+    Beam : {
+      particle  : "e-",
+      energy    : 20.0,   // MeV
+      photon_voltage : 6,   // photon voltate, [6,18] MV for x-ray beam
+      ssd : 100.,  // SSD (cm)
+      field_size : 10.0,   // field size (X/Y) in cm
   }
 }
