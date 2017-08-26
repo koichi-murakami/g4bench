@@ -1,6 +1,6 @@
 #!/bin/sh -
 # ======================================================================
-#  Build & run : vgeo
+#  Build & run : vgeo / X-ray 18MV
 # ======================================================================
 export LANG=C
 
@@ -46,14 +46,17 @@ cat << EOD > config.json5
     Seed : 123456789,
   },
   Primary : {
-    particle  : "proton",
-    energy    : 10000.0,   // MeV
-    position  : [ 0., 0., -70. ],  // cm
-    direction : [ 0., 0., 1.],
+    type : "beam",
+    Beam : {
+      particle  : "gamma",
+      photon_voltage : 18,   // photon voltate, [6,18] MV for x-ray beam
+      ssd : 100.,  // SSD (cm)
+      field_size : 10.0,   // field size (X/Y) in cm
+    }
   }
 }
 EOD
 #
-./vgeo 1000
+./vgeo 100000
 
 exit $?
