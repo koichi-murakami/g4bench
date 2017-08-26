@@ -191,11 +191,9 @@ void MedicalBeam::GeneratePrimaries(G4Event* event)
   G4PrimaryParticle* primary =
     new G4PrimaryParticle( particle, pvec.x(), pvec.y(), pvec.z() );
 
-  const double kZoffset = 25.*cm;
-  G4ThreeVector pos = G4ThreeVector(0., 0., -ssd_ + kZoffset);
-
+  const double kZoffset = 35. * cm;
+  G4ThreeVector pos = G4ThreeVector(0., 0., kZoffset - ssd_);
   G4PrimaryVertex* vertex= new G4PrimaryVertex(pos, 0.*ns);
-
   vertex-> SetPrimary(primary);
 
   event-> AddPrimaryVertex(vertex);
