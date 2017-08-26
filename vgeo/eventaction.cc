@@ -51,12 +51,12 @@ void EventAction::BeginOfEventAction(const G4Event* event)
 void EventAction::EndOfEventAction(const G4Event* event)
 {
   int ievent = event-> GetEventID();
-  const int kKiloEvents = 1000;
+  const int k10KEvents = 10000;
 
-  if ( ievent % kKiloEvents == 0 && ievent != 0 ) {
-    int event_in_mega = ievent / kKiloEvents;
+  if ( ievent % k10KEvents == 0 && ievent != 0 ) {
+    int event_in_mega = ievent / k10KEvents;
     std::stringstream key;
-    key << "EventCheckPoint:" << event_in_mega << "K";
+    key << "EventCheckPoint:" << event_in_mega << "0K";
     ::gtimer-> TakeSplit(key.str());
     ::ShowProgress(ievent, key.str());
   }
