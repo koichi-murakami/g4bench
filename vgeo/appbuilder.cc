@@ -68,22 +68,21 @@ void SetupParticleGun()
   run_manager-> SetUserAction(pga);
   G4ParticleGun* gun = pga-> GetGun();
 
-  std::string pname = jparser-> GetStringValue("Primary/particle");
+  std::string pname = jparser-> GetStringValue("Primary/Gun/particle");
   G4ParticleTable* ptable = G4ParticleTable::GetParticleTable();
   G4ParticleDefinition* pdef = ptable-> FindParticle(pname);
   if ( pdef != nullptr ) gun-> SetParticleDefinition(pdef);
 
-  double pkin = jparser-> GetDoubleValue("Primary/energy");
+  double pkin = jparser-> GetDoubleValue("Primary/Gun/energy");
   gun-> SetParticleEnergy(pkin*MeV);
 
   std::vector<double> dvec;
-  if ( jparser-> Contains("Primary/direction") ) {
+  if ( jparser-> Contains("Primary/Gun/direction") ) {
     dvec.clear();
-    jparser-> GetDoubleArray("Primary/direction", dvec);
+    jparser-> GetDoubleArray("Primary/Gun/direction", dvec);
     G4ThreeVector pvec(dvec[0], dvec[1], dvec[2]);
     gun-> SetParticleMomentumDirection(pvec);
   }
-
   G4ThreeVector pos = GetPrimaryPosition();
   gun-> SetParticlePosition(pos);
 }
@@ -91,8 +90,36 @@ void SetupParticleGun()
 // --------------------------------------------------------------------------
 void SetupMedicalBeam()
 {
-  MedicalBeam* pga = new MedicalBeam();
+  MedicalBeam* beam = new MedicalBeam();
 
+  std::string pname = jparser-> GetStringValue("Primary/Beam/particle");
+  if ( pname != "gamma" && pname != "e-" ) {
+   std::cout << "[ ERROR ] AppBuilder::SetupMedicalBeam() "
+                "invalid particle in setup, " << pname
+             << std::endl;
+   std::exit(EXIT_FAILURE);
+ }
+ if ( pname  == "gamma" ) {
+   beam-> SetParticle(MedicalBeam::kPhoton);
+   int voltage = jparser-> GetIntValue("Primary/Beam/photon_voltage");
+   beam-> SetPhotonVoltage(voltage);
+ } else if ( pname == "e-") {
+   beam-> SetParticle(MedicalBeam::kElectron);
+   double ekin = jparser-> GetDoubleValue("Primary/Beam/energy");
+   beam-> SetElectronEnergy(ekin * MeV);
+ }
+
+ // SSD
+ if ( jparser-> Contains("Primary/Beam/ssd") ) {
+   double ssd = jparser-> GetDoubleValue("Primary/Beam/ssd");
+   beam-> SetSSD(ssd * cm);
+ }
+
+ // field size
+ if ( jparser-> Contains("Primary/Beam/field_size") ) {
+   double fxy = jparser-> GetDoubleValue("Primary/Beam/field_size");
+   beam-> SetFieldSize(fxy * cm);
+ }
 }
 
 // --------------------------------------------------------------------------
