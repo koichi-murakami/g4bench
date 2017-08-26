@@ -52,10 +52,10 @@ void SetupGeomtry(SimData* data)
 G4ThreeVector GetPrimaryPosition()
 {
   G4ThreeVector pos = G4ThreeVector();
-  if ( jparser-> Contains("Primary/position") ) {
+  if ( jparser-> Contains("Primary/Gun/position") ) {
     std::vector<double> dvec;
     dvec.clear();
-    jparser-> GetDoubleArray("Primary/position", dvec);
+    jparser-> GetDoubleArray("Primary/Gun/position", dvec);
     pos = G4ThreeVector(dvec[0]*cm, dvec[1]*cm, dvec[2]*cm);
   }
   return pos;
