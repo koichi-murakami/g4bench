@@ -89,6 +89,7 @@ void SetupParticleGun()
 void SetupMedicalBeam()
 {
   MedicalBeam* beam = new MedicalBeam();
+  run_manager-> SetUserAction(beam);
 
   std::string pname = jparser-> GetStringValue("Primary/Beam/particle");
   if ( pname != "gamma" && pname != "e-" ) {
