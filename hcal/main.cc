@@ -116,15 +116,6 @@ int main(int argc, char** argv)
     std::exit(EXIT_SUCCESS);
   }
 
-  // load config
-  JsonParser* jparser = JsonParser::GetJsonParser();
-  bool qload = jparser-> LoadFile(config_file);
-  if ( ! qload ) {
-    std::cout << "[ ERROR ] failed on loading a config file. "
-              << config_file << std::endl;
-    std::exit(EXIT_FAILURE);
-  }
-
   // #histories
   int nhistories = 0.;
   if ( optind < argc ) {
@@ -142,6 +133,15 @@ int main(int argc, char** argv)
     }
   }
 
+  // load config
+  JsonParser* jparser = JsonParser::GetJsonParser();
+  bool qload = jparser-> LoadFile(config_file);
+  if ( ! qload ) {
+    std::cout << "[ ERROR ] failed on loading a config file. "
+              << config_file << std::endl;
+    std::exit(EXIT_FAILURE);
+  }
+
   // ----------------------------------------------------------------------
   std::cout << "=============================================================="
             << std::endl;
@@ -149,6 +149,11 @@ int main(int argc, char** argv)
   std::cout << "   * config file = " << config_file << std::endl
             << "   * # of histories = " << nhistories
             << std::endl;
+  std::cout << "=============================================================="
+            << std::endl;
+
+  std::cout << "JSON configuration" << std::endl;
+  jparser-> DumpAll();
   std::cout << "=============================================================="
             << std::endl;
 
