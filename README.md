@@ -10,9 +10,9 @@ G4Bench is a set of benchmark tests of Geant4 detector simulation toolkit.
 * [Issues](https://github.com/koichi-murakami/g4bench/issues)
 
 ## Benchmarks
-* ecal : Simulation of EM calorimeter array
-* hcal : Simulation of hadron sandwich calorimeter
-* vgeo : Water phantom simulation for voxel geometry
+* `ecal` : Simulation of EM calorimeter array
+* `hcal` : Simulation of hadron sandwich calorimeter
+* `vgeo` : Water phantom simulation for voxel geometry
 
 ## License
 BSD 2-Clause License
