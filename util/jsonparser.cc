@@ -403,14 +403,14 @@ long JsonParser::GetLongValue(const char* key) const
 
   if ( ! is_found ) {
     std::stringstream ss;
-    ss << "JsonParser::GetIntValue() key is not found." << std::endl
+    ss << "JsonParser::GetLongValue() key is not found." << std::endl
        << key;
     ::ThrowException(ss.str());
   }
 
   if ( ! val.is<double>() ) {
     std::stringstream ss;
-    ss << "JsonParser::GetIntValue() not a double/int." << std::endl
+    ss << "JsonParser::GetLongValue() not a double/int." << std::endl
        << key;
     ::ThrowException(ss.str());
   }
