@@ -4,9 +4,6 @@
 # NOTE:
 # CACHE variables can be changed in CMake CLI with -D option.
 #==============================================================================
-# Installation prefixes for MPEXS libraries
-#set(CMAKE_INSTALL_PREFIX $ENV{HOME}/Library/g4bench
-#    CACHE STRING "Install prefix")
 
 set(CMAKE_INSTALL_PREFIX /home/kmura/work/g4bench/work
     CACHE STRING "Install prefix")
