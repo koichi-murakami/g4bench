@@ -15,6 +15,7 @@ See the License for more information.
 #include "G4Electron.hh"
 #include "G4Gamma.hh"
 #include "G4PrimaryVertex.hh"
+#include "G4Proton.hh"
 #include "G4PhysicalConstants.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4ThreeVector.hh"
@@ -136,7 +137,7 @@ double GeneratePhotonEnergy18MV()
 
 // --------------------------------------------------------------------------
 MedicalBeam::MedicalBeam()
-  : particle_type_(kElectron), electron_energy_(20.*MeV),
+  : particle_type_(kElectron), kinetic_energy_(20.*MeV),
     photon_voltage_(::k6MV), ssd_(100.*cm), field_xy_(10.*cm)
 {
   ::InitializePhotnSpectrum();
@@ -163,17 +164,24 @@ void MedicalBeam::SetPhotonVoltage(int volt)
 // --------------------------------------------------------------------------
 void MedicalBeam::GeneratePrimaries(G4Event* event)
 {
-
-  G4ParticleDefinition* particle = NULL;
-  if (particle_type_ == kElectron ) particle = G4Electron::Electron();
-  else particle = G4Gamma::Gamma();
+  G4ParticleDefinition* particle = nullptr;
+  switch ( particle_type_ ) {
+    case kElectron :
+      particle = G4Electron::Electron();
+      break;
+    case kProton :
+      particle = G4Proton::Proton();
+      break;
+    case kPhoton :
+      particle = G4Gamma::Gamma();
+      break;
+    default :
+      particle = G4Electron::Electron();
+      break;
+  }
 
   G4ThreeVector pvec;
-  if (particle_type_ == kElectron ) {
-    G4double emass = particle-> GetPDGMass();
-    G4double momemtum = std::sqrt(sqr(emass+electron_energy_) - sqr(emass));
-    pvec = momemtum * ::GenerateBeamDirection(ssd_, field_xy_);
-  } else { // in case of photon
+  if ( particle_type_ == kPhoton ) {
     double energy;
     if ( photon_voltage_ == ::k6MV )
       energy = ::GeneratePhotonEnergy6MV();
@@ -186,6 +194,10 @@ void MedicalBeam::GeneratePrimaries(G4Event* event)
       std::exit(EXIT_FAILURE);
     }
     pvec = energy * ::GenerateBeamDirection(ssd_, field_xy_);
+  } else {
+    G4double mass = particle-> GetPDGMass();
+    G4double momemtum = std::sqrt(sqr(mass+kinetic_energy_) - sqr(mass));
+    pvec = momemtum * ::GenerateBeamDirection(ssd_, field_xy_);
   }
 
   G4PrimaryParticle* primary =

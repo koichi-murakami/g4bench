@@ -95,7 +95,7 @@ void SetupMedicalBeam()
   run_manager-> SetUserAction(beam);
 
   std::string pname = jparser-> GetStringValue("Primary/Beam/particle");
-  if ( pname != "gamma" && pname != "e-" ) {
+  if ( pname != "gamma" && pname != "e-" && pname != "proton") {
    std::cout << "[ ERROR ] AppBuilder::SetupMedicalBeam() "
                 "invalid particle in setup, " << pname
              << std::endl;
@@ -108,7 +108,11 @@ void SetupMedicalBeam()
  } else if ( pname == "e-") {
    beam-> SetParticle(MedicalBeam::kElectron);
    double ekin = jparser-> GetDoubleValue("Primary/Beam/energy");
-   beam-> SetElectronEnergy(ekin * MeV);
+   beam-> SetEnergy(ekin * MeV);
+ } else if ( pname == "proton") {
+   beam-> SetParticle(MedicalBeam::kProton);
+   double ekin = jparser-> GetDoubleValue("Primary/Beam/energy");
+   beam-> SetEnergy(ekin * MeV);
  }
 
  // SSD
