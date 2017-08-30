@@ -10,7 +10,7 @@ See the License for more information.
 ============================================================================*/
 #include <vector>
 #include <boost/lexical_cast.hpp>
-#include "FTFP_BERT.hh"
+#include "QGSP_BIC.hh"
 #include "G4Navigator.hh"
 #include "G4ParticleGun.hh"
 #include "G4ParticleTable.hh"
