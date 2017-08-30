@@ -1,8 +1,8 @@
 # G4bench score sample
 
-# Ecal e1000	v1.2	Release	Evt:10k
+## Ecal e1000	v1.2	Release	Evt:10k
 
-## 10.3.p2
+### 10.3.p2
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
 | -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
 | E5-2690 v4 | 72.76  | 0.64 | 7.212	| 0.138658	| 591.747	| 968.345	| 1.897	| 1.897   |
