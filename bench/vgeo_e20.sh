@@ -72,6 +72,11 @@ if [ ${G4BENCH-undef} = "undef" ]; then
   G4BENCH=.
 fi
 
-${G4BENCH}/vgeo 100000
+if [ $# = 0 ]; then
+  ${G4BENCH}/vgeo 100000
+else
+  log=$1
+  ${G4BENCH}/vgeo 100000 > $1 2>&1
+fi
 
 exit $?

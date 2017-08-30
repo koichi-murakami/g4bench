@@ -69,6 +69,11 @@ if [ ${G4BENCH-undef} = "undef" ]; then
   G4BENCH=.
 fi
 
-${G4BENCH}/hcal 10000
+if [ $# = 0 ]; then
+  ${G4BENCH}/hcal 10000
+else
+  log=$1
+  ${G4BENCH}/hcal 10000 > $1 2>&1
+fi
 
 exit $?
