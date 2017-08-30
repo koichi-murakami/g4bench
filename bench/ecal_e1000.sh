@@ -74,6 +74,7 @@ if [ $# = 0 ]; then
 else
   log=$1
   ${G4BENCH}/ecal 10000 > $1 2>&1
+  touch done
 fi
 
 exit $?
