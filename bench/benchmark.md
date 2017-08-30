@@ -1,8 +1,8 @@
-# G4bench score sample
+## G4bench score sample
 
 These values show typical scores for each processor. Note that these values might differ in each computing environment.
 
-## Ecal e1000	v1.2 Release	Evt:10k
+### Ecal e1000	v1.2 Release	Evt:10k
 `10.3.p2`
 
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
@@ -22,7 +22,7 @@ These values show typical scores for each processor. Note that these values migh
 | E5-2690 v4 | 72.87	| 0.52 | 7.235  |	0.138217	| 588.94	| 968.411 |	1.891 | 1.888   |
 
 
-## Hcal p10 v1.2 Release Evt:10k
+### Hcal p10 v1.2 Release Evt:10k
 `10.3.p2`
 
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
@@ -35,7 +35,7 @@ These values show typical scores for each processor. Note that these values migh
 | W5590	       | 743.18	| 0.89 | 74.229	| 0.0134718	| 203.635 | 842.397	| 1.000	| 1.000 |
 
 
-## Vgeo e20 v1.2 Release Evt:100k
+### Vgeo e20 v1.2 Release Evt:100k
 `10.3.p2`
 
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
@@ -44,7 +44,7 @@ These values show typical scores for each processor. Note that these values migh
 | E5-2690 v2 | 98.68	| 0.94 | 0.9774	| 1.02312  	| 392.284 | 18.7512	| 1.053 | 1.053   |
 | W5590      | 103.81 | 0.86 | 1.0295	| 0.971345  |	372.432	| 18.751	| 1.000 | 1.000   |
 
-## Vgeo x18 v1.2 Release Evt:100k
+### Vgeo x18 v1.2 Release Evt:100k
 `10.3.p2`
 
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
@@ -53,7 +53,7 @@ These values show typical scores for each processor. Note that these values migh
 | W5590	     | 39.65	| 0.87 | 0.3878	| 2.57865	  | 532.861 | 1.89814 | 1.000 |	1.000   |
 
 
-## Vgeo p200 v1.2 Release Evt:100k
+### Vgeo p200 v1.2 Release Evt:100k
 `10.3.p2`
 
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
