@@ -174,7 +174,7 @@ AppBuilder::~AppBuilder()
 void AppBuilder::SetupApplication()
 {
   ::SetupGeomtry(simdata_);
-  ::run_manager-> SetUserInitialization(new FTFP_BERT);
+  ::run_manager-> SetUserInitialization(new QGSP_BIC);
   ::SetupPGA();
 
   RunAction* runaction = new RunAction;
