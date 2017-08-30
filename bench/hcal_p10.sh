@@ -1,7 +1,7 @@
 #!/bin/sh -
 # ======================================================================
 #  G4Bench benchmark / Hcal p10
-#    Geometry : EM calorimeter
+#    Geometry : Hadron calorimeter
 #    Primary  : proton 10 GeV
 #    Event    : 10k
 #
