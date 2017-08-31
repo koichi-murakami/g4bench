@@ -26,7 +26,11 @@ if(GEANT4_CONFIG)
 
 else()
   set(GEANT4_FOUND FALSE)
-  message(STATUS "NOT Found Geant4: set GEANT4_INSTALL env.")
+  if (Geant4_FIND_REQUIRED)
+    message(FATAL_ERROR "NOT Found Geant4: set GEANT4_INSTALL.")
+  else()
+    message(WARNING "NOT Found Geant4: set GEANT4_INSTALL.")
+  endif()
 
 endif()
 
