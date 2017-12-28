@@ -61,6 +61,9 @@ if(NOT CMAKE_BUILD_TYPE)
   endif()
 endif()
 
+# rpath setting
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+
 #------------------------------------------------------------------------------
 # parameters for building
 message(STATUS "--------------------------------------------------------")
