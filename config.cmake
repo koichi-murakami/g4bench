@@ -9,8 +9,10 @@ set(CMAKE_INSTALL_PREFIX /home/kmura/work/g4bench/work
     CACHE STRING "Install prefix")
 
 # Geant4 installation path
-set(GEANT4_INSTALL /opt/geant4/10.3.2
+set(GEANT4_INSTALL /opt/geant4/10.4.0
     CACHE STRING "Geant4 installation path")
+#set(GEANT4_INSTALL /opt/geant4/10.3.3
+#    CACHE STRING "Geant4 installation path")
 #set(GEANT4_INSTALL /opt/geant4/10.2.3
 #    CACHE STRING "Geant4 installation path")
 #set(GEANT4_INSTALL /opt/geant4/10.1.3
