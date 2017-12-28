@@ -27,10 +27,10 @@ else()
   target_link_libraries(${APP_NAME} ${GEANT4_LIBRARIES})
 endif()
 
-set_target_properties(${APP_NAME}
-                      PROPERTIES INSTALL_RPATH
-                      ${GEANT4_LIBRARY_DIR}
-                      BUILD_WITH_INSTALL_RPATH TRUE)
+#set_target_properties(${APP_NAME}
+#                      PROPERTIES INSTALL_RPATH
+#                      ${GEANT4_LIBRARY_DIR}
+#                      BUILD_WITH_INSTALL_RPATH TRUE)
 
 install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/vgeo)
 install(FILES config.tmpl DESTINATION ${CMAKE_INSTALL_PREFIX}/vgeo)
