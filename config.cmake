@@ -4,9 +4,11 @@
 # NOTE:
 # CACHE variables can be changed in CMake CLI with -D option.
 #==============================================================================
-
-set(CMAKE_INSTALL_PREFIX /home/kmura/work/g4bench/work
-    CACHE STRING "Install prefix")
+# installation prefix
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX $ENV{HOME}/work/g4bench/work
+      CACHE STRING "Install prefix" FORCE)
+endif()
 
 # Geant4 installation path
 set(GEANT4_INSTALL /opt/geant4/10.4.0
