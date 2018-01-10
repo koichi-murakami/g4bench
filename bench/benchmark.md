@@ -1,12 +1,18 @@
 ## G4bench score sample
 
-These values show typical scores for each processor. Note that these values might differ in each computing environment.
+These values show typical scores for each processor.
+Note that these values might differ in each computing environment.
 
 ### Ecal e1000	v1.2 Release	Evt:10k
-`10.3.p2`
-
+`10.4`
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
 | -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
+| E5-2690 v4!| 74.36  | 0.65 | 7.371  | 0.135667  | 587.746 | 968.328 | 1.856 | 1.884   |
+
+`10.3.p2`
+| Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
+| -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
+| E5-2690 v4!| 73.24  | 0.64 | 7.26   | 0.137741  | 587.834 | 968.345 | 1.884 | 1.884   |
 | E5-2690 v4 | 72.76  | 0.64 | 7.212	| 0.138658	| 591.747	| 968.345	| 1.897	| 1.897   |
 | E5-2697 v3 | 77.72  | 0.77 | 7.695	| 0.129955	| 555.18	| 968.709	| 1.778	| 1.780   |
 | E5-2690 v2 |128.33  | 0.95 | 12.738	| 0.0785053	| 335.035	| 968.345	| 1.074	| 1.074   |
@@ -15,29 +21,38 @@ These values show typical scores for each processor. Note that these values migh
 | X5680	     | 137.72	| 0.99 | 13.673	| 0.0731368	| 312.124	| 968.345	| 1.001	| 1.001   |
 | W5590*	   | 137.71	| 0.9	 | 13.681	| 0.0730941	| 311.942	| 968.345	| 1.000	| 1.000   |
 
-`10.2.p3`
 
+`10.2.p3`
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
 | -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
 | E5-2690 v4 | 72.87	| 0.52 | 7.235  |	0.138217	| 588.94	| 968.411 |	1.891 | 1.888   |
 
 
 ### Hcal p10 v1.2 Release Evt:10k
-`10.3.p2`
-
+`10.4`
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
 | -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
-| E5-2690 v4	 | 414.18	| 0.63 | 41.355	| 0.0241809	| 365.509	| 842.397 | 1.795 | 1.795 |
-| E5-2690 v2	 | 703.53	| 0.95 | 70.258	| 0.0142333	| 215.144	| 842.397 | 1.057 | 1.057 |
-| Power8E	     | 775.67	| 1.17 | 77.45	| 0.0129116	| 192.85	| 836.37	| 0.958	| 0.947 |
-| Power8NVL	   | 712.99	| 1.08 | 71.191	| 0.0140467	| 209.805 | 836.37	| 1.043	| 1.030 |
-| X5680	       | 781.3	| 0.95 | 78.035	| 0.0128148	| 193.703 | 842.397	| 0.951	| 0.951 |
-| W5590*	     | 743.18	| 0.89 | 74.229	| 0.0134718	| 203.635 | 842.397	| 1.000	| 1.000 |
+| E5-2690 v4!| 408.68	| 0.64 | 40.804	| 0.0245074	| 372.776	| 842.691 | 1.819 | 1.831  |
+
+
+`10.3.p2`
+| Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
+| -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
+| E5-2690 v4 | 414.18	| 0.63 | 41.355	| 0.0241809	| 365.509	| 842.397 | 1.795 | 1.795   |
+| E5-2690 v2 | 703.53	| 0.95 | 70.258	| 0.0142333	| 215.144	| 842.397 | 1.057 | 1.057   |
+| Power8E	   | 775.67	| 1.17 | 77.45	| 0.0129116	| 192.85	| 836.37	| 0.958	| 0.947   |
+| Power8NVL	 | 712.99	| 1.08 | 71.191	| 0.0140467	| 209.805 | 836.37	| 1.043	| 1.030   |
+| X5680	     | 781.3	| 0.95 | 78.035	| 0.0128148	| 193.703 | 842.397	| 0.951	| 0.951   |
+| W5590*	   | 743.18	| 0.89 | 74.229	| 0.0134718	| 203.635 | 842.397	| 1.000	| 1.000   |
 
 
 ### Vgeo e20 v1.2 Release Evt:100k
-`10.3.p2`
+`10.4`
+| Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
+| -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
+| E5-2690 v4!| 59.2	  | 0.64 | 0.5856	| 1.70765	  | 654.906 | 18.7519	| 1.758 | 1.758   |
 
+`10.3.p2`
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
 | -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
 | E5-2690 v4 | 58.39	| 0.61 | 0.5778	| 1.7307	  | 663.583 | 18.7512	| 1.782 | 1.782   |
@@ -46,7 +61,6 @@ These values show typical scores for each processor. Note that these values migh
 
 ### Vgeo x18 v1.2 Release Evt:100k
 `10.3.p2`
-
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
 | -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
 | E5-2690 v4 | 22.01	| 0.67 | 0.2134	| 4.68604	  | 968.339 | 1.89814 | 1.817 |	1.817   |
@@ -55,7 +69,6 @@ These values show typical scores for each processor. Note that these values migh
 
 ### Vgeo p200 v1.2 Release Evt:100k
 `10.3.p2`
-
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
 | -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
 
@@ -70,3 +83,5 @@ These values show typical scores for each processor. Note that these values migh
 | Power8NVL  | Ubuntu16 |           |
 | X5680      | CentOS7  |           |
 | W5590      | openSUSE | * Ref.    |
+
+! patched for Meltdown/Spectre
