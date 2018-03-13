@@ -8,6 +8,7 @@ This software is distributed WITHOUT ANY WARRANTY; without even the
 implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License for more information.
 ============================================================================*/
+#include <fstream>
 #include "G4Run.hh"
 #include "G4SystemOfUnits.hh"
 #include "runaction.h"
@@ -105,4 +106,13 @@ void RunAction::ShowRunSummary(const G4Run* run)
             << std::endl;
   std::cout << "=============================================================="
             << std::endl << std::endl;
+
+  // testing output
+  if ( qtest_ ) {
+    std::ofstream outfile("jtest.out", std::ios::out);
+    outfile << "EPS1000,  Edep\n"
+            << proc_eps*1.e3 << ",  " << edep_cal << std::endl;
+    outfile.close();
+  }
+
 }

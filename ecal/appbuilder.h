@@ -23,14 +23,22 @@ public:
   ~AppBuilder();
 
   void SetupApplication();
+  void SetTestingFlag(bool val);
 
 private:
   DISALLOW_COPY_AND_ASSIGN(AppBuilder);
 
   SimData* simdata_;
+  bool qtest_;
 
   bool CheckVPrimaryPosition(const G4ThreeVector& pos);
 
 };
+
+// ==========================================================================
+inline void AppBuilder::SetTestingFlag(bool val)
+{
+  qtest_ = val;
+}
 
 #endif
