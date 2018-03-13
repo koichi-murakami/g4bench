@@ -60,12 +60,7 @@ void RunAction::ShowRunSummary(const G4Run* run)
   double edep_cal = simdata_-> GetEdep() / nevents / MeV;
 
   // elapsed time
-  double t_start = 0;
-  if ( gtimer-> FindAKey("BeamOn") ) {
-    t_start = gtimer-> GetTime("BeamOn");
-  } else {
-    t_start = gtimer-> GetTime("RunStart");
-  }
+  double t_start = gtimer-> GetTime("BeamOn");
   double t_end = gtimer-> GetTime("RunEnd");
   double elapsed_time = t_end - t_start;
 
