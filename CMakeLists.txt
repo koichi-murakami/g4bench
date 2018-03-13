@@ -7,11 +7,11 @@
 #  !! DONOT EDIT THIS FILE  !!
 #  ***************************
 #
-cmake_minimum_required(VERSION 3.5)
-include(config.cmake)
 #==============================================================================
 project(G4Bench)
 #==============================================================================
+cmake_minimum_required(VERSION 3.5)
+include(config.cmake)
 
 # version.h generation (true for release)
 if(DEVMODE)
@@ -79,7 +79,7 @@ message(STATUS "--------------------------------------------------------")
 # version.h (#.##d# + rev# / dev flag d/a/b/rc)
 if(NOT SKIP_VERSION)
 set(G4BENCH_VERSION_MAJOR 1)
-set(G4BENCH_VERSION_MINOR 2.1)
+set(G4BENCH_VERSION_MINOR 2.2b)
 execute_process (COMMAND git rev-parse --short HEAD OUTPUT_VARIABLE
                  G4BENCH_VERSION_BUILD OUTPUT_STRIP_TRAILING_WHITESPACE)
 configure_file(
