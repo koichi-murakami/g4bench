@@ -4,6 +4,13 @@ These values show typical scores for each processor.
 Note that these values might differ in each computing environment.
 
 ### Ecal e1000	v1.2 Release	Evt:10k
+`10.4.p1`
+
+| Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
+| -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
+| Gold 6142  | 68.95  | 0.79 | 6.895  | 0.146714  | 635.604 | 968.328 | 2.007 | 2.038   |
+
+
 `10.4`
 
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
@@ -32,11 +39,17 @@ Note that these values might differ in each computing environment.
 
 
 ### Hcal p10 v1.2 Release Evt:10k
+`10.4.p1`
+
+| Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
+| -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
+| Gold 6142  | 432.45	| 0.86 | 43.245	| 0.0231701	| 352.435	| 842.691 |  1.720 | 1.731  |
+
 `10.4`
 
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
 | -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
-| E5-2690 v4!| 408.68	| 0.64 | 40.804	| 0.0245074	| 372.776	| 842.691 | 1.819 | 1.831  |
+| E5-2690 v4!| 408.68	| 0.64 | 40.804	| 0.0245074	| 372.776	| 842.691 | 1.819 | 1.831   |
 
 
 `10.3.p2`
@@ -48,10 +61,16 @@ Note that these values might differ in each computing environment.
 | Power8E	   | 775.67	| 1.17 | 77.45	| 0.0129116	| 192.85	| 836.37	| 0.958	| 0.947   |
 | Power8NVL	 | 712.99	| 1.08 | 71.191	| 0.0140467	| 209.805 | 836.37	| 1.043	| 1.030   |
 | X5680	     | 781.3	| 0.95 | 78.035	| 0.0128148	| 193.703 | 842.397	| 0.951	| 0.951   |
-| W5590*	   | 743.18	| 0.89 | 74.229	| 0.0134718	| 203.635 | 842.397	| 1.000	| 1.000   |
+| W5590*	   | 743.18	| 0.89 | 74.229	| 0.01314718	| 203.635 | 842.397	| 1.000	| 1.000   |
 
 
 ### Vgeo e20 v1.2 Release Evt:100k
+`10.4.p1`
+
+| Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
+| -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
+| Gold 6142  | 54.74	| 0.73 | 0.5401	| 1.85151	  | 710.077 | 18.7519	| 1.906 | 1.907   |
+
 `10.4`
 
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
@@ -86,6 +105,7 @@ Note that these values might differ in each computing environment.
 
 | Processor	 | OS	      | Notes     |
 | -----------| ----     | ---       |
+| Gold 6142  | CentOS7  |           |
 | E5-2690 v4 | CentOS7  |           |
 | E5-2697 v3 | SL6      | KEKCC     |
 | E5-2690 v2 | CentOS7  |           |
