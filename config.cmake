@@ -13,12 +13,6 @@ endif()
 # Geant4 installation path
 set(GEANT4_INSTALL /opt/geant4/10.4.1
     CACHE STRING "Geant4 installation path")
-#set(GEANT4_INSTALL /opt/geant4/10.3.3
-#    CACHE STRING "Geant4 installation path")
-#set(GEANT4_INSTALL /opt/geant4/10.2.3
-#    CACHE STRING "Geant4 installation path")
-#set(GEANT4_INSTALL /opt/geant4/10.1.3
-#    CACHE STRING "Geant4 installation path")
 
 # visualization flag
 set(ENABLE_VIS TRUE CACHE BOOL "Enable visualization flag")
