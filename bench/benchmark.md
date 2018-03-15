@@ -9,7 +9,7 @@ Note that these values might differ in each computing environment.
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
 | -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
 | Gold 6142  | 68.95  | 0.79 | 6.895  | 0.146714  | 635.604 | 968.328 | 2.007 | 2.038   |
-
+| EPYC 7501  | 92.22  | 0.84 | 9.138  | 0.109433  | 474.095 | 968.328 | 1.497 | 1.520   |
 
 `10.4`
 
