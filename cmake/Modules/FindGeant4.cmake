@@ -6,6 +6,7 @@
 # GEANT4_LIBRARY_DIR         PATH to the library directory
 # GEANT4_LIBRARIES           Most common libraries
 # GEANT4_LIBRARIES_WITH_VIS  Most common libraries with visualization
+# GEANT4_VIS                 Availabiliy of Vis package (bool)
 
 find_program(GEANT4_CONFIG NAMES geant4-config
              PATHS $ENV{GEANT4_INSTALL}/bin
@@ -21,8 +22,18 @@ if(GEANT4_CONFIG)
   execute_process(COMMAND ${GEANT4_CONFIG} --version
                   OUTPUT_VARIABLE GEANT4_VERSION
                   OUTPUT_STRIP_TRAILING_WHITESPACE)
+  execute_process(COMMAND ${GEANT4_CONFIG} --has-feature opengl-x11
+                  OUTPUT_VARIABLE _GEANT4_VIS_YES_OR_NO
+                  OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+  if ( ${_GEANT4_VIS_YES_OR_NO} MATCHES "yes" )
+    set(GEANT4_VIS true)
+  else()
+    set(GEANT4_VIS false)
+  endif()
 
   message(STATUS "Found Geant4: ${GEANT4_PREFIX} (${GEANT4_VERSION})")
+  message(STATUS "Geant4 Visualization: ${GEANT4_VIS}")
 
 else()
   set(GEANT4_FOUND FALSE)

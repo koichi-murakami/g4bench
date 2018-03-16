@@ -61,6 +61,11 @@ if(NOT CMAKE_BUILD_TYPE)
   endif()
 endif()
 
+# Geant4 visualization
+if( NOT GEANT4_VIS)
+  set(ENABLE_VIS false)
+endif()
+
 # rpath setting
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
