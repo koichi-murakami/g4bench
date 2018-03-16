@@ -54,6 +54,6 @@ cat << EOD > config.json5
 }
 EOD
 #
-./hcal 100
+./hcal -j 2000
 
 exit $?

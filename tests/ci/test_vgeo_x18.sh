@@ -57,6 +57,6 @@ cat << EOD > config.json5
 }
 EOD
 #
-./vgeo 100000
+./vgeo -j 100000
 
 exit $?

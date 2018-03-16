@@ -54,6 +54,6 @@ cat << EOD > config.json5
 }
 EOD
 #
-./ecal 1000
+./ecal -j 10000
 
 exit $?
