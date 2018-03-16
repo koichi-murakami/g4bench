@@ -21,6 +21,7 @@ public:
   virtual ~RunAction();
 
   void SetSimData(SimData* data);
+  void SetTestingFlag(bool val);
 
   virtual void BeginOfRunAction(const G4Run* run);
   virtual void EndOfRunAction(const G4Run* run);
@@ -29,6 +30,7 @@ public:
 
 private:
   SimData* simdata_;
+  bool qtest_;
 
 };
 
@@ -36,6 +38,11 @@ private:
 inline void RunAction::SetSimData(SimData* data)
 {
   simdata_ = data;
+}
+
+inline void RunAction::SetTestingFlag(bool val)
+{
+  qtest_ = val;
 }
 
 #endif

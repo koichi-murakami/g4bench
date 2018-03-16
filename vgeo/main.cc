@@ -39,18 +39,20 @@ void show_version()
 // --------------------------------------------------------------------------
 void show_help()
 {
-  std::cout << "G4Bench vgeo" << std::endl;
-  std::cout << "usage:" << std::endl;
-  std::cout << "ecal [options] [#histories]"
-            << std::endl << std::endl;
-  std::cout << "   -h, --help          show this message." << std::endl
-            << "   -v  --version       show program name/version." << std::endl
-            << "   -c, --config        "
-               "specify configuratioon file [config.json5]" << std::endl
-            << "   -s, --session=type  specify session type" << std::endl
-            << "   -i, --init=macro    specify initial macro"
-            << std::endl;
-  std::cout << std::endl;
+  const char* message =
+R"(
+usage:
+vgeo [options] [#histories]
+
+   -h, --help          show this message.
+   -v  --version       show program name/version.
+   -c, --config        specify configuratioon file [config.json5]
+   -s, --session=type  specify session type
+   -i, --init=macro    specify initial macro
+   -j, --test          make output for CI [false]
+)";
+
+   std::cout << message << std::endl;
 }
 
 } // end of namespace
@@ -65,6 +67,7 @@ int main(int argc, char** argv)
   std::string init_macro = "";
   std::string config_file = "config.json5";
   std::string str_nhistories = "";
+  bool qtest = false;
 
   struct option long_options[] = {
     {"help",    no_argument,       NULL, 'h'},
@@ -72,13 +75,14 @@ int main(int argc, char** argv)
     {"config",  required_argument, NULL, 'c'},
     {"session", required_argument, NULL, 's'},
     {"init",    required_argument, NULL, 'i'},
+    {"test",    no_argument,       NULL, 'j'},
     {NULL,      0,                 NULL,  0}
   };
 
   while (1) {
     int option_index = -1;
 
-    int c = getopt_long(argc, argv, "hvc:s:i:", long_options, &option_index);
+    int c = getopt_long(argc, argv, "hvc:s:i:j", long_options, &option_index);
 
     if (c == -1) break;
 
@@ -96,6 +100,9 @@ int main(int argc, char** argv)
       break;
     case 'i' :
       init_macro = optarg;
+      break;
+    case 'j' :
+      qtest = true;
       break;
     default:
       std::exit(EXIT_FAILURE);
@@ -167,6 +174,7 @@ int main(int argc, char** argv)
 
   AppBuilder* appbuilder = new AppBuilder();
   appbuilder-> SetupApplication();
+  appbuilder-> SetTestingFlag(qtest);
 
   // ----------------------------------------------------------------------
 #ifdef ENABLE_VIS

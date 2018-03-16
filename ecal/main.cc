@@ -39,7 +39,7 @@ void show_version()
 // --------------------------------------------------------------------------
 void show_help()
 {
-const char* message =
+  const char* message =
 R"(
 usage:
 ecal [options] [#histories]
@@ -50,7 +50,6 @@ ecal [options] [#histories]
    -s, --session=type  specify session type
    -i, --init=macro    specify initial macro
    -j, --test          make output for CI [false]
-
 )";
 
    std::cout << message << std::endl;
