@@ -21,4 +21,5 @@
 
 # Directories
 build/
+ninja/
 *zzz/
