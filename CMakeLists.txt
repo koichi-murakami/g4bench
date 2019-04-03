@@ -68,6 +68,7 @@ endif()
 
 # rpath setting
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+#set(CMAKE_EXE_LINKER_FLAGS "-Wl,--disable-new-dtags")
 
 #------------------------------------------------------------------------------
 # parameters for building
