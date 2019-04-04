@@ -4,8 +4,6 @@
 
 [![geant4](https://img.shields.io/badge/geant4-10.5-blue.svg)](http://www.geant4.org/)
 
-Copyright (c) 2017-2019, Koichi Murakami
-
 G4Bench is a set of benchmark tests of Geant4 detector simulation toolkit.
 
 * [Releases](https://github.com/koichi-murakami/g4bench/releases)
