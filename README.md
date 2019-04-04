@@ -1,7 +1,7 @@
 ![g4bench](docs/img/logo.png)
 
 # G4Bench
-Copyright (c) 2017, Koichi Murakami
+Copyright (c) 2017-2019, Koichi Murakami
 
 G4Bench is a set of benchmark tests of Geant4 detector simulation toolkit.
 
