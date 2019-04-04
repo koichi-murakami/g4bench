@@ -1,18 +1,17 @@
 # executable
 #------------------------------------------------------------------------------
-set(APP_NAME ecal)
+set(APP ecal)
 #------------------------------------------------------------------------------
-include_directories(${PROJECT_SOURCE_DIR} ${GEANT4_INCLUDE_DIR})
-
-link_directories(${GEANT4_LIBRARY_DIR})
-
 if(ENABLE_VIS)
-  add_definitions(-DG4INTY_USE_X -DG4VIS_USE_OPENGLX -DG4VIS_USE_OPENGLQT)
-  add_definitions(-DENABLE_VIS)
+  set(G4LIBS ${GEANT4_LIBRARIES_WITH_VIS})
+else()
+  set(G4LIBS ${GEANT4_LIBRARIES})
 endif()
 
 # executable
-add_executable(${APP_NAME}
+add_executable(${APP})
+
+target_sources(${APP} PRIVATE
   appbuilder.cc calscorer.cc ecalgeom.cc eventaction.cc main.cc
   particlegun.cc runaction.cc simdata.cc stepaction.cc
   ../util/jsonparser.cc
@@ -21,15 +20,20 @@ add_executable(${APP_NAME}
 )
 
 if(ENABLE_VIS)
-  target_link_libraries(${APP_NAME} ${GEANT4_LIBRARIES_WITH_VIS})
-else()
-  target_link_libraries(${APP_NAME} ${GEANT4_LIBRARIES})
+  target_compile_definitions(${APP} PRIVATE
+    ENABLE_VIS G4INTY_USE_X G4VIS_USE_OPENGLX G4VIS_USE_OPENGLQT)
 endif()
 
-#set_target_properties(${APP_NAME}
-#                      PROPERTIES INSTALL_RPATH
-#                      ${GEANT4_LIBRARY_DIR}
-#                      BUILD_WITH_INSTALL_RPATH TRUE)
+target_include_directories(${APP} PRIVATE
+  ${PROJECT_SOURCE_DIR} ${GEANT4_INCLUDE_DIR})
 
-install(TARGETS ${APP_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/ecal)
+target_link_directories(${APP} PRIVATE ${GEANT4_LIBRARY_DIR})
+
+target_link_libraries(${APP} PRIVATE ${G4LIBS} PUBLIC global_cflags)
+
+#
+configure_file(config.tmpl g4bench.conf)
+
+#
+install(TARGETS ${APP} DESTINATION ${CMAKE_INSTALL_PREFIX}/ecal)
 install(FILES config.tmpl DESTINATION ${CMAKE_INSTALL_PREFIX}/ecal)

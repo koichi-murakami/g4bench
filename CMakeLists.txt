@@ -10,18 +10,15 @@
 #==============================================================================
 project(G4Bench)
 #==============================================================================
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.11)
 include(config.cmake)
 
 # version.h generation (true for release)
 if(DEVMODE)
-  set(SKIP_VERSION FALSE)
+  option(SKIP_VERSION "overwrite version.h" OFF)
 else()
-  set(SKIP_VERSION TRUE)
+  option(SKIP_VERSION "overwrite version.h" ON)
 endif()
-
-# static / shared library
-#set (LIBRARY_TYPE "STATIC")
 
 # cmake modules
 set(CMAKE_MODULE_PATH
@@ -46,8 +43,9 @@ find_package(Boost 1.53.0)
 find_package(OpenGL)
 
 # c++11
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_library(global_cflags INTERFACE)
+target_compile_features(global_cflags INTERFACE cxx_std_11 )
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # build options
 if(NOT CMAKE_BUILD_TYPE)
@@ -63,7 +61,7 @@ endif()
 
 # Geant4 visualization
 if( NOT GEANT4_VIS)
-  set(ENABLE_VIS false)
+  option(ENABLE_VIS OFF)
 endif()
 
 # rpath setting
