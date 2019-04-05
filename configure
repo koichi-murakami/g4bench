@@ -27,6 +27,7 @@ Installation directories:
 
 Fine tuning of the library build:
   --with-geant4-dir=DIR     Geant4 installed dir [config.cmake]
+  --with-build-dir=DIR      Set build dir [build]
 
 Enable/disable options: prefix with either --enable- or --disable-
   vis      OpenGL support [enable]
@@ -64,6 +65,7 @@ enable_vis=1
 enable_opt=1
 enable_debug=0
 enable_dev=_cmake
+build_dir=build
 
 # parsing options
 while test $# -gt 0
@@ -78,6 +80,7 @@ do
     # ---------------------------------------------------------------
     --prefix=*)                prefix=$optarg                    ;;
     --with-geant4-dir=*)       g4_install=$optarg                ;;
+    --with-build-dir=*)        build_dir=$optarg                 ;;
     # ---------------------------------------------------------------
     --enable-vis )         enable_vis=1                          ;;
     --disable-vis )        enable_vis=0                          ;;
@@ -159,11 +162,12 @@ echo "cmake flags:${cmake_option}"
 # ======================================================================
 show_line
 echo "@@ execute cmake..."
-if [ -d build ]; then
-  rm -r -f build
+if [ -d $build_dir ]; then
+  rm -r -f $build_dir
 fi
-mkdir build
-cd build
-cmake $cmake_option ..
+mkdir $build_dir
+cd $build_dir
+cmake_cmd="cmake ${cmake_option} .."
+eval ${cmake_cmd}
 check_error
 exit 0
