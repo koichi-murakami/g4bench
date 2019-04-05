@@ -61,7 +61,7 @@ endif()
 
 # Geant4 visualization
 if( NOT GEANT4_VIS)
-  option(ENABLE_VIS OFF)
+  set (ENABLE_VIS FALSE)
 endif()
 
 # rpath setting
