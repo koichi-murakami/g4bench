@@ -17,16 +17,20 @@
 
 #ifndef DISALLOW_COPY_AND_ASSIGN
 #define DISALLOW_COPY_AND_ASSIGN(TypeName) \
-  TypeName(const TypeName&);               \
-  void operator=(const TypeName&)
+  TypeName(const TypeName&) = delete;      \
+  void operator=(const TypeName&) = delete
 #endif
 
 class TimeHistory {
 public:
   static TimeHistory* GetTimeHistory();
-  ~TimeHistory();
+  virtual ~TimeHistory() = default;
+
+  DISALLOW_COPY_AND_ASSIGN(TimeHistory);
 
   void TakeSplit(const std::string& key);
+
+  double TakeSplit();
 
   bool FindAKey(const std::string& key) const;
 
@@ -40,7 +44,6 @@ public:
 
 private:
   TimeHistory();
-  DISALLOW_COPY_AND_ASSIGN(TimeHistory);
 
   Stopwatch sw_;
   double t0_;
