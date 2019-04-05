@@ -31,7 +31,7 @@ void show_version()
   const char* version_str = G4BENCH_VERSION_MAJOR "."
                             G4BENCH_VERSION_MINOR ".";
 
-  std::cout << "G4Bench/hcal version 1.1"
+  std::cout << "G4Bench/hcal version 1.3.0"
             << " (" << version_str << ::build_head << "."
             << ::build_tail << ")" << std::endl;
 }
@@ -46,7 +46,7 @@ hcal [options] [#histories]
 
    -h, --help          show this message.
    -v  --version       show program name/version.
-   -c, --config        specify configuratioon file [config.json5]
+   -c, --config        specify configuration file [g4bench.conf]
    -s, --session=type  specify session type
    -i, --init=macro    specify initial macro
    -j, --test          make output for CI [false]
@@ -65,7 +65,7 @@ int main(int argc, char** argv)
   bool qversion = false;
   std::string session_type = "";
   std::string init_macro = "";
-  std::string config_file = "config.json5";
+  std::string config_file = "g4bench.conf";
   std::string str_nhistories = "";
   bool qtest = false;
 
