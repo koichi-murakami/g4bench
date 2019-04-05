@@ -283,17 +283,7 @@ JsonParser* JsonParser::GetJsonParser()
 }
 
 // --------------------------------------------------------------------------
-JsonParser::JsonParser()
-{
-}
-
-// --------------------------------------------------------------------------
-JsonParser::~JsonParser()
-{
-}
-
-// --------------------------------------------------------------------------
-bool JsonParser::LoadFile(const std::string& fname)
+bool JsonParser::LoadFile(const std::string& fname, bool raw_mode)
 {
   std::fstream fs;
   fs.open(fname.c_str());
@@ -312,18 +302,28 @@ bool JsonParser::LoadFile(const std::string& fname)
   }
   fs.close();
 
-  std::string json_string = ss.str();
-  try {
-    ::ConvertToJson(json_string);
-  } catch ( std::exception& e ) {
-    std::cerr << e.what() << std::endl;
-    return false;
-  }
+  auto qok = LoadString(ss.str(), raw_mode);
+  return qok;
+}
+
+// --------------------------------------------------------------------------
+bool JsonParser::LoadString(const std::string& jstring, bool raw_mode)
+{
+  std::string json_string = jstring;
+
+  if ( ! raw_mode ) {
+    try {
+      ::ConvertToJson(json_string);
+    } catch ( std::exception& e ) {
+      std::cerr << e.what() << std::endl;
+      return false;
+    }
 
 #ifdef DEBUG
     std::cout << "*** JSON string:" << std::endl
               << json_string << std::endl << std::endl;
 #endif
+  }
 
   std::string error = picojson::parse(data_map_, json_string);
   if ( ! error.empty() ) {
@@ -417,6 +417,12 @@ long JsonParser::GetLongValue(const char* key) const
 
   long long_value = val.get<double>();
   return long_value;
+}
+
+// --------------------------------------------------------------------------
+float JsonParser::GetFloatValue(const char* key) const
+{
+  return float(GetDoubleValue(key));
 }
 
 // --------------------------------------------------------------------------
@@ -536,6 +542,56 @@ std::size_t JsonParser::GetIntArray(const char* key, iarray_t& iarray) const
       return 0;
     }
     iarray.push_back(item.get<double>());
+  }
+
+  return size;
+}
+
+// --------------------------------------------------------------------------
+std::size_t JsonParser::GetLongArray(const char* key, larray_t& larray) const
+{
+  const picojson::object& obj = data_map_.get<picojson::object>();
+  bool is_found{false};
+  picojson::value val = ::SearchKeyValue(key, obj, is_found);
+
+  if ( ! is_found ) {
+    std::stringstream ss;
+    ss << "JsonParser::GetLongArray() key is not found." << std::endl
+       << key;
+    ::ThrowException(ss.str());
+  }
+
+  if ( ! val.is<picojson::array>() ) {
+    std::stringstream ss;
+    ss << "JsonParser::GetLongArray() not an array." << std::endl
+       << key;
+    ::ThrowException(ss.str());
+  }
+
+  const picojson::array& array = val.get<picojson::array>();
+  larray.clear();
+
+  auto size = array.size();
+  for ( auto& item : array ) {
+    if ( ! item.is<double>() ) {
+      std::cout << "JsonParser::GetLongArray() not a double/long. "
+                << key << std::endl;
+      return 0;
+    }
+    larray.push_back(item.get<double>());
+  }
+
+  return size;
+}
+
+// --------------------------------------------------------------------------
+std::size_t JsonParser::GetFloatArray(const char* key, farray_t& farray) const
+{
+  darray_t darray;
+  auto size = GetDoubleArray(key, darray);
+
+  for ( auto it : darray ) {
+    farray.push_back(it);
   }
 
   return size;

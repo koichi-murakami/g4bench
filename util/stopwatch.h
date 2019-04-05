@@ -18,7 +18,7 @@
 class Stopwatch {
 public:
   Stopwatch();
-  ~Stopwatch();
+  virtual ~Stopwatch() = default;
 
   void Reset();
   void Split();
