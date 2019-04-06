@@ -1,9 +1,8 @@
 ## Dependencies
-* `Geant4` : >= 10.1
+* `Geant4` : `v10.5` is latest
 * `Boost-C++` : >= 1.53
 * `CMake` : >= 3.11
 * `GCC` : >= 4.8.5, C++11 support
-
 
 ## Install instructions
 There is a `configure` script wrapping `CMakeLists.txt`. It can take several options to set building parameters.
@@ -22,6 +21,7 @@ Installation directories:
 
 Fine tuning of the library build:
   --with-geant4-dir=DIR     Geant4 installed dir [config.cmake]
+  --with-build-dir=DIR      Set build dir [build]
 
 Enable/disable options: prefix with either --enable- or --disable-
   vis      OpenGL support [enable]
@@ -47,20 +47,22 @@ $ make install
 ...
 ~~~~
 
-
 ## Running
-You need to set Geant4 environment variables to specify the paths for data tables, to run applications. 
+You need to set Geant4 environment variables to specify the paths for
+data tables, to run applications.
 
 ~~~~
 $ env | grep G4
-G4NEUTRONHPDATA=/opt/geant4/data/10.3.2/G4NDL4.5
-G4LEDATA=/opt/geant4/data/10.3.2/G4EMLOW6.50
-G4LEVELGAMMADATA=/opt/geant4/data/10.3.2/PhotonEvaporation4.3.2
-G4RADIOACTIVEDATA=/opt/geant4/data/10.3.2/RadioactiveDecay5.1.1
-G4NEUTRONXSDATA=/opt/geant4/data/10.3.2/G4NEUTRONXS1.4
-G4PIIDATA=/opt/geant4/data/10.3.2/G4PII1.3
-G4REALSURFACEDATA=/opt/geant4/data/10.3.2/RealSurface1.0
-G4SAIDXSDATA=/opt/geant4/data/10.3.2/G4SAIDDATA1.1
-G4ABLADATA=/opt/geant4/data/10.3.2/G4ABLA3.0
-G4ENSDFSTATEDATA=/opt/geant4/data/10.3.2/G4ENSDFSTATE2.1
+G4DATA=/opt/geant4/data/10.5.0
+G4ABLADATA=/opt/geant4/data/10.5.0/G4ABLA3.1
+G4LEDATA=/opt/geant4/data/10.5.0/G4EMLOW7.7
+G4ENSDFSTATEDATA=/opt/geant4/data/10.5.0/G4ENSDFSTATE2.2
+G4INCLDATA=/opt/geant4/data/10.5.0/G4INCL1.0
+G4NEUTRONHPDATA=/opt/geant4/data/10.5.0/G4NDL4.5
+G4PARTICLEXSDATA=/opt/geant4/data/10.5.0/G4PARTICLEXS1.1
+G4PIIDATA=/opt/geant4/data/10.5.0/G4PII1.3
+G4SAIDXSDATA=/opt/geant4/data/10.5.0/G4SAIDDATA2.0
+G4LEVELGAMMADATA=/opt/geant4/data/10.5.0/PhotonEvaporation5.3
+G4RADIOACTIVEDATA=/opt/geant4/data/10.5.0/RadioactiveDecay5.3
+G4REALSURFACEDATA=/opt/geant4/data/10.5.0/RealSurface2.1.1
 ~~~~
