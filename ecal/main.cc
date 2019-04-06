@@ -199,8 +199,7 @@ int main(int argc, char** argv)
 
   } else {
     gtimer-> TakeSplit("SessionStart");
-    ui_session-> SetPrompt("[40;01;33mecal[40;31m(%s)[40;36m[%/][00;01;30m:");
-    ui_session-> SetLsColor(BLUE, RED);
+    ui_session-> SetPrompt("ecal(%s)[%/]:");
     ui_session-> SessionStart();
     gtimer-> TakeSplit("SessionEnd");
   }
