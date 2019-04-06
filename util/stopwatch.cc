@@ -1,12 +1,12 @@
 /*============================================================================
-  Copyright 2017 Koichi Murakami
+Copyright 2017-2019 Koichi Murakami
 
-  Distributed under the OSI-approved BSD License (the "License");
-  see accompanying file Copyright.txt for details.
+Distributed under the OSI-approved BSD License (the "License");
+see accompanying file LICENSE for details.
 
-  This software is distributed WITHOUT ANY WARRANTY; without even the
-  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-  See the License for more information.
+This software is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the License for more information.
 ============================================================================*/
 #include "util/stopwatch.h"
 
