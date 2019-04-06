@@ -1,7 +1,7 @@
 #
 #  CMakeLists.txt for buidlig G4Bench
 #
-#  Copyright 2017 Koichi Murakami
+#  Copyright 2017-2019 Koichi Murakami
 #
 #  ***************************
 #  !! DONOT EDIT THIS FILE  !!
@@ -59,8 +59,13 @@ if(NOT CMAKE_BUILD_TYPE)
   endif()
 endif()
 
+# check MT
+if (NOT GEANT4_MT)
+  set (ENABLE_MT FALSE)
+endif()
+
 # Geant4 visualization
-if( NOT GEANT4_VIS)
+if(NOT GEANT4_VIS)
   set (ENABLE_VIS FALSE)
 endif()
 
@@ -76,7 +81,7 @@ message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 message(STATUS "CMAKE_CXX_COMPILER: ${CMAKE_CXX_COMPILER}")
 message(STATUS "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
 message(STATUS "GEANT4_LIBRARY_DIR: ${GEANT4_LIBRARY_DIR}")
-
+message(STATUS "ENABLE_MT: ${ENABLE_MT}")
 message(STATUS "--------------------------------------------------------")
 
 #------------------------------------------------------------------------------

@@ -19,6 +19,10 @@ target_sources(${APP} PRIVATE
   ../util/timehistory.cc
 )
 
+if(ENABLE_MT)
+  target_compile_definitions(${APP} PRIVATE ENABLE_MT)
+endif()
+
 if(ENABLE_VIS)
   target_compile_definitions(${APP} PRIVATE
     ENABLE_VIS G4INTY_USE_X G4VIS_USE_OPENGLX G4VIS_USE_OPENGLQT)

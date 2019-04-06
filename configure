@@ -30,6 +30,7 @@ Fine tuning of the library build:
   --with-build-dir=DIR      Set build dir [build]
 
 Enable/disable options: prefix with either --enable- or --disable-
+  mt       multi-threading support [disable]
   vis      OpenGL support [enable]
   opt      optimization (O3) [enable]
   debug    debug mode [disable]
@@ -61,6 +62,7 @@ echo "========================================================================"
 # default values
 prefix=_cmake
 g4_install=_cmake
+enable_mt=0
 enable_vis=1
 enable_opt=1
 enable_debug=0
@@ -84,6 +86,8 @@ do
     # ---------------------------------------------------------------
     --enable-vis )         enable_vis=1                          ;;
     --disable-vis )        enable_vis=0                          ;;
+    --enable-mt )          enable_mt=1                          ;;
+    --disable-mt )         enable_mt=0                          ;;
     --enable-opt )         enable_opt=1                          ;;
     --disable-opt )        enable_opt=0                          ;;
     --enable-debug )       enable_debug=1                        ;;
@@ -125,6 +129,13 @@ fi
 
 echo ""
 echo -n "Enabled support for [ "
+if [ $enable_mt = 1 ]; then
+  echo -n "mt "
+  cmake_option="${cmake_option} -DENABLE_MT=TRUE"
+else
+  cmake_option="${cmake_option} -DENABLE_MT=FALSE"
+fi
+
 if [ $enable_vis = 1 ]; then
   echo -n "vis "
   cmake_option="${cmake_option} -DENABLE_VIS=TRUE"
