@@ -1,10 +1,12 @@
+# Installation
+
 ## Dependencies
 * `Geant4` : `v10.5` is latest
 * `Boost-C++` : >= 1.53
 * `CMake` : >= 3.11
 * `GCC` : >= 4.8.5, C++11 support
 
-## Install instructions
+## How to install
 There is a `configure` script wrapping `CMakeLists.txt`. It can take several options to set building parameters.
 ~~~~
 $ ./configure --help
@@ -37,6 +39,7 @@ make install
 
 1. Run `configure` script with proper options, that creates a `build` directory to compile applications.
 2. Move to `build` directory, then do `make` and `make install`.
+
 ~~~~
 $ ./configure
 ...
