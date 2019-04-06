@@ -14,6 +14,9 @@ endif()
 set(GEANT4_INSTALL /opt/geant4/10.5.0
     CACHE STRING "Geant4 installation path")
 
+# MT flag
+set(ENABLE_MT FALSE CACHE BOOL "Enable multi-threading flag")
+
 # visualization flag
 set(ENABLE_VIS TRUE CACHE BOOL "Enable visualization flag")
 
