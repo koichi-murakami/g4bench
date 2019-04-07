@@ -20,45 +20,70 @@ namespace {
 
 TimeHistory* gtimer = nullptr;
 
+// --------------------------------------------------------------------------
+void ShowWorkerRunSummary(const G4Run* run)
+{
+  // # of processed events
+  int nevents = run-> GetNumberOfEvent();
+  std::cout << " * Worker Summary : #events = " << nevents << std::endl;
+}
+
 } // end of namespace
 
-// --------------------------------------------------------------------------
+// ==========================================================================
 RunAction::RunAction()
-  : simdata_(nullptr)
+  : simdata_{nullptr}, nvec_{0},
+    total_step_count_{0}, total_edep_{0.}
 {
   ::gtimer = TimeHistory::GetTimeHistory();
 }
 
 // --------------------------------------------------------------------------
-RunAction::~RunAction()
-{
-}
-
-// --------------------------------------------------------------------------
 void RunAction::BeginOfRunAction(const G4Run*)
 {
-  simdata_-> Initialize();
+  if (IsMaster()) {
+    for ( int i = 0; i < nvec_; i++) {
+      simdata_[i].Initialize();
+    }
 
-  std::cout << std::endl;
-  ::gtimer-> TakeSplit("RunBegin");
+    std::cout << std::endl;
+    ::gtimer-> TakeSplit("RunBegin");
+  }
 }
 
 // --------------------------------------------------------------------------
 void RunAction::EndOfRunAction(const G4Run* run)
 {
-  ::gtimer-> TakeSplit("RunEnd");
-  ShowRunSummary(run);
+  if (IsMaster()) {
+    ::gtimer-> TakeSplit("RunEnd");
+    ReduceResult();
+    ShowRunSummary(run);
+  } else {
+    ::ShowWorkerRunSummary(run);
+  }
 }
 
 // --------------------------------------------------------------------------
-void RunAction::ShowRunSummary(const G4Run* run)
+void RunAction::ReduceResult()
+{
+  total_step_count_ = 0;
+  total_edep_ = 0.;
+
+  for (int i = 0; i < nvec_; i++ ) {
+    total_step_count_ += simdata_[i].GetStepCount();
+    total_edep_ += simdata_[i].GetEdep();
+  }
+}
+
+// --------------------------------------------------------------------------
+void RunAction::ShowRunSummary(const G4Run* run) const
 {
   // # of processed events
   int nevents_to_be = run-> GetNumberOfEventToBeProcessed();
   int nevents = run-> GetNumberOfEvent();
 
   // Edep information
-  double edep_cal = simdata_-> GetEdep() / nevents / MeV;
+  double edep_cal = total_edep_ / nevents / MeV;
 
   // elapsed time
   double t_start = gtimer-> GetTime("BeamOn");;
@@ -81,8 +106,7 @@ void RunAction::ShowRunSummary(const G4Run* run)
   double proc_eps = nevents / proc_time * msec;
 
   // steps/msec
-  double sps = simdata_-> GetStepCount() / proc_time * msec;
-
+  double sps = total_step_count_ / proc_time * msec;
 
   std::cout << std::endl;
   std::cout << "=============================================================="

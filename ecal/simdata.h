@@ -56,4 +56,10 @@ inline double SimData::GetEdep() const
   return edep_;
 }
 
+inline void SimData::Initialize()
+{
+  step_count_ = 0;
+  edep_ = 0.;
+}
+
 #endif

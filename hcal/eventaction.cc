@@ -9,7 +9,6 @@ implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License for more information.
 ============================================================================*/
 #include <sstream>
-#include <string>
 #include "G4Event.hh"
 #include "eventaction.h"
 #include "util/timehistory.h"
@@ -19,10 +18,11 @@ namespace {
 
 TimeHistory* gtimer = nullptr;
 
-void ShowProgress(int nprocessed, const std::string& key) {
+void ShowProgress(int nprocessed, const std::string& key)
+{
   std::cout << "[MESSAGE] event-loop check point: "
             << nprocessed << " events processed." << std::endl;
-  gtimer-> ShowHistory(key);
+  //::gtimer-> ShowHistory(key);
 }
 
 } // end of namespace
@@ -31,11 +31,6 @@ void ShowProgress(int nprocessed, const std::string& key) {
 EventAction::EventAction()
 {
   ::gtimer = TimeHistory::GetTimeHistory();
-}
-
-// --------------------------------------------------------------------------
-EventAction::~EventAction()
-{
 }
 
 // --------------------------------------------------------------------------

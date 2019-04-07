@@ -13,14 +13,16 @@ add_executable(${APP})
 
 target_sources(${APP} PRIVATE
   appbuilder.cc calscorer.cc hcalgeom.cc eventaction.cc main.cc
-  particlegun.cc runaction.cc simdata.cc stepaction.cc
+  particlegun.cc runaction.cc stepaction.cc
   ../util/jsonparser.cc
   ../util/stopwatch.cc
   ../util/timehistory.cc
 )
 
 if(ENABLE_MT)
-  target_compile_definitions(${APP} PRIVATE ENABLE_MT)
+  target_compile_definitions(${APP} PRIVATE ENABLE_MT G4MULTITHREADED)
+elseif(GEANT4_MT)
+  target_compile_definitions(${APP} PRIVATE G4MULTITHREADED)
 endif()
 
 if(ENABLE_VIS)

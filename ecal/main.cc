@@ -15,8 +15,6 @@ See the License for more information.
 #else
 #include "G4RunManager.hh"
 #endif
-#include "G4Run.hh"
-#include "G4StateManager.hh"
 #include "G4UIExecutive.hh"
 #include "G4UImanager.hh"
 #include "G4UItcsh.hh"
@@ -92,7 +90,8 @@ int main(int argc, char** argv)
   while (1) {
     int option_index = -1;
 
-    int c = getopt_long(argc, argv, "hvc:s:i:n:aj", long_options, &option_index);
+    int c = getopt_long(argc, argv, "hvc:s:i:n:aj",
+                        long_options, &option_index);
 
     if (c == -1) break;
 
@@ -214,6 +213,7 @@ int main(int argc, char** argv)
 #else
   auto run_manager = new G4RunManager();
 #endif
+
   auto ui_manager = G4UImanager::GetUIpointer();
 
   auto appbuilder = new AppBuilder();

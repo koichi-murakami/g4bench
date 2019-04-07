@@ -45,7 +45,7 @@ void SetupGeomtry(SimData* data)
 {
   EcalGeom* geom = new EcalGeom();
   geom-> SetSimData(data);
-  run_manager-> SetUserInitialization(geom);
+  ::run_manager-> SetUserInitialization(geom);
 }
 
 // --------------------------------------------------------------------------
@@ -55,7 +55,7 @@ G4ThreeVector GetPrimaryPosition()
   if ( jparser-> Contains("Primary/position") ) {
     std::vector<double> dvec;
     dvec.clear();
-    jparser-> GetDoubleArray("Primary/position", dvec);
+    ::jparser-> GetDoubleArray("Primary/position", dvec);
     pos = G4ThreeVector(dvec[0]*cm, dvec[1]*cm, dvec[2]*cm);
   }
   return pos;
@@ -66,7 +66,7 @@ void SetupParticleGun(ParticleGun* pga)
 {
   G4ParticleGun* gun = pga-> GetGun();
 
-  std::string pname = jparser-> GetStringValue("Primary/particle");
+  std::string pname = ::jparser-> GetStringValue("Primary/particle");
   G4ParticleTable* ptable = G4ParticleTable::GetParticleTable();
   G4ParticleDefinition* pdef = ptable-> FindParticle(pname);
   if ( pdef != nullptr ) gun-> SetParticleDefinition(pdef);
@@ -75,9 +75,9 @@ void SetupParticleGun(ParticleGun* pga)
   gun-> SetParticleEnergy(pkin*MeV);
 
   std::vector<double> dvec;
-  if ( jparser-> Contains("Primary/direction") ) {
+  if ( ::jparser-> Contains("Primary/direction") ) {
     dvec.clear();
-    jparser-> GetDoubleArray("Primary/direction", dvec);
+    ::jparser-> GetDoubleArray("Primary/direction", dvec);
     G4ThreeVector pvec(dvec[0], dvec[1], dvec[2]);
     gun-> SetParticleMomentumDirection(pvec);
   }

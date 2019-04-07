@@ -17,12 +17,13 @@ class SimData;
 
 class HcalGeom : public G4VUserDetectorConstruction {
 public:
-  HcalGeom();
-  ~HcalGeom();
+  HcalGeom() = default;
+  ~HcalGeom() = default;
 
   void SetSimData(SimData* data);
 
   virtual G4VPhysicalVolume* Construct();
+  virtual void ConstructSDandField();
 
 private:
   SimData* simdata_;
