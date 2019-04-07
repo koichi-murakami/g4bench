@@ -30,7 +30,7 @@ void ShowWorkerRunSummary(const G4Run* run)
 
 } // end of namespace
 
-// --------------------------------------------------------------------------
+// ==========================================================================
 RunAction::RunAction()
   : simdata_{nullptr}, nvec_{0},
     total_step_count_{0}, total_edep_{0.}
