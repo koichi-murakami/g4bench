@@ -54,6 +54,7 @@ ecal [options] [#histories]
    -s, --session=type  specify session type
    -i, --init=macro    specify initial macro
    -n, --nthreads=N    set number of threads in MT mode [1]
+   -a, --affinity      set CPU affinity [false]
    -j, --test          make output for CI [false]
 )";
 
@@ -73,23 +74,25 @@ int main(int argc, char** argv)
   std::string config_file = "g4bench.conf";
   std::string str_nhistories = "";
   std::string str_nthreads = "1";
+  bool qaffinity = false;
   bool qtest = false;
 
   struct option long_options[] = {
-    {"help",    no_argument,        0 ,  'h'},
-    {"version", no_argument,        0 ,  'v'},
-    {"config",  required_argument,  0 ,  'c'},
-    {"session", required_argument,  0 ,  's'},
-    {"init",    required_argument,  0 ,  'i'},
-    {"nthreads",required_argument,  0,   'n'},
-    {"test",    no_argument,        0,   'j'},
-    {0,         0,                  0,    0}
+    {"help",       no_argument,        0 ,  'h'},
+    {"version",    no_argument,        0 ,  'v'},
+    {"config",     required_argument,  0 ,  'c'},
+    {"session",    required_argument,  0 ,  's'},
+    {"init",       required_argument,  0 ,  'i'},
+    {"nthreads",   required_argument,  0,   'n'},
+    {"affinity",   no_argument,        0,   'a'},
+    {"test",       no_argument,        0,   'j'},
+    {0,            0,                  0,    0}
   };
 
   while (1) {
     int option_index = -1;
 
-    int c = getopt_long(argc, argv, "hvc:s:i:n:j", long_options, &option_index);
+    int c = getopt_long(argc, argv, "hvc:s:i:n:aj", long_options, &option_index);
 
     if (c == -1) break;
 
@@ -110,6 +113,9 @@ int main(int argc, char** argv)
       break;
     case 'n' :
       str_nthreads = optarg;
+      break;
+    case 'a' :
+      qaffinity = true;
       break;
     case 'j' :
       qtest = true;
@@ -138,14 +144,21 @@ int main(int argc, char** argv)
   try {
     nthreads = boost::lexical_cast<int>(str_nthreads);
   } catch (std::exception& e) {
-    std::cerr << e.what() << std::endl;
-    std::cerr << "[ ERROR ] invalid argument: <#threads>" << std::endl;
+    std::cout << e.what() << std::endl;
+    std::cout << "[ ERROR ] invalid argument: <#threads>" << std::endl;
     std::exit(EXIT_FAILURE);
   }
   if(nthreads <= 0 ) {
     std::cout << "[ ERROR ] #threads should be more than 0." << std::endl;
     std::exit(EXIT_FAILURE);
   }
+
+#ifndef ENABLE_MT
+  if ( nthreads != 1 || qaffinity ) {
+    std::cout << "[ ERROR ] multi-threads is not supported" << std::endl;
+    std::exit(EXIT_FAILURE);
+  }
+#endif
 
   // #histories
   int nhistories = 0.;
@@ -154,8 +167,8 @@ int main(int argc, char** argv)
     try {
       nhistories = boost::lexical_cast<int>(str_nhistories);
     } catch (std::exception& e) {
-      std::cerr << e.what() << std::endl;
-      std::cerr << "[ ERROR ] invalid argument: <#histories>" << std::endl;
+      std::cout << e.what() << std::endl;
+      std::cout << "[ ERROR ] invalid argument: <#histories>" << std::endl;
       std::exit(EXIT_FAILURE);
     }
     if(nhistories <= 0 ) {
@@ -197,6 +210,7 @@ int main(int argc, char** argv)
 #ifdef ENABLE_MT
   auto run_manager = new G4MTRunManager();
   run_manager-> SetNumberOfThreads(nthreads);
+  if ( qaffinity ) run_manager-> SetPinAffinity(nthreads);
 #else
   auto run_manager = new G4RunManager();
 #endif
