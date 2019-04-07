@@ -213,6 +213,7 @@ int main(int argc, char** argv)
 #else
   auto run_manager = new G4RunManager();
 #endif
+
   auto ui_manager = G4UImanager::GetUIpointer();
 
   auto appbuilder = new AppBuilder();
