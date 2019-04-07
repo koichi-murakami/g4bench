@@ -13,7 +13,7 @@ See the License for more information.
 
 // --------------------------------------------------------------------------
 ParticleGun::ParticleGun()
-  : gun_(nullptr)
+  : gun_{nullptr}
 {
   gun_ = new G4ParticleGun();
 }

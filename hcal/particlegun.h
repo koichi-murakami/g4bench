@@ -14,8 +14,8 @@ See the License for more information.
 #include "G4VUserPrimaryGeneratorAction.hh"
 
 #define DISALLOW_COPY_AND_ASSIGN(TypeName) \
-  TypeName(const TypeName&);               \
-  void operator=(const TypeName&)
+  TypeName(const TypeName&) = delete;      \
+  void operator=(const TypeName&) = delete
 
 class G4ParticleGun;
 
@@ -23,14 +23,13 @@ class ParticleGun : public G4VUserPrimaryGeneratorAction {
 public:
   ParticleGun();
   ~ParticleGun();
+  DISALLOW_COPY_AND_ASSIGN(ParticleGun);
 
   G4ParticleGun* GetGun() const;
 
   virtual void GeneratePrimaries(G4Event* event);
 
 private:
-  DISALLOW_COPY_AND_ASSIGN(ParticleGun);
-
   G4ParticleGun* gun_;
 
 };
