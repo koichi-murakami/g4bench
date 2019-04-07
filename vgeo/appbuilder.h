@@ -11,28 +11,26 @@ See the License for more information.
 #ifndef APP_BUILDER_H_
 #define APP_BUILDER_H_
 
-#define DISALLOW_COPY_AND_ASSIGN(TypeName) \
-  TypeName(const TypeName&);               \
-  void operator=(const TypeName&)
+#include "G4VUserActionInitialization.hh"
 
 class SimData;
 
-class AppBuilder {
+class AppBuilder : public G4VUserActionInitialization {
 public:
   AppBuilder();
   ~AppBuilder();
 
-  void SetupApplication();
+  void BuildApplication();
+
   void SetTestingFlag(bool val);
 
+  virtual void Build() const;
+  virtual void BuildForMaster() const;
+
 private:
-  DISALLOW_COPY_AND_ASSIGN(AppBuilder);
-
   SimData* simdata_;
+  int nvec_;
   bool qtest_;
-
-  bool CheckVPrimaryPosition(const G4ThreeVector& pos);
-
 };
 
 // ==========================================================================
