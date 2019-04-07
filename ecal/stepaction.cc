@@ -21,6 +21,11 @@ StepAction::StepAction()
 // --------------------------------------------------------------------------
 void StepAction::UserSteppingAction(const G4Step* step)
 {
+#ifdef ENABLE_MT
   int tid = G4Threading::G4GetThreadId();
+#else
+  int tid = 0;
+#endif
+
   simdata_[tid].AddStepCount();
 }
