@@ -14,7 +14,7 @@ See the License for more information.
 
 // --------------------------------------------------------------------------
 StepAction::StepAction()
-  : simdata_(nullptr)
+  : simdata_{nullptr}
 {
 }
 
