@@ -19,16 +19,6 @@ See the License for more information.
 #include "hcalgeom.h"
 
 // --------------------------------------------------------------------------
-HcalGeom::HcalGeom()
-{
-}
-
-// --------------------------------------------------------------------------
-HcalGeom::~HcalGeom()
-{
-}
-
-// --------------------------------------------------------------------------
 G4VPhysicalVolume* HcalGeom::Construct()
 {
   G4NistManager* nist_manager = G4NistManager::Instance();
@@ -36,52 +26,45 @@ G4VPhysicalVolume* HcalGeom::Construct()
   // world volume
   const double kDXY_World = 100.*cm;
   const double kDZ_World = 200.*cm;
-  G4Box* world_box = new G4Box("world", kDXY_World/2.,
-                                        kDXY_World/2., kDZ_World/2.);
+  auto world_box = new G4Box("world", kDXY_World/2.,
+                                      kDXY_World/2., kDZ_World/2.);
 
-  G4Material* air = nist_manager-> FindOrBuildMaterial("G4_AIR");
-  G4LogicalVolume* world_lv = new G4LogicalVolume(world_box, air, "world");
+  auto air = nist_manager-> FindOrBuildMaterial("G4_AIR");
+  auto world_lv = new G4LogicalVolume(world_box, air, "world");
 
-  G4PVPlacement* world_pv = new G4PVPlacement(nullptr, G4ThreeVector(), "world",
+  auto world_pv = new G4PVPlacement(nullptr, G4ThreeVector(), "world",
                                               world_lv, nullptr, false, 0);
 
   // s/w calorimeter
   const double kDXY_Cal = 30.*cm;
   const double kDZ_Cal = 100.*cm;
 
-  G4Box* cal_box = new G4Box("cal", kDXY_Cal/2., kDXY_Cal/2., kDZ_Cal/2.);
-  G4Material* pb = nist_manager-> FindOrBuildMaterial("G4_Pb");
+  auto cal_box = new G4Box("cal", kDXY_Cal/2., kDXY_Cal/2., kDZ_Cal/2.);
+  auto pb = nist_manager-> FindOrBuildMaterial("G4_Pb");
 
-  G4LogicalVolume* cal_lv = new G4LogicalVolume(cal_box, pb, "cal");
+  auto cal_lv = new G4LogicalVolume(cal_box, pb, "cal");
 
-  G4PVPlacement* cal_pv = new G4PVPlacement(nullptr, G4ThreeVector(),
-                                cal_lv, "cal", world_lv, false, 0);
+  auto cal_pv = new G4PVPlacement(nullptr, G4ThreeVector(),
+                                  cal_lv, "cal", world_lv, false, 0);
 
   // replication along z-axis
   const double kDZ_Pb = 2.*cm; // 1(Pb)+1(scinti)
-  G4Box* pb_solid = new G4Box("pb", kDXY_Cal/2., kDXY_Cal/2., kDZ_Pb/2.);
+  auto pb_solid = new G4Box("pb", kDXY_Cal/2., kDXY_Cal/2., kDZ_Pb/2.);
 
-  G4LogicalVolume* pb_lv = new G4LogicalVolume(pb_solid, pb, "pb");
+  auto pb_lv = new G4LogicalVolume(pb_solid, pb, "pb");
 
   const int kNZ = 50;
-  G4PVReplica* pb_rep = new G4PVReplica("pb", pb_lv, cal_lv, kZAxis,
-                                        kNZ, kDZ_Pb);
+  auto pb_rep = new G4PVReplica("pb", pb_lv, cal_lv, kZAxis, kNZ, kDZ_Pb);
 
   // scintillator
   const double kDZ_SC = 1.*cm;
-  G4Box* sc_solid = new G4Box("sc", kDXY_Cal/2., kDXY_Cal/2., kDZ_SC/2.);
-  G4Material* sc =
-    nist_manager-> FindOrBuildMaterial("G4_PLASTIC_SC_VINYLTOLUENE");
+  auto sc_solid = new G4Box("sc", kDXY_Cal/2., kDXY_Cal/2., kDZ_SC/2.);
+  auto sc = nist_manager-> FindOrBuildMaterial("G4_PLASTIC_SC_VINYLTOLUENE");
 
-  G4LogicalVolume* sc_lv = new G4LogicalVolume(sc_solid, sc, "sc");
+  auto sc_lv = new G4LogicalVolume(sc_solid, sc, "sc");
 
-  G4PVPlacement* sc_pv =
-    new G4PVPlacement(nullptr, G4ThreeVector(0.,0.,kDZ_SC/2.),
-                      sc_lv, "sc", pb_lv, false, 0);
-
-  CalScorer* cal_scorer = new CalScorer();
-  cal_scorer-> SetSimData(simdata_);
-  sc_lv-> SetSensitiveDetector(cal_scorer);
+  auto sc_pv = new G4PVPlacement(nullptr, G4ThreeVector(0.,0.,kDZ_SC/2.),
+                                 sc_lv, "sc", pb_lv, false, 0);
 
   // vis attributes
   G4VisAttributes* va = nullptr;
@@ -102,4 +85,12 @@ G4VPhysicalVolume* HcalGeom::Construct()
   sc_lv-> SetVisAttributes(va);
 
   return world_pv;
+}
+
+// --------------------------------------------------------------------------
+void HcalGeom::ConstructSDandField()
+{
+  auto cal_scorer = new CalScorer();
+  cal_scorer-> SetSimData(simdata_);
+  SetSensitiveDetector("sc", cal_scorer);
 }
