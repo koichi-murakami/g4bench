@@ -241,7 +241,6 @@ int main(int argc, char** argv)
   delete vis_manager;
 #endif
 
-  gtimer-> ShowAllHistories();
   gtimer-> ShowClock("[MESSAGE] End:");
 
   return EXIT_SUCCESS;
