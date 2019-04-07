@@ -12,13 +12,14 @@ See the License for more information.
 #define SIM_DATA_H_
 
 #define DISALLOW_COPY_AND_ASSIGN(TypeName) \
-  TypeName(const TypeName&);               \
-  void operator=(const TypeName&)
+  TypeName(const TypeName&) = delete;      \
+  void operator=(const TypeName&) = delete
 
 class SimData {
 public:
-  SimData();
-  virtual ~SimData();
+  SimData() = default;
+  virtual ~SimData() = default;
+  DISALLOW_COPY_AND_ASSIGN(SimData);
 
   void Initialize();
 
@@ -29,8 +30,6 @@ public:
   double GetEdep() const;
 
 private:
-  DISALLOW_COPY_AND_ASSIGN(SimData);
-
   long step_count_;
   double edep_;
 
@@ -55,6 +54,12 @@ inline void SimData::AddEdep(double val)
 inline double SimData::GetEdep() const
 {
   return edep_;
+}
+
+inline void SimData::Initialize()
+{
+  step_count_ = 0;
+  edep_ = 0.;
 }
 
 #endif
