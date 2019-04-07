@@ -4,7 +4,7 @@
 
 [![geant4](https://img.shields.io/badge/geant4-10.5-blue.svg)](http://www.geant4.org/)
 [![MT](https://img.shields.io/badge/MT-ecal-green.svg)](http://www.geant4.org/)
-[![MT](https://img.shields.io/badge/MT-hcal-red.svg)](http://www.geant4.org/)
+[![MT](https://img.shields.io/badge/MT-hcal-green.svg)](http://www.geant4.org/)
 [![MT](https://img.shields.io/badge/MT-vgeo-red.svg)](http://www.geant4.org/)
 
 G4Bench is a set of benchmark tests of Geant4 detector simulation toolkit.
