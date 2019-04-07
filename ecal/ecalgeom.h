@@ -17,12 +17,13 @@ class SimData;
 
 class EcalGeom : public G4VUserDetectorConstruction {
 public:
-  EcalGeom();
-  ~EcalGeom();
+  EcalGeom() = default;
+  ~EcalGeom() = default;
 
   void SetSimData(SimData* data);
 
   virtual G4VPhysicalVolume* Construct();
+  virtual void ConstructSDandField();
 
 private:
   SimData* simdata_;

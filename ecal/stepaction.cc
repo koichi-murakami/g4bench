@@ -8,6 +8,7 @@ This software is distributed WITHOUT ANY WARRANTY; without even the
 implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License for more information.
 ============================================================================*/
+#include "G4Threading.hh"
 #include "simdata.h"
 #include "stepaction.h"
 
@@ -15,16 +16,11 @@ See the License for more information.
 StepAction::StepAction()
   : simdata_(nullptr)
 {
-
-}
-
-// --------------------------------------------------------------------------
-StepAction::~StepAction()
-{
 }
 
 // --------------------------------------------------------------------------
 void StepAction::UserSteppingAction(const G4Step* step)
 {
-  simdata_-> AddStepCount();
+  int tid = G4Threading::G4GetThreadId();
+  simdata_[tid].AddStepCount();
 }

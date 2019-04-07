@@ -18,7 +18,7 @@ class SimData;
 class StepAction : public G4UserSteppingAction {
 public:
   StepAction();
-  virtual ~StepAction();
+  virtual ~StepAction() = default;
 
   void SetSimData(SimData* data);
 

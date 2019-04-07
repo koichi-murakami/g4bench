@@ -19,6 +19,7 @@ namespace {
 
 TimeHistory* gtimer = nullptr;
 
+// --------------------------------------------------------------------------
 void ShowProgress(int nprocessed, const std::string& key) {
   std::cout << "[MESSAGE] event-loop check point: "
             << nprocessed << " events processed." << std::endl;
@@ -31,11 +32,6 @@ void ShowProgress(int nprocessed, const std::string& key) {
 EventAction::EventAction()
 {
   ::gtimer = TimeHistory::GetTimeHistory();
-}
-
-// --------------------------------------------------------------------------
-EventAction::~EventAction()
-{
 }
 
 // --------------------------------------------------------------------------
