@@ -25,8 +25,7 @@ void ShowWorkerRunSummary(const G4Run* run)
 {
   // # of processed events
   int nevents = run-> GetNumberOfEvent();
-  std::cout << " * Run Summary (Worker)" << std::endl
-            << "   - # events processed = " << nevents << std::endl;
+  std::cout << " * Worker Summary : #events = " << nevents << std::endl;
 }
 
 } // end of namespace
