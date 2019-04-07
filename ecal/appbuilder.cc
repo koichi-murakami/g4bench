@@ -143,6 +143,7 @@ void AppBuilder::Build() const
   auto runaction = new RunAction();
   runaction-> SetSimData(simdata_);
   runaction-> SetDataSize(nvec_);
+  runaction-> SetTestingFlag(qtest_);
   SetUserAction(runaction);
 
   SetUserAction(new EventAction);
