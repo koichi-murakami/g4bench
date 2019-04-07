@@ -26,6 +26,7 @@ Fine tuning of the library build:
   --with-build-dir=DIR      Set build dir [build]
 
 Enable/disable options: prefix with either --enable- or --disable-
+  mt       multi-threading support [disable]
   vis      OpenGL support [enable]
   opt      optimization (O3) [enable]
   debug    debug mode [disable]
