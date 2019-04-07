@@ -20,10 +20,11 @@ namespace {
 TimeHistory* gtimer = nullptr;
 
 // --------------------------------------------------------------------------
-void ShowProgress(int nprocessed, const std::string& key) {
+void ShowProgress(int nprocessed, const std::string& key)
+{
   std::cout << "[MESSAGE] event-loop check point: "
             << nprocessed << " events processed." << std::endl;
-  //gtimer-> ShowHistory(key);
+  //::gtimer-> ShowHistory(key);
 }
 
 } // end of namespace
