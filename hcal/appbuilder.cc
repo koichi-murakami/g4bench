@@ -14,29 +14,31 @@ See the License for more information.
 #include "G4Navigator.hh"
 #include "G4ParticleGun.hh"
 #include "G4ParticleTable.hh"
+#ifdef ENABLE_MT
+#include "G4MTRunManager.hh"
+#else
 #include "G4RunManager.hh"
+#endif
 #include "G4SystemOfUnits.hh"
-#include "G4TransportationManager.hh"
-#include "G4UImanager.hh"
-#include "G4VPhysicalVolume.hh"
-#include "G4VSolid.hh"
 #include "CLHEP/Random/MTwistEngine.h"
-//#include "CLHEP/Random/Ranlux64Engine.h"
-#include "CLHEP/Random/Random.h"
 #include "appbuilder.h"
+#include "eventaction.h"
 #include "hcalgeom.h"
 #include "particlegun.h"
-#include "util/jsonparser.h"
-#include "eventaction.h"
 #include "runaction.h"
 #include "simdata.h"
 #include "stepaction.h"
+#include "util/jsonparser.h"
 
 // --------------------------------------------------------------------------
 namespace {
 
+#ifdef ENABLE_MT
+G4MTRunManager* run_manager = nullptr;
+#else
 G4RunManager* run_manager = nullptr;
-G4UImanager* ui_manager = nullptr;
+#endif
+
 JsonParser* jparser = nullptr;
 
 // --------------------------------------------------------------------------
@@ -44,30 +46,28 @@ void SetupGeomtry(SimData* data)
 {
   HcalGeom* geom = new HcalGeom();
   geom-> SetSimData(data);
-  run_manager-> SetUserInitialization(geom);
+  ::run_manager-> SetUserInitialization(geom);
 }
 
 // --------------------------------------------------------------------------
 G4ThreeVector GetPrimaryPosition()
 {
   G4ThreeVector pos = G4ThreeVector();
-  if ( jparser-> Contains("Primary/position") ) {
+  if ( ::jparser-> Contains("Primary/position") ) {
     std::vector<double> dvec;
     dvec.clear();
-    jparser-> GetDoubleArray("Primary/position", dvec);
+    ::jparser-> GetDoubleArray("Primary/position", dvec);
     pos = G4ThreeVector(dvec[0]*cm, dvec[1]*cm, dvec[2]*cm);
   }
   return pos;
 }
 
 // --------------------------------------------------------------------------
-void SetupParticleGun()
+void SetupParticleGun(ParticleGun* pga)
 {
-  ParticleGun* pga = new ParticleGun();
-  run_manager-> SetUserAction(pga);
   G4ParticleGun* gun = pga-> GetGun();
 
-  std::string pname = jparser-> GetStringValue("Primary/particle");
+  std::string pname = ::jparser-> GetStringValue("Primary/particle");
   G4ParticleTable* ptable = G4ParticleTable::GetParticleTable();
   G4ParticleDefinition* pdef = ptable-> FindParticle(pname);
   if ( pdef != nullptr ) gun-> SetParticleDefinition(pdef);
@@ -76,9 +76,9 @@ void SetupParticleGun()
   gun-> SetParticleEnergy(pkin*MeV);
 
   std::vector<double> dvec;
-  if ( jparser-> Contains("Primary/direction") ) {
+  if ( ::jparser-> Contains("Primary/direction") ) {
     dvec.clear();
-    jparser-> GetDoubleArray("Primary/direction", dvec);
+    ::jparser-> GetDoubleArray("Primary/direction", dvec);
     G4ThreeVector pvec(dvec[0], dvec[1], dvec[2]);
     gun-> SetParticleMomentumDirection(pvec);
   }
@@ -87,82 +87,80 @@ void SetupParticleGun()
   gun-> SetParticlePosition(pos);
 }
 
-// --------------------------------------------------------------------------
-void SetupPGA()
-{
-  std::cout << "[ MESSAGE ] primary type : gun" << std::endl;
-  SetupParticleGun();
-}
-
 } // end of namespace
 
 // ==========================================================================
 AppBuilder::AppBuilder()
+  : simdata_{nullptr}, nvec_{0}, qtest_{false}
 {
-  ::run_manager = G4RunManager::GetRunManager();
-  ::ui_manager = G4UImanager::GetUIpointer();
   ::jparser = JsonParser::GetJsonParser();
-
-  simdata_ = new SimData;
-
-  CLHEP::MTwistEngine* rand_engine = new CLHEP::MTwistEngine();
-  //CLHEP::Ranlux64Engine* rand_engine = new CLHEP::Ranlux64Engine();
-
-  long seed = 0L;
-  if ( jparser-> Contains("Run/Seed") ) {
-    long seed = jparser-> GetLongValue("Run/Seed");
-  }
-
-  const int kK = 12345;
-  rand_engine-> setSeed(seed, kK);
-  CLHEP::HepRandom::setTheEngine(rand_engine);
 }
 
 // --------------------------------------------------------------------------
 AppBuilder::~AppBuilder()
 {
-  delete simdata_;
+  delete [] simdata_;
 }
 
 // --------------------------------------------------------------------------
-void AppBuilder::SetupApplication()
+void AppBuilder::BuildApplication()
 {
+#ifdef ENABLE_MT
+  ::run_manager = G4MTRunManager::GetMasterRunManager();
+  nvec_ = ::run_manager-> GetNumberOfThreads();
+#else
+  ::run_manager = G4RunManager::GetRunManager();
+  nvec_ = 1;
+#endif
+
+  simdata_ = new SimData[nvec_];
+
   ::SetupGeomtry(simdata_);
   ::run_manager-> SetUserInitialization(new FTFP_BERT);
-  ::SetupPGA();
+  ::run_manager-> SetUserInitialization(this);
 
-  RunAction* runaction = new RunAction;
-  runaction-> SetSimData(simdata_);
-  ::run_manager-> SetUserAction(runaction);
+  // set random number generator
+  CLHEP::MTwistEngine* rand_engine = new CLHEP::MTwistEngine();
 
-
-  EventAction* eventaction = new EventAction;
-  ::run_manager-> SetUserAction(eventaction);
-
-  StepAction* stepaction = new StepAction;
-  stepaction-> SetSimData(simdata_);
-  ::run_manager-> SetUserAction(stepaction);
-
-  ::run_manager-> Initialize();
-
-  G4ThreeVector pos = ::GetPrimaryPosition();
-  bool qcheck = CheckVPrimaryPosition(pos);
-  if ( qcheck == false ) {
-    std::cout << "[ ERROR ] primary position out of world." << std::endl;
-    std::exit(EXIT_FAILURE);
+  long seed { 0L };
+  if ( jparser-> Contains("Run/Seed") ) {
+    long seed = jparser-> GetLongValue("Run/Seed");
   }
+
+  G4Random::setTheEngine(rand_engine);
+  G4Random::setTheSeed(seed);
+
+  // initialize
+  ::run_manager-> Initialize();
 }
 
 // --------------------------------------------------------------------------
-bool AppBuilder::CheckVPrimaryPosition(const G4ThreeVector& pos)
+void AppBuilder::Build() const
 {
-  G4Navigator* navigator = G4TransportationManager::GetTransportationManager()
-                             -> GetNavigatorForTracking();
+  auto pga = new ParticleGun();
+  ::SetupParticleGun(pga);
+  SetUserAction(pga);
 
-  G4VPhysicalVolume* world = navigator-> GetWorldVolume();
-  G4VSolid* solid = world-> GetLogicalVolume()-> GetSolid();
-  EInside qinside = solid-> Inside(pos);
+  auto runaction = new RunAction();
+  runaction-> SetSimData(simdata_);
+  runaction-> SetDataSize(nvec_);
+  runaction-> SetTestingFlag(qtest_);
+  SetUserAction(runaction);
 
-   if( qinside != kInside) return false;
-   else return true;
+  SetUserAction(new EventAction);
+
+  auto stepaction = new StepAction;
+  stepaction-> SetSimData(simdata_);
+  SetUserAction(stepaction);
+}
+
+// --------------------------------------------------------------------------
+void AppBuilder::BuildForMaster() const
+{
+  auto runaction = new RunAction();
+  runaction-> SetSimData(simdata_);
+  runaction-> SetDataSize(nvec_);
+  runaction-> SetTestingFlag(qtest_);
+
+  SetUserAction(runaction);
 }
