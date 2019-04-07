@@ -83,7 +83,7 @@ void RunAction::ShowRunSummary(const G4Run* run) const
   int nevents = run-> GetNumberOfEvent();
 
   // Edep information
-  double edep_cal = simdata_-> GetEdep() / nevents / MeV;
+  double edep_cal = total_edep_ / nevents / MeV;
 
   // elapsed time
   double t_start = gtimer-> GetTime("BeamOn");;
@@ -106,8 +106,7 @@ void RunAction::ShowRunSummary(const G4Run* run) const
   double proc_eps = nevents / proc_time * msec;
 
   // steps/msec
-  double sps = simdata_-> GetStepCount() / proc_time * msec;
-
+  double sps = total_step_count_ / proc_time * msec;
 
   std::cout << std::endl;
   std::cout << "=============================================================="
