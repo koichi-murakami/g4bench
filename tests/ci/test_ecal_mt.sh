@@ -32,6 +32,6 @@ export G4DATA=/opt/geant4/data/10.5.0
 . ../../tests/g4env/g4env.10.5.0.sh
 
 #
-./ecal -n 10 -a -j 100000
+./ecal -n 10 -j 100000
 
 exit $?
