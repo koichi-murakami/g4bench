@@ -9,6 +9,7 @@ implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License for more information.
 ============================================================================*/
 #include "G4Step.hh"
+#include "G4Threading.hh"
 #include "calscorer.h"
 #include "simdata.h"
 
@@ -19,13 +20,9 @@ CalScorer::CalScorer()
 }
 
 // --------------------------------------------------------------------------
-CalScorer::~CalScorer()
-{
-}
-
-// --------------------------------------------------------------------------
 bool CalScorer::ProcessHits(G4Step* step, G4TouchableHistory*)
 {
   double edep = step-> GetTotalEnergyDeposit();
-  simdata_-> AddEdep(edep);
+  int tid = G4Threading::G4GetThreadId();
+  simdata_[tid].AddEdep(edep);
 }
