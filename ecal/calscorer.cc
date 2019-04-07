@@ -15,7 +15,7 @@ See the License for more information.
 
 // --------------------------------------------------------------------------
 CalScorer::CalScorer()
-: G4VSensitiveDetector("calscorer"), simdata_(nullptr)
+: G4VSensitiveDetector("calscorer"), simdata_{nullptr}
 {
 }
 
