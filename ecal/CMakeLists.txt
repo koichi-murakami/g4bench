@@ -13,7 +13,7 @@ add_executable(${APP})
 
 target_sources(${APP} PRIVATE
   appbuilder.cc calscorer.cc ecalgeom.cc eventaction.cc main.cc
-  particlegun.cc runaction.cc simdata.cc stepaction.cc
+  particlegun.cc runaction.cc stepaction.cc
   ../util/jsonparser.cc
   ../util/stopwatch.cc
   ../util/timehistory.cc
