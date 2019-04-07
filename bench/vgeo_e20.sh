@@ -51,7 +51,7 @@ env | grep G4 | grep DATA
 echo ""
 
 #
-cat << EOD > config.json5
+cat << EOD > g4bench.conf
 {
   Run : {
     Seed : 123456789,
