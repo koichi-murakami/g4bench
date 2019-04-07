@@ -15,7 +15,6 @@ See the License for more information.
 #else
 #include "G4RunManager.hh"
 #endif
-#include "G4StateManager.hh"
 #include "G4UIExecutive.hh"
 #include "G4UImanager.hh"
 #include "G4UItcsh.hh"
