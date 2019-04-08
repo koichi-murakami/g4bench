@@ -14,8 +14,8 @@ See the License for more information.
 #include "G4VUserPrimaryGeneratorAction.hh"
 
 #define DISALLOW_COPY_AND_ASSIGN(TypeName) \
-  TypeName(const TypeName&);               \
-  void operator=(const TypeName&)
+  TypeName(const TypeName&) = delete;      \
+  void operator=(const TypeName&) = delete
 
 class G4ParticleDefinition;
 

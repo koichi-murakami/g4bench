@@ -15,8 +15,8 @@ See the License for more information.
 #include "G4PVReplica.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4VisAttributes.hh"
-#include "calscorer.h"
 #include "hcalgeom.h"
+#include "common/calscorer.h"
 
 // --------------------------------------------------------------------------
 G4VPhysicalVolume* HcalGeom::Construct()

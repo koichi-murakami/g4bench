@@ -149,9 +149,23 @@ void SetupPGA()
 // ==========================================================================
 AppBuilder::AppBuilder()
 {
-  ::run_manager = G4RunManager::GetRunManager();
-  ::ui_manager = G4UImanager::GetUIpointer();
   ::jparser = JsonParser::GetJsonParser();
+}
+
+// --------------------------------------------------------------------------
+AppBuilder::~AppBuilder()
+{
+  delete simdata_;
+}
+
+// --------------------------------------------------------------------------
+void AppBuilder::BuildApplication()
+{
+  ::SetupGeomtry(simdata_);
+  ::run_manager-> SetUserInitialization(new QGSP_BIC);
+  ::SetupPGA();
+
+
 
   simdata_ = new SimData;
 
@@ -166,20 +180,7 @@ AppBuilder::AppBuilder()
   const int kK = 12345;
   rand_engine-> setSeed(seed, kK);
   CLHEP::HepRandom::setTheEngine(rand_engine);
-}
 
-// --------------------------------------------------------------------------
-AppBuilder::~AppBuilder()
-{
-  delete simdata_;
-}
-
-// --------------------------------------------------------------------------
-void AppBuilder::SetupApplication()
-{
-  ::SetupGeomtry(simdata_);
-  ::run_manager-> SetUserInitialization(new QGSP_BIC);
-  ::SetupPGA();
 
   RunAction* runaction = new RunAction;
   runaction-> SetSimData(simdata_);
@@ -193,26 +194,37 @@ void AppBuilder::SetupApplication()
   stepaction-> SetSimData(simdata_);
   ::run_manager-> SetUserAction(stepaction);
 
+  // initialize
   ::run_manager-> Initialize();
-
-  G4ThreeVector pos = ::GetPrimaryPosition();
-  bool qcheck = CheckVPrimaryPosition(pos);
-  if ( qcheck == false ) {
-    std::cout << "[ ERROR ] primary position out of world." << std::endl;
-    std::exit(EXIT_FAILURE);
-  }
 }
 
 // --------------------------------------------------------------------------
-bool AppBuilder::CheckVPrimaryPosition(const G4ThreeVector& pos)
+void AppBuilder::Build() const
 {
-  G4Navigator* navigator = G4TransportationManager::GetTransportationManager()
-                             -> GetNavigatorForTracking();
+  auto pga = new ParticleGun();
+  ::SetupParticleGun(pga);
+  SetUserAction(pga);
 
-  G4VPhysicalVolume* world = navigator-> GetWorldVolume();
-  G4VSolid* solid = world-> GetLogicalVolume()-> GetSolid();
-  EInside qinside = solid-> Inside(pos);
+  auto runaction = new RunAction();
+  runaction-> SetSimData(simdata_);
+  runaction-> SetDataSize(nvec_);
+  runaction-> SetTestingFlag(qtest_);
+  SetUserAction(runaction);
 
-   if( qinside != kInside) return false;
-   else return true;
+  SetUserAction(new EventAction);
+
+  auto stepaction = new StepAction;
+  stepaction-> SetSimData(simdata_);
+  SetUserAction(stepaction);
+}
+
+// --------------------------------------------------------------------------
+void AppBuilder::BuildForMaster() const
+{
+  auto runaction = new RunAction();
+  runaction-> SetSimData(simdata_);
+  runaction-> SetDataSize(nvec_);
+  runaction-> SetTestingFlag(qtest_);
+
+  SetUserAction(runaction);
 }

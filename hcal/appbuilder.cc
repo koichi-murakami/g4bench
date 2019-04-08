@@ -22,12 +22,12 @@ See the License for more information.
 #include "G4SystemOfUnits.hh"
 #include "CLHEP/Random/MTwistEngine.h"
 #include "appbuilder.h"
-#include "eventaction.h"
 #include "hcalgeom.h"
-#include "particlegun.h"
-#include "runaction.h"
-#include "simdata.h"
-#include "stepaction.h"
+#include "common/eventaction.h"
+#include "common/particlegun.h"
+#include "common/runaction.h"
+#include "common/simdata.h"
+#include "common/stepaction.h"
 #include "util/jsonparser.h"
 
 // --------------------------------------------------------------------------
