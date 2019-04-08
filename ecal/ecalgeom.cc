@@ -16,7 +16,7 @@ See the License for more information.
 #include "G4Tubs.hh"
 #include "G4VisAttributes.hh"
 #include "ecalgeom.h"
-#include "calscorer.h"
+#include "common/calscorer.h"
 
 // --------------------------------------------------------------------------
 G4VPhysicalVolume* EcalGeom::Construct()

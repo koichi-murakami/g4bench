@@ -22,11 +22,11 @@ See the License for more information.
 #include "CLHEP/Random/MTwistEngine.h"
 #include "appbuilder.h"
 #include "ecalgeom.h"
-#include "eventaction.h"
-#include "particlegun.h"
-#include "runaction.h"
-#include "simdata.h"
-#include "stepaction.h"
+#include "common/eventaction.h"
+#include "common/particlegun.h"
+#include "common/runaction.h"
+#include "common/simdata.h"
+#include "common/stepaction.h"
 #include "util/jsonparser.h"
 
 // --------------------------------------------------------------------------
