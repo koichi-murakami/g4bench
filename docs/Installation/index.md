@@ -51,9 +51,56 @@ $ make install
 ...
 ~~~~
 
-## Running
+## How to Run
+Each benchmark program has the following command line options.
+~~~~
+G4Bench/ecal version 1.5.0 (1.5.0d1.13098.3115)
+
+usage:
+ecal [options] [#histories]
+
+   -h, --help          show this message.
+   -v  --version       show program name/version.
+   -c, --config        specify configuration file [g4bench.conf]
+   -s, --session=type  specify session type
+   -i, --init=macro    specify initial macro
+   -n, --nthreads=N    set number of threads in MT mode [1]
+   -a, --affinity      set CPU affinity [false]
+   -j, --test          make output for CI [false]
+~~~~
+
+The programs have multi-threading capability if you use a MT version of
+Geant4. You can specify the number of threads with `-n` option.
+Also you can pin the CPU affinity with `-a` option, but
+take fully care for the CPU architecture of your machine, e.g.
+*hyper-threading*.
+
+The configuration of an application is described in a JSON5 configuration
+file (`g4bench.conf` by default).
+
+~~~~
+{
+  // -----------------------------------------------------------------
+  // Run Configuration
+  Run : {
+    Seed : 123456789,
+  },
+  // -----------------------------------------------------------------
+  // Primary setting (Generic)
+  Primary : {
+    particle  : "e-",
+    energy    : 1000.0,   // MeV
+    position  : [ 0., 0., -45. ],  // cm
+    direction : [ 0., 0., 1.],
+  }
+}
+~~~~
+
+In the configuration file, random number seed and
+the condition of primary particles can be modified as simulation parameters.
+
 You need to set Geant4 environment variables to specify the paths for
-data tables, to run applications.
+data tables before running applications.
 
 ~~~~
 $ env | grep G4
