@@ -11,15 +11,13 @@ See the License for more information.
 #ifndef SIM_DATA_H_
 #define SIM_DATA_H_
 
-#define DISALLOW_COPY_AND_ASSIGN(TypeName) \
-  TypeName(const TypeName&) = delete;      \
-  void operator=(const TypeName&) = delete
-
 class SimData {
 public:
   SimData() = default;
   virtual ~SimData() = default;
-  DISALLOW_COPY_AND_ASSIGN(SimData);
+
+  SimData(const SimData&) = delete;
+  void operator=(const SimData&) = delete;
 
   void Initialize();
 
