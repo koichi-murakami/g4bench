@@ -243,7 +243,7 @@ int main(int argc, char** argv)
 
   } else {
     gtimer-> TakeSplit("SessionStart");
-    ui_session-> SetPrompt("ecal(%s)[%/]:");
+    ui_session-> SetPrompt("vgeo(%s)[%/]:");
     ui_session-> SessionStart();
     gtimer-> TakeSplit("SessionEnd");
   }
