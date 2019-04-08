@@ -12,8 +12,8 @@
 #define VERSION_H_
 
 #define G4BENCH_VERSION_MAJOR "1"
-#define G4BENCH_VERSION_MINOR "5.0"
-#define G4BENCH_VERSION_BUILD 0xa1bb34d
+#define G4BENCH_VERSION_MINOR "5.1"
+#define G4BENCH_VERSION_BUILD 0x87bbfba
 
 namespace {
   const int build_head = (G4BENCH_VERSION_BUILD & 0xffff000) >> 12;
