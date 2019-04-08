@@ -125,7 +125,7 @@ G4VUserPrimaryGeneratorAction* SetupMedicalBeam()
 
  // field size
  if ( ::jparser-> Contains("Primary/Beam/field_size") ) {
-   double fxy = jparser-> GetDoubleValue("Primary/Beam/field_size");
+   double fxy = ::jparser-> GetDoubleValue("Primary/Beam/field_size");
    beam-> SetFieldSize(fxy * cm);
  }
 
@@ -137,7 +137,7 @@ G4VUserPrimaryGeneratorAction* SetupPGA()
 {
   G4VUserPrimaryGeneratorAction* pga { nullptr };
 
-  std::string primary_type = jparser-> GetStringValue("Primary/type");
+  std::string primary_type = ::jparser-> GetStringValue("Primary/type");
   if ( primary_type == "gun" ) {
     std::cout << "[ MESSAGE ] primary type : gun" << std::endl;
     pga = SetupParticleGun();
