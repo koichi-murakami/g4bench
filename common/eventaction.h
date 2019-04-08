@@ -18,9 +18,20 @@ public:
   EventAction();
   virtual ~EventAction() = default;
 
+  void SetCheckCounter(int val);
+
   virtual void BeginOfEventAction(const G4Event* event);
   virtual void EndOfEventAction(const G4Event* event);
 
+private:
+  int check_counter_;
+
 };
+
+// ==========================================================================
+inline void EventAction::SetCheckCounter(int val)
+{
+  check_counter_ = val;
+}
 
 #endif

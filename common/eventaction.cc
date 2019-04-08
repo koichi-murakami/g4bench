@@ -31,6 +31,7 @@ void ShowProgress(int nprocessed, const std::string& key)
 
 // --------------------------------------------------------------------------
 EventAction::EventAction()
+  : check_counter_{1000}
 {
   ::gtimer = TimeHistory::GetTimeHistory();
 }
@@ -48,12 +49,12 @@ void EventAction::BeginOfEventAction(const G4Event* event)
 void EventAction::EndOfEventAction(const G4Event* event)
 {
   int ievent = event-> GetEventID();
-  const int kKiloEvents = 1000;
+  constexpr int kKiloEvents = 1000;
 
-  if ( ievent % kKiloEvents == 0 && ievent != 0 ) {
-    int event_in_mega = ievent / kKiloEvents;
+  if ( ievent % check_counter_ == 0 && ievent != 0 ) {
+    int event_in_kilo = ievent / kKiloEvents;
     std::stringstream key;
-    key << "EventCheckPoint:" << event_in_mega << "K";
+    key << "EventCheckPoint:" << event_in_kilo << "K";
     ::gtimer-> TakeSplit(key.str());
     ::ShowProgress(ievent, key.str());
   }
