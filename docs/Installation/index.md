@@ -69,7 +69,7 @@ ecal [options] [#histories]
    -j, --test          make output for CI [false]
 ~~~~
 
-The programs have multi-threading capability if you use a MT version of
+These programs have multi-threading capability if you use a MT version of
 Geant4. You can specify the number of threads with `-n` option.
 Also you can pin the CPU affinity with `-a` option, but
 take fully care for the CPU architecture of your machine, e.g.
@@ -117,3 +117,34 @@ G4LEVELGAMMADATA=/opt/geant4/data/10.5.0/PhotonEvaporation5.3
 G4RADIOACTIVEDATA=/opt/geant4/data/10.5.0/RadioactiveDecay5.3
 G4REALSURFACEDATA=/opt/geant4/data/10.5.0/RealSurface2.1.1
 ~~~~
+
+
+## Results
+Each program shows the following benchmark values.
+
+~~~~
+==============================================================
+ Run Summary
+ - # events processd = 10000 / 10000
+ - elapsed cpu time = 69.92 sec
+ - initialization time = 0.64 sec
+ *** Physics regression ***
+ - edep in cal per event = 968.754 MeV/event
+ *** EPS Score ***
+ - average TPE = 6.992 msec
+ - processed TPE = 6.928 msec
+ - processed EPS = 0.144342 /msec
+ *** SPS Score ***
+ - steps per msec = 628.371 steps/msec
+==============================================================
+~~~~
+
+The important metrics are:
+
+* EPS : Events per second
+* TPE : Time per event
+* SPS : Steps per second
+
+To validate physics results as regression test, the energy deposit per event
+in the scoring volume is also shown. Keep monitoring these values to
+ensure the benchmark validity.
