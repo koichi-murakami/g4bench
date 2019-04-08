@@ -15,18 +15,13 @@ See the License for more information.
 #include <string>
 #include "util/stopwatch.h"
 
-#ifndef DISALLOW_COPY_AND_ASSIGN
-#define DISALLOW_COPY_AND_ASSIGN(TypeName) \
-  TypeName(const TypeName&) = delete;      \
-  void operator=(const TypeName&) = delete
-#endif
-
 class TimeHistory {
 public:
   static TimeHistory* GetTimeHistory();
   virtual ~TimeHistory() = default;
 
-  DISALLOW_COPY_AND_ASSIGN(TimeHistory);
+  TimeHistory(const TimeHistory&) = delete;
+  void operator=(const TimeHistory&) = delete;
 
   void TakeSplit(const std::string& key);
 

@@ -211,7 +211,9 @@ void AppBuilder::Build() const
   runaction-> SetTestingFlag(qtest_);
   SetUserAction(runaction);
 
-  SetUserAction(new EventAction);
+  auto eventaction = new EventAction();
+  eventaction-> SetCheckCounter(10000);
+  SetUserAction(eventaction);
 
   auto stepaction = new StepAction;
   stepaction-> SetSimData(simdata_);

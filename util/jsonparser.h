@@ -15,12 +15,6 @@ See the License for more information.
 #include <vector>
 #include "util/picojson.h"
 
-#ifndef DISALLOW_COPY_AND_ASSIGN
-#define DISALLOW_COPY_AND_ASSIGN(TypeName) \
-  TypeName(const TypeName&) = delete;      \
-  void operator=(const TypeName&) = delete
-#endif
-
 class JsonParser {
 public:
   typedef std::vector<bool> barray_t;
@@ -33,7 +27,8 @@ public:
   static JsonParser* GetJsonParser();
   virtual ~JsonParser() = default;
 
-  DISALLOW_COPY_AND_ASSIGN(JsonParser);
+  JsonParser(const JsonParser&) = delete;
+  void operator=(const JsonParser&) = delete;
 
   bool LoadFile(const std::string& fname, bool raw_mode = false);
   bool LoadString(const std::string& jstring, bool raw_mode = false);
