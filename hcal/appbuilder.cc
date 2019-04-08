@@ -72,7 +72,7 @@ void SetupParticleGun(ParticleGun* pga)
   G4ParticleDefinition* pdef = ptable-> FindParticle(pname);
   if ( pdef != nullptr ) gun-> SetParticleDefinition(pdef);
 
-  double pkin = jparser-> GetDoubleValue("Primary/energy");
+  double pkin = ::jparser-> GetDoubleValue("Primary/energy");
   gun-> SetParticleEnergy(pkin*MeV);
 
   std::vector<double> dvec;
