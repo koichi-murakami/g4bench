@@ -13,16 +13,15 @@ See the License for more information.
 
 #include "G4VUserPrimaryGeneratorAction.hh"
 
-#define DISALLOW_COPY_AND_ASSIGN(TypeName) \
-  TypeName(const TypeName&) = delete;      \
-  void operator=(const TypeName&) = delete
-
 class G4ParticleDefinition;
 
 class MedicalBeam : public G4VUserPrimaryGeneratorAction {
 public:
   MedicalBeam();
-  ~MedicalBeam();
+  ~MedicalBeam() = default;
+
+  MedicalBeam(const MedicalBeam&) = delete;
+  void operator=(const MedicalBeam&) = delete;
 
   enum { kElectron = 0, kPhoton, kProton};
 
@@ -45,8 +44,6 @@ public:
   virtual void GeneratePrimaries(G4Event* event);
 
 private:
-  DISALLOW_COPY_AND_ASSIGN(MedicalBeam);
-
   int particle_type_;
   double kinetic_energy_;
   int photon_voltage_;

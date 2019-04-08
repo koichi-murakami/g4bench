@@ -22,9 +22,9 @@ G4Material* water = nullptr;
 
 // --------------------------------------------------------------------------
 PhantomPVP::PhantomPVP()
-  : nx_(0), dx_(0.)
+  : nx_{0}, dx_{0.}
 {
-  G4NistManager* nist_manager = G4NistManager::Instance();
+  auto nist_manager = G4NistManager::Instance();
   ::water = nist_manager-> FindOrBuildMaterial("G4_WATER");
 }
 
@@ -58,6 +58,6 @@ void PhantomPVP::ComputeTransformation(const int idx,
                                        G4VPhysicalVolume* physvol) const
 {
   double x = dx_ * ( -nx_/2. + idx + 0.5 );
-  G4ThreeVector vec = G4ThreeVector(x, 0., 0.);
+  auto vec = G4ThreeVector(x, 0., 0.);
   physvol-> SetTranslation(vec);
 }
