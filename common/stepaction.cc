@@ -8,19 +8,18 @@ This software is distributed WITHOUT ANY WARRANTY; without even the
 implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License for more information.
 ============================================================================*/
-#include "G4Step.hh"
 #include "G4Threading.hh"
-#include "calscorer.h"
-#include "simdata.h"
+#include "common/simdata.h"
+#include "common/stepaction.h"
 
 // --------------------------------------------------------------------------
-CalScorer::CalScorer()
-: G4VSensitiveDetector("calscorer"), simdata_{nullptr}
+StepAction::StepAction()
+  : simdata_{nullptr}
 {
 }
 
 // --------------------------------------------------------------------------
-bool CalScorer::ProcessHits(G4Step* step, G4TouchableHistory*)
+void StepAction::UserSteppingAction(const G4Step* step)
 {
 #ifdef ENABLE_MT
   int tid = G4Threading::G4GetThreadId();
@@ -28,6 +27,5 @@ bool CalScorer::ProcessHits(G4Step* step, G4TouchableHistory*)
   int tid = 0;
 #endif
 
-  double edep = step-> GetTotalEnergyDeposit();
-  simdata_[tid].AddEdep(edep);
+  simdata_[tid].AddStepCount();
 }

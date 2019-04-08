@@ -11,8 +11,8 @@ See the License for more information.
 #include <fstream>
 #include "G4Run.hh"
 #include "G4SystemOfUnits.hh"
-#include "runaction.h"
-#include "simdata.h"
+#include "common/runaction.h"
+#include "common/simdata.h"
 #include "util/timehistory.h"
 
 // --------------------------------------------------------------------------

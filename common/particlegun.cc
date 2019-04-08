@@ -9,7 +9,7 @@ implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License for more information.
 ============================================================================*/
 #include "G4ParticleGun.hh"
-#include "particlegun.h"
+#include "common/particlegun.h"
 
 // --------------------------------------------------------------------------
 ParticleGun::ParticleGun()

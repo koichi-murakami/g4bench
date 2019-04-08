@@ -11,7 +11,7 @@ See the License for more information.
 #include <sstream>
 #include <string>
 #include "G4Event.hh"
-#include "eventaction.h"
+#include "common/eventaction.h"
 #include "util/timehistory.h"
 
 // --------------------------------------------------------------------------
