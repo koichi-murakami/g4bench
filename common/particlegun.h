@@ -8,31 +8,34 @@ This software is distributed WITHOUT ANY WARRANTY; without even the
 implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License for more information.
 ============================================================================*/
-#ifndef STEP_ACTION_H_
-#define STEP_ACTION_H_
+#ifndef PARTICLE_GUN_H_
+#define PARTICLE_GUN_H_
 
-#include "G4UserSteppingAction.hh"
+#include "G4VUserPrimaryGeneratorAction.hh"
 
-class SimData;
+class G4ParticleGun;
 
-class StepAction : public G4UserSteppingAction {
+class ParticleGun : public G4VUserPrimaryGeneratorAction {
 public:
-  StepAction();
-  virtual ~StepAction();
+  ParticleGun();
+  ~ParticleGun();
 
-  void SetSimData(SimData* data);
+  ParticleGun(const ParticleGun&) = delete;
+  void operator=(const ParticleGun&) = delete;
 
-  virtual void UserSteppingAction(const G4Step* step);
+  G4ParticleGun* GetGun() const;
+
+  virtual void GeneratePrimaries(G4Event* event);
 
 private:
-  SimData* simdata_;
+  G4ParticleGun* gun_;
 
 };
 
 // ==========================================================================
-inline void StepAction::SetSimData(SimData* data)
+inline G4ParticleGun* ParticleGun::GetGun() const
 {
-  simdata_ = data;
+  return gun_;
 }
 
 #endif

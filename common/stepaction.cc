@@ -9,8 +9,8 @@ implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License for more information.
 ============================================================================*/
 #include "G4Threading.hh"
-#include "simdata.h"
-#include "stepaction.h"
+#include "common/simdata.h"
+#include "common/stepaction.h"
 
 // --------------------------------------------------------------------------
 StepAction::StepAction()

@@ -15,8 +15,8 @@ See the License for more information.
 #include "G4PVReplica.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4VisAttributes.hh"
-#include "calscorer.h"
 #include "hcalgeom.h"
+#include "common/calscorer.h"
 
 // --------------------------------------------------------------------------
 G4VPhysicalVolume* HcalGeom::Construct()
@@ -67,7 +67,7 @@ G4VPhysicalVolume* HcalGeom::Construct()
                                  sc_lv, "sc", pb_lv, false, 0);
 
   // vis attributes
-  G4VisAttributes* va = nullptr;
+  G4VisAttributes* va { nullptr };
   va = new G4VisAttributes(G4Color(1., 1., 1.));
   va-> SetVisibility(true);
   world_lv-> SetVisAttributes(va);

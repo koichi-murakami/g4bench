@@ -10,9 +10,11 @@ See the License for more information.
 ============================================================================*/
 #include <getopt.h>
 #include <boost/lexical_cast.hpp>
+#ifdef ENABLE_MT
+#include "G4MTRunManager.hh"
+#else
 #include "G4RunManager.hh"
-#include "G4Run.hh"
-#include "G4StateManager.hh"
+#endif
 #include "G4UIExecutive.hh"
 #include "G4UImanager.hh"
 #include "G4UItcsh.hh"
@@ -31,7 +33,7 @@ void show_version()
   const char* version_str = G4BENCH_VERSION_MAJOR "."
                             G4BENCH_VERSION_MINOR ".";
 
-  std::cout << "G4Bench/vgeo version 1.3.0"
+  std::cout << "G4Bench/vgeo version 1.5.0"
             << " (" << version_str << ::build_head << "."
             << ::build_tail << ")" << std::endl;
 }
@@ -42,13 +44,15 @@ void show_help()
   const char* message =
 R"(
 usage:
-vgeo [options] [#histories]
+ecal [options] [#histories]
 
    -h, --help          show this message.
    -v  --version       show program name/version.
    -c, --config        specify configuration file [g4bench.conf]
    -s, --session=type  specify session type
    -i, --init=macro    specify initial macro
+   -n, --nthreads=N    set number of threads in MT mode [1]
+   -a, --affinity      set CPU affinity [false]
    -j, --test          make output for CI [false]
 )";
 
@@ -67,22 +71,27 @@ int main(int argc, char** argv)
   std::string init_macro = "";
   std::string config_file = "g4bench.conf";
   std::string str_nhistories = "";
+  std::string str_nthreads = "1";
+  bool qaffinity = false;
   bool qtest = false;
 
   struct option long_options[] = {
-    {"help",    no_argument,       NULL, 'h'},
-    {"version", no_argument,       NULL, 'v'},
-    {"config",  required_argument, NULL, 'c'},
-    {"session", required_argument, NULL, 's'},
-    {"init",    required_argument, NULL, 'i'},
-    {"test",    no_argument,       NULL, 'j'},
-    {NULL,      0,                 NULL,  0}
+    {"help",       no_argument,        0 ,  'h'},
+    {"version",    no_argument,        0 ,  'v'},
+    {"config",     required_argument,  0 ,  'c'},
+    {"session",    required_argument,  0 ,  's'},
+    {"init",       required_argument,  0 ,  'i'},
+    {"nthreads",   required_argument,  0,   'n'},
+    {"affinity",   no_argument,        0,   'a'},
+    {"test",       no_argument,        0,   'j'},
+    {0,            0,                  0,    0}
   };
 
   while (1) {
     int option_index = -1;
 
-    int c = getopt_long(argc, argv, "hvc:s:i:j", long_options, &option_index);
+    int c = getopt_long(argc, argv, "hvc:s:i:n:aj",
+                        long_options, &option_index);
 
     if (c == -1) break;
 
@@ -100,6 +109,12 @@ int main(int argc, char** argv)
       break;
     case 'i' :
       init_macro = optarg;
+      break;
+    case 'n' :
+      str_nthreads = optarg;
+      break;
+    case 'a' :
+      qaffinity = true;
       break;
     case 'j' :
       qtest = true;
@@ -123,6 +138,27 @@ int main(int argc, char** argv)
     std::exit(EXIT_SUCCESS);
   }
 
+  // #threads
+  int nthreads = 1;
+  try {
+    nthreads = boost::lexical_cast<int>(str_nthreads);
+  } catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+    std::cout << "[ ERROR ] invalid argument: <#threads>" << std::endl;
+    std::exit(EXIT_FAILURE);
+  }
+  if(nthreads <= 0 ) {
+    std::cout << "[ ERROR ] #threads should be more than 0." << std::endl;
+    std::exit(EXIT_FAILURE);
+  }
+
+#ifndef ENABLE_MT
+  if ( nthreads != 1 || qaffinity ) {
+    std::cout << "[ ERROR ] multi-threads is not supported" << std::endl;
+    std::exit(EXIT_FAILURE);
+  }
+#endif
+
   // #histories
   int nhistories = 0.;
   if ( optind < argc ) {
@@ -130,8 +166,8 @@ int main(int argc, char** argv)
     try {
       nhistories = boost::lexical_cast<int>(str_nhistories);
     } catch (std::exception& e) {
-      std::cerr << e.what() << std::endl;
-      std::cerr << "[ ERROR ] invalid argument: <#histories>" << std::endl;
+      std::cout << e.what() << std::endl;
+      std::cout << "[ ERROR ] invalid argument: <#histories>" << std::endl;
       std::exit(EXIT_FAILURE);
     }
     if(nhistories <= 0 ) {
@@ -141,7 +177,7 @@ int main(int argc, char** argv)
   }
 
   // load config
-  JsonParser* jparser = JsonParser::GetJsonParser();
+  auto jparser = JsonParser::GetJsonParser();
   bool qload = jparser-> LoadFile(config_file);
   if ( ! qload ) {
     std::cout << "[ ERROR ] failed on loading a config file. "
@@ -154,6 +190,7 @@ int main(int argc, char** argv)
             << std::endl;
   ::show_version();
   std::cout << "   * config file = " << config_file << std::endl
+            << "   * # of threads = " << nthreads << std::endl
             << "   * # of histories = " << nhistories
             << std::endl;
   std::cout << "=============================================================="
@@ -169,20 +206,27 @@ int main(int argc, char** argv)
   gtimer-> ShowClock("[MESSAGE] Start:");
 
   // G4 managers & setup application
-  G4RunManager* run_manager = new G4RunManager();
-  G4UImanager* ui_manager = G4UImanager::GetUIpointer();
+#ifdef ENABLE_MT
+  auto run_manager = new G4MTRunManager();
+  run_manager-> SetNumberOfThreads(nthreads);
+  if ( qaffinity ) run_manager-> SetPinAffinity(nthreads);
+#else
+  auto run_manager = new G4RunManager();
+#endif
 
-  AppBuilder* appbuilder = new AppBuilder();
-  appbuilder-> SetupApplication();
+  auto ui_manager = G4UImanager::GetUIpointer();
+
+  auto appbuilder = new AppBuilder();
   appbuilder-> SetTestingFlag(qtest);
+  appbuilder-> BuildApplication();
 
   // ----------------------------------------------------------------------
 #ifdef ENABLE_VIS
-  G4VisManager* vis_manager = new G4VisExecutive("quiet");
+  auto vis_manager = new G4VisExecutive("quiet");
   vis_manager-> Initialize();
 #endif
 
-  G4UIExecutive* ui_session = new G4UIExecutive(argc, argv, session_type);
+  auto ui_session = new G4UIExecutive(argc, argv, session_type);
 
   // do init macro
   if (init_macro != "" ) {
@@ -199,21 +243,18 @@ int main(int argc, char** argv)
 
   } else {
     gtimer-> TakeSplit("SessionStart");
-    ui_session-> SetPrompt("[40;01;33mecal[40;31m(%s)[40;36m[%/][00;01;30m:");
-    ui_session-> SetLsColor(BLUE, RED);
+    ui_session-> SetPrompt("vgeo(%s)[%/]:");
     ui_session-> SessionStart();
     gtimer-> TakeSplit("SessionEnd");
   }
 
   // ----------------------------------------------------------------------
   delete ui_session;
-  delete appbuilder;
   delete run_manager;
 #ifdef ENABLE_VIS
   delete vis_manager;
 #endif
 
-  gtimer-> ShowAllHistories();
   gtimer-> ShowClock("[MESSAGE] End:");
 
   return EXIT_SUCCESS;

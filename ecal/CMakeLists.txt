@@ -12,8 +12,12 @@ endif()
 add_executable(${APP})
 
 target_sources(${APP} PRIVATE
-  appbuilder.cc calscorer.cc ecalgeom.cc eventaction.cc main.cc
-  particlegun.cc runaction.cc stepaction.cc
+  appbuilder.cc ecalgeom.cc main.cc
+  ../common/calscorer.cc
+  ../common/eventaction.cc
+  ../common/particlegun.cc
+  ../common/runaction.cc
+  ../common/stepaction.cc
   ../util/jsonparser.cc
   ../util/stopwatch.cc
   ../util/timehistory.cc

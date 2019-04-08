@@ -8,24 +8,24 @@ This software is distributed WITHOUT ANY WARRANTY; without even the
 implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License for more information.
 ============================================================================*/
-#include "G4Threading.hh"
-#include "simdata.h"
-#include "stepaction.h"
+#include "G4ParticleGun.hh"
+#include "common/particlegun.h"
 
 // --------------------------------------------------------------------------
-StepAction::StepAction()
-  : simdata_{nullptr}
+ParticleGun::ParticleGun()
+  : gun_{nullptr}
 {
+  gun_ = new G4ParticleGun();
 }
 
 // --------------------------------------------------------------------------
-void StepAction::UserSteppingAction(const G4Step* step)
+ParticleGun::~ParticleGun()
 {
-#ifdef ENABLE_MT
-  int tid = G4Threading::G4GetThreadId();
-#else
-  int tid = 0;
-#endif
+  delete gun_;
+}
 
-  simdata_[tid].AddStepCount();
+// --------------------------------------------------------------------------
+void ParticleGun::GeneratePrimaries(G4Event* event)
+{
+  gun_-> GeneratePrimaryVertex(event);
 }

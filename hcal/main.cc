@@ -18,13 +18,13 @@ See the License for more information.
 #include "G4UIExecutive.hh"
 #include "G4UImanager.hh"
 #include "G4UItcsh.hh"
+#ifdef ENABLE_VIS
+#include "G4VisExecutive.hh"
+#endif
 #include "appbuilder.h"
 #include "version.h"
 #include "util/jsonparser.h"
 #include "util/timehistory.h"
-#ifdef ENABLE_VIS
-#include "G4VisExecutive.hh"
-#endif
 
 namespace {
 // --------------------------------------------------------------------------

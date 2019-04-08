@@ -19,7 +19,7 @@ See the License for more information.
 #include "G4PhysicalConstants.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4ThreeVector.hh"
-#include "CLHEP/Random/RandFlat.h"
+#include "Randomize.hh"
 #include "medicalbeam.h"
 
 namespace {
@@ -38,9 +38,9 @@ G4ThreeVector GenerateBeamDirection(double ssd, double fxy)
   double dx, dy, dz, dsin, dphi;
 
   do {
-    dz = CLHEP::RandFlat::shoot(cos0, 1.);
+    dz = G4RandFlat::shoot(cos0, 1.);
     dsin = std::sqrt(1.-sqr(dz));
-    dphi = CLHEP::RandFlat::shoot(0., twopi);
+    dphi = G4RandFlat::shoot(0., twopi);
 
     dx = dsin * std::cos(dphi);
     dy = dsin * std::sin(dphi);
@@ -105,7 +105,7 @@ void InitializePhotnSpectrum()
 double GeneratePhotonEnergy6MV()
 {
   double rand_max = vec_cprob6[kSize6-1];
-  double psampled = CLHEP::RandFlat::shoot(0., rand_max);
+  double psampled = G4RandFlat::shoot(0., rand_max);
   std::vector<double>::iterator low =
     std::lower_bound( vec_cprob6.begin(), vec_cprob6.end(), psampled );
 
@@ -121,7 +121,7 @@ double GeneratePhotonEnergy6MV()
 double GeneratePhotonEnergy18MV()
 {
   double rand_max = vec_cprob18[kSize18-1];
-  double psampled = CLHEP::RandFlat::shoot(0., rand_max);
+  double psampled = G4RandFlat::shoot(0., rand_max);
   std::vector<double>::iterator low =
     std::lower_bound( vec_cprob18.begin(), vec_cprob18.end(), psampled );
 
@@ -141,11 +141,6 @@ MedicalBeam::MedicalBeam()
     photon_voltage_(::k6MV), ssd_(100.*cm), field_xy_(10.*cm)
 {
   ::InitializePhotnSpectrum();
-}
-
-// --------------------------------------------------------------------------
-MedicalBeam::~MedicalBeam()
-{
 }
 
 // --------------------------------------------------------------------------
@@ -200,12 +195,12 @@ void MedicalBeam::GeneratePrimaries(G4Event* event)
     pvec = momemtum * ::GenerateBeamDirection(ssd_, field_xy_);
   }
 
-  G4PrimaryParticle* primary =
-    new G4PrimaryParticle( particle, pvec.x(), pvec.y(), pvec.z() );
+  auto primary = new G4PrimaryParticle(particle,
+                                       pvec.x(), pvec.y(), pvec.z() );
 
   const double kZoffset = 35. * cm;
-  G4ThreeVector pos = G4ThreeVector(0., 0., kZoffset - ssd_);
-  G4PrimaryVertex* vertex= new G4PrimaryVertex(pos, 0.*ns);
+  auto pos = G4ThreeVector(0., 0., kZoffset - ssd_);
+  auto vertex= new G4PrimaryVertex(pos, 0.*ns);
   vertex-> SetPrimary(primary);
 
   event-> AddPrimaryVertex(vertex);

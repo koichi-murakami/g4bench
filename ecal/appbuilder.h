@@ -15,7 +15,7 @@ See the License for more information.
 
 class SimData;
 
-class AppBuilder : G4VUserActionInitialization {
+class AppBuilder : public G4VUserActionInitialization {
 public:
   AppBuilder();
   ~AppBuilder();

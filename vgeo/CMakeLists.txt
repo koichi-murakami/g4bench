@@ -12,16 +12,21 @@ endif()
 add_executable(${APP})
 
 target_sources(${APP} PRIVATE
-  appbuilder.cc calscorer.cc eventaction.cc main.cc medicalbeam.cc
-  particlegun.cc phantom_pvp.cc runaction.cc simdata.cc
-  stepaction.cc voxelgeom.cc
+  appbuilder.cc main.cc medicalbeam.cc phantom_pvp.cc voxelgeom.cc
+  ../common/calscorer.cc
+  ../common/eventaction.cc
+  ../common/particlegun.cc
+  ../common/runaction.cc
+  ../common/stepaction.cc
   ../util/jsonparser.cc
   ../util/stopwatch.cc
   ../util/timehistory.cc
 )
 
 if(ENABLE_MT)
-  target_compile_definitions(${APP} PRIVATE ENABLE_MT)
+  target_compile_definitions(${APP} PRIVATE ENABLE_MT G4MULTITHREADED)
+elseif(GEANT4_MT)
+  target_compile_definitions(${APP} PRIVATE G4MULTITHREADED)
 endif()
 
 if(ENABLE_VIS)
