@@ -46,4 +46,5 @@ configure_file(config.tmpl g4bench.conf)
 
 #
 install(TARGETS ${APP} DESTINATION ${CMAKE_INSTALL_PREFIX}/ecal)
-install(FILES config.tmpl DESTINATION ${CMAKE_INSTALL_PREFIX}/ecal)
+install(FILES config.tmpl RENAME g4bench.conf
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/ecal)
