@@ -44,7 +44,7 @@ JsonParser* jparser = nullptr;
 // --------------------------------------------------------------------------
 void SetupGeomtry(SimData* data)
 {
-  HcalGeom* geom = new HcalGeom();
+  auto geom = new HcalGeom();
   geom-> SetSimData(data);
   ::run_manager-> SetUserInitialization(geom);
 }
@@ -52,7 +52,7 @@ void SetupGeomtry(SimData* data)
 // --------------------------------------------------------------------------
 G4ThreeVector GetPrimaryPosition()
 {
-  G4ThreeVector pos = G4ThreeVector();
+  auto pos = G4ThreeVector();
   if ( ::jparser-> Contains("Primary/position") ) {
     std::vector<double> dvec;
     dvec.clear();
@@ -65,11 +65,11 @@ G4ThreeVector GetPrimaryPosition()
 // --------------------------------------------------------------------------
 void SetupParticleGun(ParticleGun* pga)
 {
-  G4ParticleGun* gun = pga-> GetGun();
+  auto gun = pga-> GetGun();
 
   std::string pname = ::jparser-> GetStringValue("Primary/particle");
-  G4ParticleTable* ptable = G4ParticleTable::GetParticleTable();
-  G4ParticleDefinition* pdef = ptable-> FindParticle(pname);
+  auto ptable = G4ParticleTable::GetParticleTable();
+  auto pdef = ptable-> FindParticle(pname);
   if ( pdef != nullptr ) gun-> SetParticleDefinition(pdef);
 
   double pkin = ::jparser-> GetDoubleValue("Primary/energy");
@@ -83,7 +83,7 @@ void SetupParticleGun(ParticleGun* pga)
     gun-> SetParticleMomentumDirection(pvec);
   }
 
-  G4ThreeVector pos = GetPrimaryPosition();
+  auto pos = GetPrimaryPosition();
   gun-> SetParticlePosition(pos);
 }
 

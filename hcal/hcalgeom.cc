@@ -67,7 +67,7 @@ G4VPhysicalVolume* HcalGeom::Construct()
                                  sc_lv, "sc", pb_lv, false, 0);
 
   // vis attributes
-  G4VisAttributes* va = nullptr;
+  G4VisAttributes* va { nullptr };
   va = new G4VisAttributes(G4Color(1., 1., 1.));
   va-> SetVisibility(true);
   world_lv-> SetVisAttributes(va);
