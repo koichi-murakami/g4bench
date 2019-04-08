@@ -45,5 +45,5 @@ target_link_libraries(${APP} PRIVATE ${G4LIBS} PUBLIC global_cflags)
 configure_file(config.tmpl g4bench.conf)
 
 #
-install(TARGETS ${APP} DESTINATION ${CMAKE_INSTALL_PREFIX}/ecal)
-install(FILES config.tmpl DESTINATION ${CMAKE_INSTALL_PREFIX}/ecal)
+install(TARGETS ${APP} DESTINATION ${CMAKE_INSTALL_PREFIX}/vgeo)
+install(FILES config.tmpl DESTINATION ${CMAKE_INSTALL_PREFIX}/vgeo)
