@@ -30,4 +30,6 @@ bool CalScorer::ProcessHits(G4Step* step, G4TouchableHistory*)
 
   double edep = step-> GetTotalEnergyDeposit();
   simdata_[tid].AddEdep(edep);
+
+  return true;
 }
