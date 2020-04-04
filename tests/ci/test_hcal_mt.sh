@@ -28,8 +28,8 @@ check_error
 
 show_line
 echo "@@ Run a program..."
-export G4DATA=/opt/geant4/data/10.5.0
-. ../../tests/g4env/g4env.10.5.0.sh
+export G4DATA=/opt/geant4/data/10.6.1
+. ../../tests/g4env/g4env.10.6.1.sh
 
 #
 ./hcal -n 10 -j 20000
