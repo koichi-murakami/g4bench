@@ -1,7 +1,7 @@
 # Installation
 
 ## Dependencies
-* `Geant4` : `v10.5` is latest
+* `Geant4` : `v10.6` is latest
 * `Boost-C++` : >= 1.53
 * `CMake` : >= 3.11
 * `GCC` : >= 4.8.5, C++11 support
