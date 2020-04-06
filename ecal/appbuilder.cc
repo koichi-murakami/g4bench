@@ -104,6 +104,9 @@ AppBuilder::~AppBuilder()
 // --------------------------------------------------------------------------
 void AppBuilder::BuildApplication()
 {
+  CLHEP::MTwistEngine* rand_engine = new CLHEP::MTwistEngine();
+  G4Random::setTheEngine(rand_engine);
+
 #ifdef ENABLE_MT
   ::run_manager = G4MTRunManager::GetMasterRunManager();
   nvec_ = ::run_manager-> GetNumberOfThreads();
@@ -118,15 +121,12 @@ void AppBuilder::BuildApplication()
   ::run_manager-> SetUserInitialization(new FTFP_BERT);
   ::run_manager-> SetUserInitialization(this);
 
-  // set random number generator
-  CLHEP::MTwistEngine* rand_engine = new CLHEP::MTwistEngine();
 
   long seed { 0L };
   if ( jparser-> Contains("Run/Seed") ) {
     long seed = jparser-> GetLongValue("Run/Seed");
   }
 
-  G4Random::setTheEngine(rand_engine);
   G4Random::setTheSeed(seed);
 
   // initialize
