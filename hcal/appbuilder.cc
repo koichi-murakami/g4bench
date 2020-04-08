@@ -21,8 +21,8 @@ See the License for more information.
 #endif
 #include "G4SystemOfUnits.hh"
 #include "CLHEP/Random/MTwistEngine.h"
-#include "appbuilder.h"
 #include "hcalgeom.h"
+#include "common/appbuilder.h"
 #include "common/eventaction.h"
 #include "common/particlegun.h"
 #include "common/runaction.h"
@@ -91,7 +91,8 @@ void SetupParticleGun(ParticleGun* pga)
 
 // ==========================================================================
 AppBuilder::AppBuilder()
-  : simdata_{nullptr}, nvec_{0}, qtest_{false}
+  : simdata_{nullptr}, nvec_{0}, qtest_{false},
+    bench_name_{""}, cpu_name_{""}
 {
   ::jparser = JsonParser::GetJsonParser();
 }
@@ -145,6 +146,8 @@ void AppBuilder::Build() const
   runaction-> SetSimData(simdata_);
   runaction-> SetDataSize(nvec_);
   runaction-> SetTestingFlag(qtest_);
+  runaction-> SetBenchName(bench_name_);
+  runaction-> SetCPUName(cpu_name_);
   SetUserAction(runaction);
 
   SetUserAction(new EventAction);
