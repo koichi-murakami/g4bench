@@ -11,6 +11,7 @@ See the License for more information.
 #ifndef APP_BUILDER_H_
 #define APP_BUILDER_H_
 
+#include <string>
 #include "G4VUserActionInitialization.hh"
 
 class SimData;
@@ -23,7 +24,8 @@ public:
   void BuildApplication();
 
   void SetTestingFlag(bool val);
-
+  void SetTestingFlag(bool val, const std::string& bname,
+                                const std::string& cname);
   virtual void Build() const;
   virtual void BuildForMaster() const;
 
@@ -31,12 +33,22 @@ private:
   SimData* simdata_;
   int nvec_;
   bool qtest_;
+  std::string bench_name_;
+  std::string cpu_name_;
 };
 
 // ==========================================================================
 inline void AppBuilder::SetTestingFlag(bool val)
 {
   qtest_ = val;
+}
+
+inline void AppBuilder::SetTestingFlag(bool val, const std::string& bname,
+                                                 const std::string& cname)
+{
+  qtest_ = val;
+  bench_name_ = bname;
+  cpu_name_ = cname;
 }
 
 #endif

@@ -90,7 +90,8 @@ void SetupParticleGun(ParticleGun* pga)
 
 // ==========================================================================
 AppBuilder::AppBuilder()
-  : simdata_{nullptr}, nvec_{0}, qtest_{false}
+  : simdata_{nullptr}, nvec_{0}, qtest_{false},
+    bench_name_{""}, cpu_name_{""}
 {
   ::jparser = JsonParser::GetJsonParser();
 }
@@ -144,6 +145,8 @@ void AppBuilder::Build() const
   runaction-> SetSimData(simdata_);
   runaction-> SetDataSize(nvec_);
   runaction-> SetTestingFlag(qtest_);
+  runaction-> SetBenchName(bench_name_);
+  runaction-> SetCPUName(cpu_name_);
   SetUserAction(runaction);
 
   SetUserAction(new EventAction);

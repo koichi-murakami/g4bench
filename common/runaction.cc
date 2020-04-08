@@ -33,7 +33,8 @@ void ShowWorkerRunSummary(const G4Run* run)
 // ==========================================================================
 RunAction::RunAction()
   : simdata_{nullptr}, nvec_{0},
-    total_step_count_{0}, total_edep_{0.}
+    total_step_count_{0}, total_edep_{0.},
+    bench_name_{"bench"}, cpu_name_{"cpu"}
 {
   ::gtimer = TimeHistory::GetTimeHistory();
 }
@@ -134,8 +135,22 @@ void RunAction::ShowRunSummary(const G4Run* run) const
   // testing output
   if ( qtest_ ) {
     std::ofstream outfile("jtest.out", std::ios::out);
-    outfile << "EPS1000,  Edep\n"
+    outfile << "EPS1000,  Edep" << std::endl
             << proc_eps*1.e3 << ",  " << edep_cal << std::endl;
     outfile.close();
+
+    // json output
+    std::ofstream jsonfile("ecal.json", std::ios::out);
+    jsonfile << "{" << std::endl
+             << "  \"name\" : \"" << bench_name_ << "\"," << std::endl
+             << "  \"cpu\" : \"" << cpu_name_ << "\"," << std::endl
+             << "  \"time\" : " << elapsed_time << "," << std::endl
+             << "  \"init\" : " << init_time << "," << std::endl
+             << "  \"tpe\" : " << average_time_per_event << "," << std::endl
+             << "  \"eps\" : " << proc_eps << "," << std::endl
+             << "  \"sps\" : " << sps << "," << std::endl
+             << "  \"edep\" : " << edep_cal << std::endl
+             << "}" << std::endl;
+    jsonfile.close();
   }
 }

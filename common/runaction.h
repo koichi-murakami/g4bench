@@ -11,6 +11,7 @@ See the License for more information.
 #ifndef RUN_ACTION_H_
 #define RUN_ACTION_H_
 
+#include <string>
 #include "G4UserRunAction.hh"
 
 class SimData;
@@ -31,6 +32,9 @@ public:
 
   void ShowRunSummary(const G4Run* run) const;
 
+  void SetBenchName(const std::string& name);
+  void SetCPUName(const std::string& name);
+
 private:
   SimData* simdata_;
   int nvec_;
@@ -38,6 +42,9 @@ private:
 
   long total_step_count_;
   double total_edep_;
+
+  std::string bench_name_;
+  std::string cpu_name_;
 };
 
 // ==========================================================================
@@ -54,6 +61,16 @@ inline void RunAction::SetDataSize(int n)
 inline void RunAction::SetTestingFlag(bool val)
 {
   qtest_ = val;
+}
+
+inline void RunAction::SetBenchName(const std::string& name)
+{
+  bench_name_ = name;
+}
+
+inline void RunAction::SetCPUName(const std::string& name)
+{
+  cpu_name_ = name;
 }
 
 #endif
