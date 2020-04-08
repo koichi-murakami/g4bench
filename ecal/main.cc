@@ -21,7 +21,7 @@ See the License for more information.
 #ifdef ENABLE_VIS
 #include "G4VisExecutive.hh"
 #endif
-#include "appbuilder.h"
+#include "common/appbuilder.h"
 #include "version.h"
 #include "util/jsonparser.h"
 #include "util/timehistory.h"
@@ -55,7 +55,7 @@ ecal [options] [#histories]
    -a, --affinity      set CPU affinity [false]
    -j, --test          make output for CI [false]
    -b, --bench=name    set benchmark name [ecal]
-   -p, --cpu=name      set CPU name [cpu]
+   -p, --cpu=name      set CPU name [unknown]
 )";
 
    std::cout << message << std::endl;
