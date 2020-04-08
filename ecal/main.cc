@@ -77,6 +77,8 @@ int main(int argc, char** argv)
   std::string str_nthreads = "1";
   bool qaffinity = false;
   bool qtest = false;
+  std::string str_bench = "ecal";
+  std::string str_cpu = "unknown";
 
   struct option long_options[] = {
     {"help",       no_argument,        0 ,  'h'},
