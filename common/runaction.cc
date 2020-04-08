@@ -140,7 +140,7 @@ void RunAction::ShowRunSummary(const G4Run* run) const
     outfile.close();
 
     // json output
-    std::ofstream jsonfile("ecal.json", std::ios::out);
+    std::ofstream jsonfile("g4bench.json", std::ios::out);
     jsonfile << "{" << std::endl
              << "  \"name\" : \"" << bench_name_ << "\"," << std::endl
              << "  \"cpu\" : \"" << cpu_name_ << "\"," << std::endl
