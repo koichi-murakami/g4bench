@@ -18,13 +18,14 @@ See the License for more information.
 #include "G4UIExecutive.hh"
 #include "G4UImanager.hh"
 #include "G4UItcsh.hh"
-#include "appbuilder.h"
-#include "version.h"
-#include "util/jsonparser.h"
-#include "util/timehistory.h"
 #ifdef ENABLE_VIS
 #include "G4VisExecutive.hh"
 #endif
+
+#include "version.h"
+#include "common/appbuilder.h"
+#include "util/jsonparser.h"
+#include "util/timehistory.h"
 
 namespace {
 // --------------------------------------------------------------------------
@@ -33,7 +34,7 @@ void show_version()
   const char* version_str = G4BENCH_VERSION_MAJOR "."
                             G4BENCH_VERSION_MINOR ".";
 
-  std::cout << "G4Bench/vgeo version 1.5.0"
+  std::cout << "G4Bench/vgeo version 1.5.1"
             << " (" << version_str << ::build_head << "."
             << ::build_tail << ")" << std::endl;
 }
@@ -54,6 +55,8 @@ ecal [options] [#histories]
    -n, --nthreads=N    set number of threads in MT mode [1]
    -a, --affinity      set CPU affinity [false]
    -j, --test          make output for CI [false]
+   -b, --bench=name    set benchmark name [vgeo]
+   -p, --cpu=name      set CPU name [unknown]
 )";
 
    std::cout << message << std::endl;
@@ -74,6 +77,8 @@ int main(int argc, char** argv)
   std::string str_nthreads = "1";
   bool qaffinity = false;
   bool qtest = false;
+  std::string str_bench = "vgeo";
+  std::string str_cpu = "unknown";
 
   struct option long_options[] = {
     {"help",       no_argument,        0 ,  'h'},
@@ -90,7 +95,7 @@ int main(int argc, char** argv)
   while (1) {
     int option_index = -1;
 
-    int c = getopt_long(argc, argv, "hvc:s:i:n:aj",
+    int c = getopt_long(argc, argv, "hvc:s:i:n:ajb:p:",
                         long_options, &option_index);
 
     if (c == -1) break;
@@ -118,6 +123,12 @@ int main(int argc, char** argv)
       break;
     case 'j' :
       qtest = true;
+      break;
+    case 'b' :
+      str_bench = optarg;
+      break;
+    case 'p' :
+      str_cpu = optarg;
       break;
     default:
       std::exit(EXIT_FAILURE);
@@ -217,7 +228,7 @@ int main(int argc, char** argv)
   auto ui_manager = G4UImanager::GetUIpointer();
 
   auto appbuilder = new AppBuilder();
-  appbuilder-> SetTestingFlag(qtest);
+  appbuilder-> SetTestingFlag(qtest, str_bench, str_cpu);
   appbuilder-> BuildApplication();
 
   // ----------------------------------------------------------------------
