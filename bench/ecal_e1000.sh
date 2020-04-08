@@ -45,7 +45,7 @@ show_line
 
 check_g4env
 echo "@@@ G4ENV = ${G4ENV}"
-source ${G4ENV}
+. ${G4ENV}
 echo "@@@ Geant4 Data files :"
 env | grep G4 | grep DATA
 echo ""
@@ -64,16 +64,19 @@ cat << EOD > g4bench.conf
   }
 }
 EOD
+
 #
 if [ ${G4BENCH-undef} = "undef" ]; then
   G4BENCH=.
 fi
 
+cpu_info=`lscpu | grep name | cut -d : -f 2 | xargs echo`
+
 if [ $# = 0 ]; then
   ${G4BENCH}/ecal 10000
 else
   log=$1
-  ${G4BENCH}/ecal 10000 > $1 2>&1
+  ${G4BENCH}/ecal -j -b ecal_e1000 -p "${cpu_info}" 10000 > $1 2>&1
   touch done
 fi
 
