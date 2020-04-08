@@ -20,8 +20,8 @@ See the License for more information.
 #endif
 #include "G4SystemOfUnits.hh"
 #include "CLHEP/Random/MTwistEngine.h"
-#include "appbuilder.h"
 #include "ecalgeom.h"
+#include "common/appbuilder.h"
 #include "common/eventaction.h"
 #include "common/particlegun.h"
 #include "common/runaction.h"
