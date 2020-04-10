@@ -25,12 +25,15 @@ show_line
 echo " Execute G4Bench tests"
 show_line
 
+export G4BENCH=../build/ecal
 ./ecal_e1000.sh ecal_e1000.log
 mv g4bench.json ecal.json
 
+export G4BENCH=../build/hcal
 ./hcal_p10.sh hcal_p10.log
 mv g4bench.json hcal.json
 
+export G4BENCH=../build/vgeo
 ./vgeo_x18.sh vgeo_x18.log
 mv g4bench.json vgeo_x18.json
 
