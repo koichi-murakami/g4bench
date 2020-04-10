@@ -76,7 +76,6 @@ if [ $# = 0 ]; then
 else
   log=$1
   ${G4BENCH}/hcal -j -b hcal_p10 -p "${cpu_info}" 10000 > $1 2>&1
-  touch done
 fi
 
 exit $?
