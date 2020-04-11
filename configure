@@ -31,7 +31,7 @@ Fine tuning of the library build:
 
 Enable/disable options: prefix with either --enable- or --disable-
   mt       multi-threading support [disable]
-  vis      OpenGL support [enable]
+  vis      OpenGL support [disable]
   opt      optimization (O3) [enable]
   debug    debug mode [disable]
   dev      development mode [config.cmake/disable]
@@ -63,7 +63,7 @@ echo "========================================================================"
 prefix=_cmake
 g4_install=_cmake
 enable_mt=0
-enable_vis=1
+enable_vis=0
 enable_opt=1
 enable_debug=0
 enable_dev=_cmake
