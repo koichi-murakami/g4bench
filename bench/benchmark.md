@@ -3,7 +3,19 @@
 These values show typical scores for each processor.
 Note that these values might differ in each computing environment.
 
-### Ecal e1000	v1.2 Release	Evt:10k
+### Ecal e1000 Evt:10k
+`10.6.p1`
+| Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
+| -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
+| Gold 6240  | 63.72  | 1.09 | 6.372  | 0.159668  | 695.365 | 968.22  | 2.184 |  2.229  |
+
+
+`10.5.p1`
+| Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
+| -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
+
+
+
 `10.4.p1`
 
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
@@ -38,7 +50,7 @@ Note that these values might differ in each computing environment.
 | E5-2690 v4 | 72.87	| 0.52 | 7.235  |	0.138217	| 588.94	| 968.411 |	1.891 | 1.888   |
 
 
-### Hcal p10 v1.2 Release Evt:10k
+### Hcal p10 Evt:10k
 `10.4.p1`
 
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
@@ -61,10 +73,10 @@ Note that these values might differ in each computing environment.
 | Power8E	   | 775.67	| 1.17 | 77.45	| 0.0129116	| 192.85	| 836.37	| 0.958	| 0.947   |
 | Power8NVL	 | 712.99	| 1.08 | 71.191	| 0.0140467	| 209.805 | 836.37	| 1.043	| 1.030   |
 | X5680	     | 781.3	| 0.95 | 78.035	| 0.0128148	| 193.703 | 842.397	| 0.951	| 0.951   |
-| W5590*	   | 743.18	| 0.89 | 74.229	| 0.01314718	| 203.635 | 842.397	| 1.000	| 1.000   |
+| W5590*	   | 743.18	| 0.89 | 74.229	| 0.01314718| 203.635 | 842.397	| 1.000	| 1.000   |
 
 
-### Vgeo e20 v1.2 Release Evt:100k
+### Vgeo e20 Release Evt:100k
 `10.4.p1`
 
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
@@ -85,7 +97,7 @@ Note that these values might differ in each computing environment.
 | E5-2690 v2 | 98.68	| 0.94 | 0.9774	| 1.02312  	| 392.284 | 18.7512	| 1.053 | 1.053   |
 | W5590*     | 103.81 | 0.86 | 1.0295	| 0.971345  |	372.432	| 18.751	| 1.000 | 1.000   |
 
-### Vgeo x18 v1.2 Release Evt:100k
+### Vgeo x18 Evt:100k
 `10.3.p2`
 
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
@@ -94,7 +106,7 @@ Note that these values might differ in each computing environment.
 | W5590*     | 39.65	| 0.87 | 0.3878	| 2.57865	  | 532.861 | 1.89814 | 1.000 |	1.000   |
 
 
-### Vgeo p200 v1.2 Release Evt:100k
+### Vgeo p200 Release Evt:100k
 `10.3.p2`
 
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
@@ -105,13 +117,15 @@ Note that these values might differ in each computing environment.
 
 | Processor	 | OS	      | Notes     |
 | -----------| ----     | ---       |
-| Gold 6142  | CentOS7  |           |
-| E5-2690 v4 | CentOS7  |           |
+| Gold 6240  | Ubuntu18 |           |
+| Gold 6148  | Ubuntu18 |           |
+| Gold 6142  | Ubuntu18 |           |
+| E5-2690 v4 | CentOS8  | * Ref.    |
 | E5-2697 v3 | SL6      | KEKCC     |
-| E5-2690 v2 | CentOS7  |           |
-| Power8E    | Ubuntu16 |           |
-| Power8NVL  | Ubuntu16 |           |
-| X5680      | CentOS7  |           |
+| E5-2690 v2 | CentOS8  |           |
+| Power8E    | Ubuntu18 |           |
+| Power8NVL  | Ubuntu18 |           |
+| X5680      | CentOS8  |           |
 | W5590      | openSUSE | * Ref.    |
 
 ! patched for Meltdown/Spectre
