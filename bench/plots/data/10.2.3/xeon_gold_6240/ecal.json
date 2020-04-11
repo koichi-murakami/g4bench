@@ -1,0 +1,10 @@
+{
+  "name" : "ecal_e1000",
+  "cpu" : "Intel(R) Xeon(R) Gold 6240 CPU @ 2.60GHz",
+  "time" : 63.73,
+  "init" : 0.48,
+  "tpe" : 6.373,
+  "eps" : 0.158103,
+  "sps" : 673.665,
+  "edep" : 968.705
+}

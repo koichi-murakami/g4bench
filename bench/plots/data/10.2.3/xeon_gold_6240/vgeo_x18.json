@@ -1,0 +1,10 @@
+{
+  "name" : "vgeo_x18",
+  "cpu" : "Intel(R) Xeon(R) Gold 6240 CPU @ 2.60GHz",
+  "time" : 21.56,
+  "init" : 0.49,
+  "tpe" : 0.2156,
+  "eps" : 4.74608,
+  "sps" : 982.028,
+  "edep" : 1.90512
+}
