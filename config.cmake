@@ -18,7 +18,7 @@ set(GEANT4_INSTALL /opt/geant4/10.6.1
 set(ENABLE_MT FALSE CACHE BOOL "Enable multi-threading flag")
 
 # visualization flag
-set(ENABLE_VIS TRUE CACHE BOOL "Enable visualization flag")
+set(ENABLE_VIS FALSE CACHE BOOL "Enable visualization flag")
 
 # Optimizaton / Debug flags
 set(OPTIMIZE TRUE CACHE BOOL "Optimizaton flag (O3)")
