@@ -1,0 +1,10 @@
+{
+  "name" : "hcal_p10",
+  "cpu" : "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz",
+  "time" : 674.08,
+  "init" : 1.35,
+  "tpe" : 67.408,
+  "eps" : 0.0148648,
+  "sps" : 226.047,
+  "edep" : 835.298
+}

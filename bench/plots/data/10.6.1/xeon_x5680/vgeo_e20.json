@@ -1,0 +1,10 @@
+{
+  "name" : "vgeo_e20",
+  "cpu" : "Intel(R) Xeon(R) CPU X5680 @ 3.33GHz",
+  "time" : 99.94,
+  "init" : 1.11,
+  "tpe" : 0.9994,
+  "eps" : 1.01184,
+  "sps" : 387.966,
+  "edep" : 18.7549
+}

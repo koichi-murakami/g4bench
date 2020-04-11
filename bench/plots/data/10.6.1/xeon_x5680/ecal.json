@@ -1,0 +1,10 @@
+{
+  "name" : "ecal_e1000",
+  "cpu" : "Intel(R) Xeon(R) CPU X5680 @ 3.33GHz",
+  "time" : 137.63,
+  "init" : 2.06,
+  "tpe" : 13.763,
+  "eps" : 0.0737626,
+  "sps" : 321.242,
+  "edep" : 968.22
+}

@@ -1,0 +1,10 @@
+{
+  "name" : "hcal_p10",
+  "cpu" : "AMD EPYC 7501 32-Core Processor",
+  "time" : 512.04,
+  "init" : 1.26,
+  "tpe" : 51.204,
+  "eps" : 0.0195779,
+  "sps" : 297.718,
+  "edep" : 835.298
+}

@@ -1,0 +1,10 @@
+{
+  "name" : "vgeo_x18",
+  "cpu" : "AMD EPYC 7501 32-Core Processor",
+  "time" : 30.01,
+  "init" : 0.92,
+  "tpe" : 0.3001,
+  "eps" : 3.43761,
+  "sps" : 709.177,
+  "edep" : 1.87969
+}

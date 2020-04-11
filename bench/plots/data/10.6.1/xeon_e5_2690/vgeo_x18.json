@@ -1,0 +1,10 @@
+{
+  "name" : "vgeo_x18",
+  "cpu" : "Intel(R) Xeon(R) CPU E5-2690 v4 @ 2.60GHz",
+  "time" : 21.31,
+  "init" : 0.67,
+  "tpe" : 0.2131,
+  "eps" : 4.84496,
+  "sps" : 999.513,
+  "edep" : 1.87969
+}

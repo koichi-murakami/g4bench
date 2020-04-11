@@ -1,0 +1,10 @@
+{
+  "name" : "vgeo_x18",
+  "cpu" : "Intel(R) Xeon(R) CPU X5680 @ 3.33GHz",
+  "time" : 37.55,
+  "init" : 1.11,
+  "tpe" : 0.3755,
+  "eps" : 2.74424,
+  "sps" : 566.135,
+  "edep" : 1.87969
+}

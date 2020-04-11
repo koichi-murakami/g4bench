@@ -1,0 +1,10 @@
+{
+  "name" : "ecal_e1000",
+  "cpu" : "AMD EPYC 7501 32-Core Processor",
+  "time" : 89.37,
+  "init" : 1.44,
+  "tpe" : 8.937,
+  "eps" : 0.113727,
+  "sps" : 495.289,
+  "edep" : 968.22
+}

@@ -1,0 +1,10 @@
+{
+  "name" : "ecal_e1000",
+  "cpu" : "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz",
+  "time" : 125.39,
+  "init" : 1.61,
+  "tpe" : 12.539,
+  "eps" : 0.0807885,
+  "sps" : 351.84,
+  "edep" : 968.22
+}

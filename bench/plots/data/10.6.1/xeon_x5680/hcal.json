@@ -1,0 +1,10 @@
+{
+  "name" : "hcal_p10",
+  "cpu" : "Intel(R) Xeon(R) CPU X5680 @ 3.33GHz",
+  "time" : 724.44,
+  "init" : 1.72,
+  "tpe" : 72.444,
+  "eps" : 0.0138366,
+  "sps" : 210.412,
+  "edep" : 835.298
+}
