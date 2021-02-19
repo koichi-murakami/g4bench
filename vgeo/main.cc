@@ -34,7 +34,7 @@ void show_version()
   const char* version_str = G4BENCH_VERSION_MAJOR "."
                             G4BENCH_VERSION_MINOR ".";
 
-  std::cout << "G4Bench/vgeo version 1.5.1"
+  std::cout << "G4Bench/vgeo version 1.5.4"
             << " (" << version_str << ::build_head << "."
             << ::build_tail << ")" << std::endl;
 }
@@ -50,7 +50,7 @@ ecal [options] [#histories]
    -h, --help          show this message.
    -v  --version       show program name/version.
    -c, --config        specify configuration file [g4bench.conf]
-   -s, --session=type  specify session type
+   -s, --session=type  specify session type [tcsh]
    -i, --init=macro    specify initial macro
    -n, --nthreads=N    set number of threads in MT mode [1]
    -a, --affinity      set CPU affinity [false]
@@ -70,7 +70,7 @@ int main(int argc, char** argv)
   // optional parameters
   bool qhelp = false;
   bool qversion = false;
-  std::string session_type = "";
+  std::string session_type = "tcsh";
   std::string init_macro = "";
   std::string config_file = "g4bench.conf";
   std::string str_nhistories = "";
@@ -213,7 +213,7 @@ int main(int argc, char** argv)
             << std::endl;
 
   // ----------------------------------------------------------------------
-  TimeHistory* gtimer = TimeHistory::GetTimeHistory();
+  auto gtimer = TimeHistory::GetTimeHistory();
   gtimer-> ShowClock("[MESSAGE] Start:");
 
   // G4 managers & setup application
@@ -237,9 +237,7 @@ int main(int argc, char** argv)
   vis_manager-> Initialize();
 #endif
 
-  auto ui_session = new G4UIExecutive(argc, argv, session_type);
-
-  // do init macro
+// do init macro
   if (init_macro != "" ) {
     G4String command = "/control/execute ";
     ui_manager-> ApplyCommand(command + init_macro);
@@ -253,15 +251,17 @@ int main(int argc, char** argv)
     gtimer-> TakeSplit("BeamEnd");
 
   } else {
+    auto ui_session = new G4UIExecutive(argc, argv, session_type);
     gtimer-> TakeSplit("SessionStart");
     ui_session-> SetPrompt("vgeo(%s)[%/]:");
     ui_session-> SessionStart();
     gtimer-> TakeSplit("SessionEnd");
+    delete ui_session;
   }
 
   // ----------------------------------------------------------------------
-  delete ui_session;
   delete run_manager;
+
 #ifdef ENABLE_VIS
   delete vis_manager;
 #endif

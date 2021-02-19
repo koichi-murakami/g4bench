@@ -33,7 +33,7 @@ void show_version()
   const char* version_str = G4BENCH_VERSION_MAJOR "."
                             G4BENCH_VERSION_MINOR ".";
 
-  std::cout << "G4Bench/hcal version 1.5.1"
+  std::cout << "G4Bench/hcal version 1.5.4"
             << " (" << version_str << ::build_head << "."
             << ::build_tail << ")" << std::endl;
 }
@@ -49,7 +49,7 @@ hcal [options] [#histories]
    -h, --help          show this message.
    -v  --version       show program name/version.
    -c, --config        specify configuration file [g4bench.conf]
-   -s, --session=type  specify session type
+   -s, --session=type  specify session type [tcsh]
    -i, --init=macro    specify initial macro
    -n, --nthreads=N    set number of threads in MT mode [1]
    -a, --affinity      set CPU affinity [false]
@@ -69,7 +69,7 @@ int main(int argc, char** argv)
   // optional parameters
   bool qhelp = false;
   bool qversion = false;
-  std::string session_type = "";
+  std::string session_type = "tcsh";
   std::string init_macro = "";
   std::string config_file = "g4bench.conf";
   std::string str_nhistories = "";
@@ -189,7 +189,7 @@ int main(int argc, char** argv)
   }
 
   // load config
-  JsonParser* jparser = JsonParser::GetJsonParser();
+  auto jparser = JsonParser::GetJsonParser();
   bool qload = jparser-> LoadFile(config_file);
   if ( ! qload ) {
     std::cout << "[ ERROR ] failed on loading a config file. "
@@ -214,7 +214,7 @@ int main(int argc, char** argv)
             << std::endl;
 
   // ----------------------------------------------------------------------
-  TimeHistory* gtimer = TimeHistory::GetTimeHistory();
+  auto gtimer = TimeHistory::GetTimeHistory();
   gtimer-> ShowClock("[MESSAGE] Start:");
 
   // G4 managers & setup application
@@ -234,11 +234,9 @@ int main(int argc, char** argv)
 
   // ----------------------------------------------------------------------
 #ifdef ENABLE_VIS
-  G4VisManager* vis_manager = new G4VisExecutive("quiet");
+  auto vis_manager = new G4VisExecutive("quiet");
   vis_manager-> Initialize();
 #endif
-
-  G4UIExecutive* ui_session = new G4UIExecutive(argc, argv, session_type);
 
   // do init macro
   if (init_macro != "" ) {
@@ -254,15 +252,17 @@ int main(int argc, char** argv)
     gtimer-> TakeSplit("BeamEnd");
 
   } else {
+    auto ui_session = new G4UIExecutive(argc, argv, session_type);
     gtimer-> TakeSplit("SessionStart");
     ui_session-> SetPrompt("hcal(%s)[%/]:");
     ui_session-> SessionStart();
     gtimer-> TakeSplit("SessionEnd");
+    delete ui_session;  
   }
 
   // ----------------------------------------------------------------------
-  delete ui_session;
   delete run_manager;
+
 #ifdef ENABLE_VIS
   delete vis_manager;
 #endif
