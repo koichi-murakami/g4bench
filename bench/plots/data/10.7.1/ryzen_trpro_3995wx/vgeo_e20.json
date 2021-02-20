@@ -1,0 +1,10 @@
+{
+  "name" : "vgeo_e20",
+  "cpu" : "AMD Ryzen Threadripper PRO 3995WX 64-Cores",
+  "time" : 43.27,
+  "init" : 0.42,
+  "tpe" : 0.4327,
+  "eps" : 2.33372,
+  "sps" : 895.548,
+  "edep" : 18.7446
+}

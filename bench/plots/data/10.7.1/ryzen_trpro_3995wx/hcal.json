@@ -1,0 +1,10 @@
+{
+  "name" : "hcal_p10",
+  "cpu" : "AMD Ryzen Threadripper PRO 3995WX 64-Cores",
+  "time" : 317.12,
+  "init" : 1.1,
+  "tpe" : 31.712,
+  "eps" : 0.0316436,
+  "sps" : 486.14,
+  "edep" : 844.723
+}

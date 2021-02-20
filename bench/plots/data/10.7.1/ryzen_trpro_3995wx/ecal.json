@@ -1,0 +1,10 @@
+{
+  "name" : "ecal_e1000",
+  "cpu" : "AMD Ryzen Threadripper PRO 3995WX 64-Cores",
+  "time" : 54.5,
+  "init" : 0.99,
+  "tpe" : 5.45,
+  "eps" : 0.186881,
+  "sps" : 812.553,
+  "edep" : 967.048
+}

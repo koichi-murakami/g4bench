@@ -1,0 +1,10 @@
+{
+  "name" : "hcal_p10",
+  "cpu" : "Intel(R) Xeon(R) Gold 6148 CPU @ 2.40GHz",
+  "time" : 342.04,
+  "init" : 1.61,
+  "tpe" : 34.204,
+  "eps" : 0.0293746,
+  "sps" : 451.282,
+  "edep" : 844.723
+}
