@@ -4,6 +4,12 @@ These values show typical scores for each processor.
 Note that these values might differ in each computing environment.
 
 ### Ecal e1000 Evt:10k
+`10.7.p1`
+| Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
+| -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
+| Gold 6240  | 56.48  | 1.26 | 5.522  | 0.181094  | 787.391 | 967.048 | 2.478 | 2.524   |
+
+
 `10.6.p1`
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
 | -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
@@ -13,7 +19,6 @@ Note that these values might differ in each computing environment.
 `10.5.p1`
 | Processor	 | Time	  | Init |  TPE   |   EPS     |  SPS    |   Edep  | Ratio |SPS Ratio|
 | -----------| ----   | ---  | ------ | --------- | ------- | ------- | ----- | ------- |
-
 
 
 `10.4.p1`
