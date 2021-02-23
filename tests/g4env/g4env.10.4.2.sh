@@ -1,6 +1,5 @@
 #
 # set environment vars for data files
-# Geant4 v10.4.2
 #
 
 export G4ABLADATA=$G4DATA/G4ABLA3.1
