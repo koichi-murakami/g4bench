@@ -1,4 +1,4 @@
-![g4bench](docs/img/logo.png)
+![g4bench](img/logo.png)
 
 # G4Bench
 
@@ -7,7 +7,7 @@
 G4Bench is a set of benchmark tests of Geant4 detector simulation toolkit.
 
 * [Releases](https://github.com/koichi-murakami/g4bench/releases)
-* [Install Instructions](https://koichi-murakami.github.io/g4bench/Installation/index.html)
+* [Install Instructions](./Installation/index.html)
 * [Issues](https://github.com/koichi-murakami/g4bench/issues)
 
 ## Benchmarks
