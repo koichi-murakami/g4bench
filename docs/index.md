@@ -1,13 +1,13 @@
-![g4bench](img/logo.png)
+![g4bench](docs/img/logo.png)
 
 # G4Bench
 
-[![geant4](https://img.shields.io/badge/geant4-10.6-blue.svg)](http://www.geant4.org/)
+[![geant4](https://img.shields.io/badge/geant4-10.7-blue.svg)](http://www.geant4.org/)
 
 G4Bench is a set of benchmark tests of Geant4 detector simulation toolkit.
 
 * [Releases](https://github.com/koichi-murakami/g4bench/releases)
-* [Install Instructions](./Installation/index.html)
+* [Install Instructions](https://koichi-murakami.github.io/g4bench/Installation/index.html)
 * [Issues](https://github.com/koichi-murakami/g4bench/issues)
 
 ## Benchmarks
@@ -18,7 +18,7 @@ G4Bench is a set of benchmark tests of Geant4 detector simulation toolkit.
 ## License
 BSD 2-Clause License
 
-Copyright (c) 2017-2019, Koichi Murakami<br>
+Copyright (c) 2017-2021, Koichi Murakami<br>
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
