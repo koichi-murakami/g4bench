@@ -15,6 +15,8 @@ See the License for more information.
 #include "common/simdata.h"
 #include "util/timehistory.h"
 
+using namespace kut;
+
 // --------------------------------------------------------------------------
 namespace {
 

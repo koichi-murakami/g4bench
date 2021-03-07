@@ -14,6 +14,8 @@ See the License for more information.
 #include "common/eventaction.h"
 #include "util/timehistory.h"
 
+using namespace kut;
+
 // --------------------------------------------------------------------------
 namespace {
 

@@ -30,6 +30,8 @@ See the License for more information.
 #include "common/stepaction.h"
 #include "util/jsonparser.h"
 
+using namespace kut;
+
 // --------------------------------------------------------------------------
 namespace {
 

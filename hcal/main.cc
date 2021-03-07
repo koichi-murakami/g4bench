@@ -26,6 +26,8 @@ See the License for more information.
 #include "util/jsonparser.h"
 #include "util/timehistory.h"
 
+using namespace kut;
+
 namespace {
 // --------------------------------------------------------------------------
 void show_version()
@@ -257,7 +259,7 @@ int main(int argc, char** argv)
     ui_session-> SetPrompt("hcal(%s)[%/]:");
     ui_session-> SessionStart();
     gtimer-> TakeSplit("SessionEnd");
-    delete ui_session;  
+    delete ui_session;
   }
 
   // ----------------------------------------------------------------------

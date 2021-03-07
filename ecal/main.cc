@@ -27,6 +27,8 @@ See the License for more information.
 #include "util/jsonparser.h"
 #include "util/timehistory.h"
 
+using namespace kut;
+
 namespace {
 // --------------------------------------------------------------------------
 void show_version()
