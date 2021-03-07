@@ -1,15 +1,53 @@
 /*============================================================================
-Copyright 2017-2019 Koichi Murakami
+  Copyright 2017-2021 Koichi Murakami
 
-Distributed under the OSI-approved BSD License (the "License");
-see accompanying file LICENSE for details.
+  Distributed under the OSI-approved BSD License (the "License");
+  see accompanying file License for details.
 
-This software is distributed WITHOUT ANY WARRANTY; without even the
-implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-See the License for more information.
+  This software is distributed WITHOUT ANY WARRANTY; without even the
+  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the License for more information.
 ============================================================================*/
-#include "util/stopwatch.h"
+#include "stopwatch.h"
 
+// --------------------------------------------------------------------------
+namespace {
+
+#ifdef _MSC_VER
+#include <sys/types.h>
+#include <windows.h>
+
+  // extract milliseconds time unit
+  int sysconf(int a)
+  {
+    if( a == _SC_CLK_TCK ) return 1000;
+    else return 0;
+  }
+
+  static clock_t filetime2msec(FILETIME* t)
+  {
+    return (clock_t)((((float)t-> dwHighDateTime)*429496.7296)+
+    (((float)t-> dwLowDateTime)*.0001) );
+  }
+
+  clock_t times(struct tms* t) {
+    FILETIME ct = {0,0}, et = {0,0}, st = {0,0}, ut = {0,0}, rt = {0,0};
+    SYSTEMTIME realtime;
+
+    GetSystemTime(&realtime);
+    SystemTimeToFileTime(&realtime, &rt ); // get real time in 10^-9 sec
+    if( t != 0 ) {
+      GetProcessTimes( GetCurrentProcess(), &ct, &et, &st, &ut);
+      t->tms_utime = t->tms_cutime = filetime2msec(&ut);
+      t->tms_stime = t->tms_cstime = filetime2msec(&st);
+    }
+    return filetime2msec(&rt);
+  }
+#endif
+} // end of namespace
+
+// ==========================================================================
+namespace kut {
 // --------------------------------------------------------------------------
 Stopwatch::Stopwatch()
 {
@@ -19,20 +57,23 @@ Stopwatch::Stopwatch()
 // --------------------------------------------------------------------------
 void Stopwatch::Reset()
 {
-  start_clock_ = times(&start_time_);
+  times(&start_time_);
+  start_clock_ = g_clock::now();
 }
 
 // --------------------------------------------------------------------------
 void Stopwatch::Split()
 {
-  end_clock_ = times(&end_time_);
+  times(&end_time_);
+  end_clock_ = g_clock::now();
 }
 
 // --------------------------------------------------------------------------
 double Stopwatch::GetRealElapsed() const
 {
-  double diff = end_clock_ - start_clock_;
-  return diff / sysconf(_SC_CLK_TCK);
+  std::chrono::nanoseconds diff = end_clock_ - start_clock_;
+  double sec = diff.count() / 1.e9;
+  return sec;
 }
 
 // --------------------------------------------------------------------------
@@ -50,10 +91,21 @@ double Stopwatch::GetUserElapsed() const
 }
 
 // --------------------------------------------------------------------------
-const char* Stopwatch::GetClockTime() const
+std::string Stopwatch::GetClockTime() const
 {
-   time_t timer;
-   time(&timer);
+  g_clock::time_point now = g_clock::now();
 
-   return ctime(&timer);
+  time_t t = g_clock::to_time_t(now);
+
+  char buf[26];
+
+#ifdef _MSC_VER
+  ctime_s(buf, 26, &t);
+#else
+  ctime_r(&t, buf);
+#endif
+
+  return std::string(buf);
 }
+
+} // end of namespace

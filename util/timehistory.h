@@ -1,27 +1,26 @@
 /*============================================================================
-Copyright 2017-2019 Koichi Murakami
+  Copyright 2017-2021 Koichi Murakami
 
-Distributed under the OSI-approved BSD License (the "License");
-see accompanying file LICENSE for details.
+  Distributed under the OSI-approved BSD License (the "License");
+  see accompanying file License for details.
 
-This software is distributed WITHOUT ANY WARRANTY; without even the
-implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-See the License for more information.
+  This software is distributed WITHOUT ANY WARRANTY; without even the
+  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the License for more information.
 ============================================================================*/
 #ifndef TIME_HISTORY_H_
 #define TIME_HISTORY_H_
 
 #include <map>
 #include <string>
-#include "util/stopwatch.h"
+#include "stopwatch.h"
+
+namespace kut {
 
 class TimeHistory {
 public:
   static TimeHistory* GetTimeHistory();
-  virtual ~TimeHistory() = default;
-
-  TimeHistory(const TimeHistory&) = delete;
-  void operator=(const TimeHistory&) = delete;
+  ~TimeHistory() = default;
 
   void TakeSplit(const std::string& key);
 
@@ -39,11 +38,15 @@ public:
 
 private:
   TimeHistory();
+  TimeHistory(const TimeHistory&) = delete;
+  void operator=(const TimeHistory&) = delete;
 
   Stopwatch sw_;
   double t0_;
   std::map<std::string, double> split_history_;
 
 };
+
+} // end of namespace
 
 #endif

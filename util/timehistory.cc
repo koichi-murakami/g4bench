@@ -1,17 +1,17 @@
 /*============================================================================
-Copyright 2017-2019 Koichi Murakami
+  Copyright 2017-2021 Koichi Murakami
 
-Distributed under the OSI-approved BSD License (the "License");
-see accompanying file LICENSE for details.
+  Distributed under the OSI-approved BSD License (the "License");
+  see accompanying file License for details.
 
-This software is distributed WITHOUT ANY WARRANTY; without even the
-implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-See the License for more information.
+  This software is distributed WITHOUT ANY WARRANTY; without even the
+  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the License for more information.
 ============================================================================*/
 #include <iostream>
 #include <iomanip>
 #include <mutex>
-#include "util/timehistory.h"
+#include "timehistory.h"
 
 // --------------------------------------------------------------------------
 namespace {
@@ -20,6 +20,8 @@ std::mutex mtx;
 
 } // end of namespace
 
+// ==========================================================================
+namespace kut {
 // --------------------------------------------------------------------------
 TimeHistory* TimeHistory::GetTimeHistory()
 {
@@ -41,7 +43,7 @@ TimeHistory::TimeHistory()
 void TimeHistory::TakeSplit(const std::string& key)
 {
   sw_.Split();
-  double split = sw_.GetRealElapsed();
+  auto split = sw_.GetRealElapsed();
   split_history_[key] = split - t0_;
 }
 
@@ -49,8 +51,8 @@ void TimeHistory::TakeSplit(const std::string& key)
 double TimeHistory::TakeSplit()
 {
   sw_.Split();
-  double split = sw_.GetRealElapsed();
-  double t1 = split - t0_;
+  auto split = sw_.GetRealElapsed();
+  auto t1 = split - t0_;
   return t1;
 }
 
@@ -122,3 +124,5 @@ void TimeHistory::ShowClock(const std::string& prefix) const
   std::cout << prefix << " " << sw_.GetClockTime() << std::flush;
   ::mtx.unlock();
 }
+
+} // end of namespace
