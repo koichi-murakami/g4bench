@@ -72,7 +72,12 @@ if [ ${G4BENCH-undef} = "undef" ]; then
   G4BENCH=.
 fi
 
-cpu_info=`lscpu | grep name | cut -d : -f 2 | xargs echo`
+sys=`uname`
+if [ ${sys} = "Darwin"]; then
+  cpu_info=`sysctl machdep.cpu.brand_string | cut -d : -f 2 | xargs echo`
+else
+  cpu_info=`lscpu | grep name | cut -d : -f 2 | xargs echo`
+fi
 
 if [ $# = 0 ]; then
   ${G4BENCH}/vgeo 100000
