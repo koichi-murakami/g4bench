@@ -111,7 +111,7 @@ done
 cmake_option=""
 
 echo "Build configuration:"
-echo -n "G4Bench prefix   ... "
+printf "G4Bench prefix   ... "
 if [ $prefix = _cmake ]; then
   echo "[config.cmake]"
 else
@@ -119,7 +119,7 @@ else
   cmake_option="-DCMAKE_INSTALL_PREFIX=${prefix}"
 fi
 
-echo -n "Geant4 dir     ... "
+printf "Geant4 dir     ... "
 if [ $g4_install = _cmake ]; then
   echo "[config.cmake]"
 else
@@ -128,23 +128,23 @@ else
 fi
 
 echo ""
-echo -n "Enabled support for [ "
+printf "Enabled support for [ "
 if [ $enable_mt = 1 ]; then
-  echo -n "mt "
+  printf "mt "
   cmake_option="${cmake_option} -DENABLE_MT=TRUE"
 else
   cmake_option="${cmake_option} -DENABLE_MT=FALSE"
 fi
 
 if [ $enable_vis = 1 ]; then
-  echo -n "vis "
+  printf "vis "
   cmake_option="${cmake_option} -DENABLE_VIS=TRUE"
 else
   cmake_option="${cmake_option} -DENABLE_VIS=FALSE"
 fi
 
 if [ $enable_debug = 1 ]; then
-  echo -n "debug "
+  printf "debug "
   cmake_option="${cmake_option} -DDEBUG=TRUE"
   enable_opt=0
 else
@@ -152,7 +152,7 @@ else
 fi
 
 if [ $enable_opt = 1 ]; then
-  echo -n "opt "
+  printf "opt "
   cmake_option="${cmake_option} -DOPTIMIZE=TRUE"
 else
   cmake_option="${cmake_option} -DOPTIMIZE=FALSE"
@@ -160,7 +160,7 @@ fi
 
 if [ $enable_dev != _cmake ]; then
   if [ $enable_dev = 1 ]; then
-    echo -n "dev "
+    printf "dev "
     cmake_option="${cmake_option} -DDEVMODE=TRUE"
   else
     cmake_option="${cmake_option} -DDEVMODE=FALSE"
