@@ -9,7 +9,6 @@ implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License for more information.
 ============================================================================*/
 #include <getopt.h>
-#include <boost/lexical_cast.hpp>
 #ifdef ENABLE_MT
 #include "G4MTRunManager.hh"
 #else
@@ -154,7 +153,7 @@ int main(int argc, char** argv)
   // #threads
   int nthreads = 1;
   try {
-    nthreads = boost::lexical_cast<int>(str_nthreads);
+    nthreads = std::stoi(str_nthreads);
   } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
     std::cout << "[ ERROR ] invalid argument: <#threads>" << std::endl;
@@ -177,7 +176,7 @@ int main(int argc, char** argv)
   if ( optind < argc ) {
     str_nhistories = argv[optind];
     try {
-      nhistories = boost::lexical_cast<int>(str_nhistories);
+      nhistories = std::stoi(str_nhistories);
     } catch (std::exception& e) {
       std::cout << e.what() << std::endl;
       std::cout << "[ ERROR ] invalid argument: <#histories>" << std::endl;
