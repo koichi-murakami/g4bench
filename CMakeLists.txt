@@ -7,10 +7,12 @@
 #  !! DONOT EDIT THIS FILE  !!
 #  ***************************
 #
+cmake_minimum_required(VERSION 3.11)
+
 #==============================================================================
 project(G4Bench)
 #==============================================================================
-cmake_minimum_required(VERSION 3.11)
+
 include(config.cmake)
 
 # version.h generation (true for release)
@@ -39,12 +41,11 @@ endif()
 
 # find packages
 find_package(Geant4 REQUIRED)
-find_package(Boost 1.53.0)
 find_package(OpenGL)
 
-# c++11
+# c++14
 add_library(global_cflags INTERFACE)
-target_compile_features(global_cflags INTERFACE cxx_std_11 )
+target_compile_features(global_cflags INTERFACE cxx_std_14 )
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # build options
