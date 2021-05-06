@@ -7,7 +7,7 @@
 # installation prefix
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX $ENV{HOME}/work/g4bench/work
-      CACHE STRING "Install prefix" FORCE)
+      CACHE PATH "Install prefix" FORCE)
 endif()
 
 # Geant4 installation path
