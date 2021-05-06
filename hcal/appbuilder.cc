@@ -9,7 +9,6 @@ implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License for more information.
 ============================================================================*/
 #include <vector>
-#include <boost/lexical_cast.hpp>
 #include "FTFP_BERT.hh"
 #include "G4Navigator.hh"
 #include "G4ParticleGun.hh"
