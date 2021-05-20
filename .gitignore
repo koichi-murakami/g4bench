@@ -28,3 +28,6 @@
 build*/
 *zzz/
 .vscode/
+
+# static analysis
+compile_flags.txt
