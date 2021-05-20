@@ -20,8 +20,6 @@ echo "========================================================================"
 # ======================================================================
 # main
 # ======================================================================
-. ./tests/ci/g4version.sh
-
 show_line
 echo "@@ Configure a program..."
 ./configure --with-geant4-dir=/opt/geant4/${G4VERSION} --disable-vis
@@ -34,14 +32,13 @@ check_error
 
 show_line
 echo "@@ Run a program..."
-export G4DATA=/opt/geant4/data/${G4VERSION}
-. ../../tests/g4env/g4env.${G4VERSION}.sh
 
 #
 cat << EOD > g4bench_x18.conf
 {
   Run : {
     Seed : 123456789,
+    G4DATA : "/opt/geant4/data/10.7.1"
   },
   Primary : {
     type : "beam",
