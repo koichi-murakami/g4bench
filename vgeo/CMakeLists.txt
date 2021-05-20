@@ -15,6 +15,7 @@ target_sources(${APP} PRIVATE
   appbuilder.cc main.cc medicalbeam.cc phantom_pvp.cc voxelgeom.cc
   ../common/calscorer.cc
   ../common/eventaction.cc
+  ../common/g4environment.cc
   ../common/particlegun.cc
   ../common/runaction.cc
   ../common/stepaction.cc
