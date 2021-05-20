@@ -1,5 +1,5 @@
 /*============================================================================
-Copyright 2017-2019 Koichi Murakami
+Copyright 2017-2021 Koichi Murakami
 
 Distributed under the OSI-approved BSD License (the "License");
 see accompanying file LICENSE for details.
@@ -34,12 +34,12 @@ using namespace kut;
 namespace {
 
 #ifdef ENABLE_MT
-G4MTRunManager* run_manager = nullptr;
+G4MTRunManager* run_manager {nullptr};
 #else
-G4RunManager* run_manager = nullptr;
+G4RunManager* run_manager {nullptr};
 #endif
 
-JsonParser* jparser = nullptr;
+JsonParser* jparser {nullptr};
 
 // --------------------------------------------------------------------------
 void SetupGeomtry(SimData* data)
