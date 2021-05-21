@@ -34,14 +34,13 @@ check_error
 
 show_line
 echo "@@ Run a program..."
-export G4DATA=/opt/geant4/data/${G4VERSION}
-. ../../tests/g4env/g4env.${G4VERSION}.sh
 
 #
 cat << EOD > g4bench_e20.conf
 {
   Run : {
     Seed : 123456789,
+    G4DATA : "/opt/geant4/data/${G4VERSION}"
   },
   Primary : {
     type : "beam",

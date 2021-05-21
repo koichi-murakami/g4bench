@@ -34,10 +34,6 @@ check_error
 
 show_line
 echo "@@ Run a program..."
-export G4DATA=/opt/geant4/data/${G4VERSION}
-. ../../tests/g4env/g4env.${G4VERSION}.sh
-
-#
 ./ecal -n 10 -j 100000
 
 exit $?

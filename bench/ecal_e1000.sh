@@ -6,10 +6,16 @@
 #    Event    : 10k
 #
 #  Environment variables:
-#    G4ENV : bash script for export Geant4 Data files
+#    G4DATA : direcotry of Geant4 Data files
 #    G4BENCH : prefix for G4Bench program
 # ======================================================================
 export LANG=C
+
+# ======================================================================
+# run parameters
+# ======================================================================
+NEVENTS=10000
+LOG=ecal_e1000.log
 
 # ======================================================================
 # functions
@@ -24,18 +30,6 @@ show_line() {
 echo "========================================================================"
 }
 
-check_g4env() {
-  if [ ${G4ENV-undef} = "undef" ]; then
-    echo "*** Error : G4ENV is not defined."
-    exit -1
-  fi
-
-  if [ ! -e $G4ENV ]; then
-    echo "*** Error : ${G4ENV} does not exist."
-    exit -1
-  fi
-}
-
 # ======================================================================
 # main
 # ======================================================================
@@ -43,18 +37,12 @@ show_line
 echo " G4Bench / Ecal e1000"
 show_line
 
-check_g4env
-echo "@@@ G4ENV = ${G4ENV}"
-. ${G4ENV}
-echo "@@@ Geant4 Data files :"
-env | grep G4 | grep DATA
-echo ""
-
 #
 cat << EOD > g4bench.conf
 {
   Run : {
     Seed : 123456789,
+    G4DATA : "${G4DATA}"
   },
   Primary : {
     particle  : "e-",
@@ -77,11 +65,6 @@ else
   cpu_info=`lscpu | grep name | cut -d : -f 2 | xargs echo`
 fi
 
-if [ $# = 0 ]; then
-  ${G4BENCH}/ecal 10000
-else
-  log=$1
-  ${G4BENCH}/ecal -j -b ecal_e1000 -p "${cpu_info}" 10000 > $1 2>&1
-fi
+${G4BENCH}/ecal -j -b ecal_e1000 -p "${cpu_info}" ${NEVENTS} > ${LOG} 2>&1
 
 exit $?

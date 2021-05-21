@@ -1,8 +1,21 @@
 #!/bin/sh -
 # ======================================================================
-#  Build & run : vgeo / electron 20 MeV
+#  G4Bench benchmark / Vgeo p200
+#    Geometry : Voxel water phantom
+#    Primary  : proton 200 MeV broad beam
+#    Event    : 100k
+#
+#  Environment variables:
+#    G4DATA : direcotry of Geant4 Data files
+#    G4BENCH : prefix for G4Bench program
 # ======================================================================
 export LANG=C
+
+# ======================================================================
+# run parameters
+# ======================================================================
+NEVENTS=100000
+LOG=vgeo_p200.log
 
 # ======================================================================
 # functions
@@ -20,27 +33,16 @@ echo "========================================================================"
 # ======================================================================
 # main
 # ======================================================================
-. ./tests/ci/g4version.sh
-
 show_line
-echo "@@ Configure a program..."
-./configure --with-geant4-dir=/opt/geant4/${G4VERSION}-mt --enable-mt --disable-vis
-
+echo " G4Bench / Vgeo p200"
 show_line
-echo "@@ Build a program..."
-cd build/vgeo
-make -j4
-check_error
-
-show_line
-echo "@@ Run a program..."
 
 #
-cat << EOD > g4bench_p200.conf
+cat << EOD > g4bench.conf
 {
   Run : {
     Seed : 123456789,
-    G4DATA : "/opt/geant4/data/${G4VERSION}"
+    G4DATA : "${G4DATA}"
   },
   Primary : {
     type : "beam",
@@ -53,7 +55,19 @@ cat << EOD > g4bench_p200.conf
   }
 }
 EOD
+
 #
-./vgeo -c g4bench_p200.conf -n 10 -j 1000000
+if [ ${G4BENCH-undef} = "undef" ]; then
+  G4BENCH=.
+fi
+
+sys=`uname`
+if [ ${sys} = "Darwin" ]; then
+  cpu_info=`sysctl machdep.cpu.brand_string | cut -d : -f 2 | xargs echo`
+else
+  cpu_info=`lscpu | grep name | cut -d : -f 2 | xargs echo`
+fi
+
+${G4BENCH}/vgeo -j -b vgeo_p200 -p "${cpu_info}" ${NEVENTS} > ${LOG} 2>&1
 
 exit $?

@@ -8,32 +8,24 @@ This software is distributed WITHOUT ANY WARRANTY; without even the
 implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License for more information.
 ============================================================================*/
-#ifndef ECAL_GEOM_H_
-#define ECAL_GEOM_H_
+#ifndef G4ENVIRONMENT_H_
+#define G4ENVIRONMENT_H_
 
-#include "G4VUserDetectorConstruction.hh"
+#include<string>
 
-class SimData;
-
-class EcalGeom : public G4VUserDetectorConstruction {
+class G4Environment {
 public:
-  EcalGeom() = default;
-  ~EcalGeom() = default;
+  G4Environment() = default;
+  ~G4Environment() = default;
 
-  void SetSimData(SimData* data);
-
-  virtual G4VPhysicalVolume* Construct();
-  virtual void ConstructSDandField();
+  static void SetDataDir(const std::string& dir);
+  static void CheckEnvironment();
+  static void SetEnvironment();
+  static void PrintEnvironment();
 
 private:
-  SimData* simdata_;
+  static std::string data_dir_;
 
 };
-
-// ==========================================================================
-inline void EcalGeom::SetSimData(SimData* data)
-{
-  simdata_ = data;
-}
 
 #endif

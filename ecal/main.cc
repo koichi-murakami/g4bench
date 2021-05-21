@@ -1,5 +1,5 @@
 /*============================================================================
-Copyright 2017-2019 Koichi Murakami
+Copyright 2017-2021 Koichi Murakami
 
 Distributed under the OSI-approved BSD License (the "License");
 see accompanying file LICENSE for details.
@@ -8,6 +8,7 @@ This software is distributed WITHOUT ANY WARRANTY; without even the
 implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License for more information.
 ============================================================================*/
+#include <cstdlib>
 #include <getopt.h>
 #ifdef ENABLE_MT
 #include "G4MTRunManager.hh"
@@ -23,6 +24,7 @@ See the License for more information.
 
 #include "version.h"
 #include "common/appbuilder.h"
+#include "common/g4environment.h"
 #include "util/jsonparser.h"
 #include "util/timehistory.h"
 
@@ -35,7 +37,7 @@ void show_version()
   const char* version_str = G4BENCH_VERSION_MAJOR "."
                             G4BENCH_VERSION_MINOR ".";
 
-  std::cout << "G4Bench/ecal version 1.5.5"
+  std::cout << "G4Bench/ecal version 1.6.0"
             << " (" << version_str << ::build_head << "."
             << ::build_tail << ")" << std::endl;
 }
@@ -212,6 +214,14 @@ int main(int argc, char** argv)
 
   std::cout << "JSON configuration" << std::endl;
   jparser-> DumpAll();
+  std::cout << "=============================================================="
+            << std::endl;
+
+  std::cout << "G4DATA DIRs:" << std::endl;
+  auto g4data_dir = jparser-> GetStringValue("Run/G4DATA");
+  G4Environment::SetDataDir(g4data_dir);
+  G4Environment::SetEnvironment();
+  G4Environment::PrintEnvironment();
   std::cout << "=============================================================="
             << std::endl;
 
