@@ -1,9 +1,9 @@
 #!/bin/sh -
 # ======================================================================
-#  G4Bench benchmark / Ecal e1000
-#    Geometry : EM calorimeter
-#    Primary  : electron 1 GeV
-#    Event    : 10k
+#  G4Bench benchmark / Vgeo p200
+#    Geometry : Voxel water phantom
+#    Primary  : proton 200 MeV broad beam
+#    Event    : 100k
 #
 #  Environment variables:
 #    G4DATA : direcotry of Geant4 Data files
@@ -14,8 +14,8 @@ export LANG=C
 # ======================================================================
 # run parameters
 # ======================================================================
-NEVENTS=10000
-LOG=ecal_e1000.log
+NEVENTS=100000
+LOG=vgeo_p200.log
 
 # ======================================================================
 # functions
@@ -34,7 +34,7 @@ echo "========================================================================"
 # main
 # ======================================================================
 show_line
-echo " G4Bench / Ecal e1000"
+echo " G4Bench / Vgeo p200"
 show_line
 
 #
@@ -45,10 +45,13 @@ cat << EOD > g4bench.conf
     G4DATA : "${G4DATA}"
   },
   Primary : {
-    particle  : "e-",
-    energy    : 1000.0,   // MeV
-    position  : [ 0., 0., -45. ],  // cm
-    direction : [ 0., 0., 1.],
+    type : "beam",
+    Beam : {
+      particle  : "proton",
+      energy    : 200.0,   // MeV
+      ssd : 100.,  // SSD (cm)
+      field_size : 10.0,   // field size (X/Y) in cm
+    }
   }
 }
 EOD
@@ -65,6 +68,6 @@ else
   cpu_info=`lscpu | grep name | cut -d : -f 2 | xargs echo`
 fi
 
-${G4BENCH}/ecal -j -b ecal_e1000 -p "${cpu_info}" ${NEVENTS} > ${LOG} 2>&1
+${G4BENCH}/vgeo -j -b vgeo_p200 -p "${cpu_info}" ${NEVENTS} > ${LOG} 2>&1
 
 exit $?

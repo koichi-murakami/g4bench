@@ -3,13 +3,19 @@
 #  G4Bench benchmark / Vgeo e20
 #    Geometry : Voxel water phantom
 #    Primary  : electron 20 MeV broad beam
-#    Event    : 100k
+#    Event    : 200k
 #
 #  Environment variables:
 #    G4DATA : direcotry of Geant4 Data files
 #    G4BENCH : prefix for G4Bench program
 # ======================================================================
 export LANG=C
+
+# ======================================================================
+# run parameters
+# ======================================================================
+NEVENTS=200000
+LOG=vgeo_e20.log
 
 # ======================================================================
 # functions
@@ -49,6 +55,7 @@ cat << EOD > g4bench.conf
   }
 }
 EOD
+
 #
 if [ ${G4BENCH-undef} = "undef" ]; then
   G4BENCH=.
@@ -61,11 +68,6 @@ else
   cpu_info=`lscpu | grep name | cut -d : -f 2 | xargs echo`
 fi
 
-if [ $# = 0 ]; then
-  ${G4BENCH}/vgeo 100000
-else
-  log=$1
-  ${G4BENCH}/vgeo -j -b vgeo_e20 -p "${cpu_info}" 100000 > $1 2>&1
-fi
+${G4BENCH}/vgeo -j -b vgeo_e20 -p "${cpu_info}" ${NEVENTS} > ${LOG} 2>&1
 
 exit $?

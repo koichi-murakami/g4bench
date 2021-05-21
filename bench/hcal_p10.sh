@@ -12,6 +12,12 @@
 export LANG=C
 
 # ======================================================================
+# run parameters
+# ======================================================================
+NEVENTS=10000
+LOG=hcal_p10.log
+
+# ======================================================================
 # functions
 # ======================================================================
 check_error() {
@@ -46,6 +52,7 @@ cat << EOD > g4bench.conf
   }
 }
 EOD
+
 #
 if [ ${G4BENCH-undef} = "undef" ]; then
   G4BENCH=.
@@ -58,11 +65,6 @@ else
   cpu_info=`lscpu | grep name | cut -d : -f 2 | xargs echo`
 fi
 
-if [ $# = 0 ]; then
-  ${G4BENCH}/hcal 10000
-else
-  log=$1
-  ${G4BENCH}/hcal -j -b hcal_p10 -p "${cpu_info}" 10000 > $1 2>&1
-fi
+${G4BENCH}/hcal -j -b hcal_p10 -p "${cpu_info}" ${NEVENTS} > ${LOG} 2>&1
 
 exit $?

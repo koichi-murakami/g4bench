@@ -3,13 +3,19 @@
 #  G4Bench benchmark / Vgeo x18
 #    Geometry : Voxel water phantom
 #    Primary  : x-ray 18 MV broad beam
-#    Event    : 100k
+#    Event    : 500k
 #
 #  Environment variables:
 #    G4DATA : direcotry of Geant4 Data files
 #    G4BENCH : prefix for G4Bench program
 # ======================================================================
 export LANG=C
+
+# ======================================================================
+# run parameters
+# ======================================================================
+NEVENTS=500000
+LOG=vgeo_x18.log
 
 # ======================================================================
 # functions
@@ -28,7 +34,7 @@ echo "========================================================================"
 # main
 # ======================================================================
 show_line
-echo " G4Bench / Vgeo x18"
+echo " G4Bench / Vgeo X18"
 show_line
 
 #
@@ -49,6 +55,7 @@ cat << EOD > g4bench.conf
   }
 }
 EOD
+
 #
 if [ ${G4BENCH-undef} = "undef" ]; then
   G4BENCH=.
@@ -61,11 +68,6 @@ else
   cpu_info=`lscpu | grep name | cut -d : -f 2 | xargs echo`
 fi
 
-if [ $# = 0 ]; then
-  ${G4BENCH}/vgeo 100000
-else
-  log=$1
-  ${G4BENCH}/vgeo -j -b vgeo_x18 -p "${cpu_info}" 100000 > $1 2>&1
-fi
+${G4BENCH}/vgeo -j -b vgeo_x18 -p "${cpu_info}" ${NEVENTS} > ${LOG} 2>&1
 
 exit $?
