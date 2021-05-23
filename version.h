@@ -1,5 +1,5 @@
 /*============================================================================
-  Copyright 2017-2019 Koichi Murakami
+  Copyright 2017-2021 Koichi Murakami
 
   Distributed under the OSI-approved BSD License (the "License");
   see accompanying file LICENSE for details.
@@ -13,7 +13,7 @@
 
 #define G4BENCH_VERSION_MAJOR "1"
 #define G4BENCH_VERSION_MINOR "6.0"
-#define G4BENCH_VERSION_BUILD 0x93f726a
+#define G4BENCH_VERSION_BUILD 0x552e5ea
 
 namespace {
   const int build_head = (G4BENCH_VERSION_BUILD & 0xffff000) >> 12;

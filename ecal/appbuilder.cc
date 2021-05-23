@@ -126,7 +126,7 @@ void AppBuilder::BuildApplication()
 
   long seed { 0L };
   if ( jparser-> Contains("Run/Seed") ) {
-    long seed = jparser-> GetLongValue("Run/Seed");
+    seed = jparser-> GetLongValue("Run/Seed");
   }
 
   G4Random::setTheSeed(seed);
