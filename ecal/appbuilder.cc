@@ -131,6 +131,16 @@ void AppBuilder::BuildApplication()
 
   G4Random::setTheSeed(seed);
 
+  #ifdef ENABLE_MT
+  if ( jparser-> Contains("Run/SeedOnce") ) {
+    if ( jparser-> GetBoolValue("Run/SeedOnce") ) {
+      G4MTRunManager::SetSeedOncePerCommunication(1);
+    } else {
+      G4MTRunManager::SetSeedOncePerCommunication(0);
+    }
+  }
+#endif
+
   // initialize
   ::run_manager-> Initialize();
 }
