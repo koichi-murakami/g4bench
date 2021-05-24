@@ -27,10 +27,5 @@ set(DEBUG FALSE CACHE BOOL "Debug mode")
 # Development flag (set false for release)
 set(DEVMODE FALSE CACHE BOOL "Development mode")
 
-# Optional configurations
-# Compiler
-#set(CMAKE_C_COMPILER /opt/gcc-4.8.5/bin/gcc)
-#set(CMAKE_CXX_COMPILER /opt/gcc-4.8.5/bin/g++)
-
-# non-default Boost-C++
-#set(BOOST_ROOT /opt/boost-1.60.0)
+# spacial flags for developer
+option(GEANT4_STATIC "Use static library" OFF)

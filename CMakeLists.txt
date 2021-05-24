@@ -45,7 +45,7 @@ find_package(OpenGL)
 
 # c++14
 add_library(global_cflags INTERFACE)
-target_compile_features(global_cflags INTERFACE cxx_std_14 )
+target_compile_features(global_cflags INTERFACE cxx_std_14)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # build options
@@ -86,6 +86,7 @@ message(STATUS "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
 message(STATUS "GEANT4_LIBRARY_DIR: ${GEANT4_LIBRARY_DIR}")
 message(STATUS "ENABLE_MT: ${ENABLE_MT}")
 message(STATUS "ENABLE_VIS: ${ENABLE_VIS}")
+message(STATUS "GEANT4_STATIC : ${GEANT4_STATIC}")
 message(STATUS "--------------------------------------------------------")
 
 #------------------------------------------------------------------------------
