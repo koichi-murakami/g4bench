@@ -58,6 +58,32 @@ endif()
 
 set(GEANT4_INCLUDE_DIR ${GEANT4_PREFIX}/include/Geant4)
 set(GEANT4_LIBRARY_DIR ${GEANT4_PREFIX}/${_LIBDIR_DEFAULT})
+
+if (GEANT4_STATIC)
+set(GEANT4_LIBRARIES  ${GEANT4_LIBRARY_DIR}/libG4interfaces.a
+                      ${GEANT4_LIBRARY_DIR}/libG4persistency.a
+                      ${GEANT4_LIBRARY_DIR}/libG4analysis.a
+                      ${GEANT4_LIBRARY_DIR}/libG4error_propagation.a
+                      ${GEANT4_LIBRARY_DIR}/libG4readout.a
+                      ${GEANT4_LIBRARY_DIR}/libG4physicslists.a
+                      ${GEANT4_LIBRARY_DIR}/libG4run.a
+                      ${GEANT4_LIBRARY_DIR}/libG4event.a
+                      ${GEANT4_LIBRARY_DIR}/libG4tracking.a
+                      ${GEANT4_LIBRARY_DIR}/libG4parmodels.a
+                      ${GEANT4_LIBRARY_DIR}/libG4processes.a
+                      ${GEANT4_LIBRARY_DIR}/libG4digits_hits.a
+                      ${GEANT4_LIBRARY_DIR}/libG4track.a
+                      ${GEANT4_LIBRARY_DIR}/libG4particles.a
+                      ${GEANT4_LIBRARY_DIR}/libG4geometry.a
+                      ${GEANT4_LIBRARY_DIR}/libG4materials.a
+                      ${GEANT4_LIBRARY_DIR}/libG4graphics_reps.a
+                      ${GEANT4_LIBRARY_DIR}/libG4intercoms.a
+                      ${GEANT4_LIBRARY_DIR}/libG4global.a
+                      ${GEANT4_LIBRARY_DIR}/libG4clhep.a
+                      ${GEANT4_LIBRARY_DIR}/libG4zlib.a
+                      expat pthread)
+
+else()
 set(GEANT4_LIBRARIES  G4interfaces G4persistency G4analysis
                       G4error_propagation G4readout G4physicslists
                       G4run G4event G4tracking G4parmodels G4processes
@@ -74,3 +100,5 @@ set(GEANT4_LIBRARIES_WITH_VIS
                       G4digits_hits G4track G4particles G4geometry
                       G4materials G4graphics_reps G4intercoms
                       G4global G4clhep G4zlib)
+
+endif()
