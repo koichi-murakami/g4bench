@@ -200,6 +200,8 @@ void AppBuilder::BuildApplication()
   if ( jparser-> Contains("Run/SeedOnce") ) {
     if ( jparser-> GetBoolValue("Run/SeedOnce") ) {
       G4MTRunManager::SetSeedOncePerCommunication(1);
+    } else {
+      G4MTRunManager::SetSeedOncePerCommunication(0);
     }
   }
 #endif
