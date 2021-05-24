@@ -8,6 +8,11 @@ export LANG=C
 # run parameters
 # ======================================================================
 export G4DATA=/opt/geant4/data/10.7.1
+run_ecal=1
+run_hcal=1
+run_vgeo_x18=1
+run_vgeo_e20=1
+run_vgeo_p200=1
 
 # ======================================================================
 # functions
@@ -37,27 +42,37 @@ echo " Execute G4Bench tests"
 show_line
 
 # ======================================================================
-export G4BENCH=../../ecal
-../ecal_e1000.sh
-mv g4bench.json ecal.json
+if [ ${run_ecal} = 1 ]; then
+  export G4BENCH=../../ecal
+  ../ecal_e1000.sh
+  mv g4bench.json ecal.json
+fi
 
 # ======================================================================
-export G4BENCH=../../hcal
-../hcal_p10.sh
-mv g4bench.json hcal.json
+if [ ${run_hcal} = 1 ]; then
+  export G4BENCH=../../hcal
+  ../hcal_p10.sh
+  mv g4bench.json hcal.json
+fi
 
 # ======================================================================
 export G4BENCH=../../vgeo
-../vgeo_x18.sh
-mv g4bench.json vgeo_x18.json
+if [ ${run_vgeo_x18} = 1 ]; then
+  ../vgeo_x18.sh
+  mv g4bench.json vgeo_x18.json
+fi
 
 # ======================================================================
-../vgeo_e20.sh
-mv g4bench.json vgeo_e20.json
+if [ ${vgeo_e20} = 1 ]; then
+  ../vgeo_e20.sh
+  mv g4bench.json vgeo_e20.json
+fi
 
 # ======================================================================
-../vgeo_p200.sh
-mv g4bench.json vgeo_p200.json
+if [ ${vgeo_p200} = 1 ]; then
+  ../vgeo_p200.sh
+  mv g4bench.json vgeo_p200.json
+fi
 
 # ======================================================================
 cd ..
