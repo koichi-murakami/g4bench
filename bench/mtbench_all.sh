@@ -15,6 +15,12 @@ NEVENTS_VGEO_X=10000000
 NEVENTS_VGEO_E=10000000
 NEVENTS_VGEO_P=400000
 
+run_ecal=1
+run_hcal=1
+run_vgeo_x18=1
+run_vgeo_e20=1
+run_vgeo_p200=1
+
 # ======================================================================
 # functions
 # ======================================================================
@@ -63,7 +69,9 @@ cat << EOD > g4bench.conf
 }
 EOD
 
-../mtbench.sh ../../ecal/ecal ${NEVENTS_ECAL} ecal_e1000
+if [ ${run_ecal} = 1 ]; then
+  ../mtbench.sh ../../ecal/ecal ${NEVENTS_ECAL} ecal_e1000
+fi
 
 # ======================================================================
 # hcal
@@ -86,7 +94,9 @@ cat << EOD > g4bench.conf
 }
 EOD
 
-../mtbench.sh ../../hcal/hcal ${NEVENTS_HCAL} hcal_p10
+if [ ${run_hcal} = 1 ]; then
+  ../mtbench.sh ../../hcal/hcal ${NEVENTS_HCAL} hcal_p10
+fi
 
 # ======================================================================
 # vgeo-x18
@@ -112,7 +122,9 @@ cat << EOD > g4bench.conf
 }
 EOD
 
-../mtbench.sh ../../vgeo/vgeo ${NEVENTS_VGEO_X} vgeo_x18
+if [ ${run_vgeo_x18} = 1 ]; then
+  ../mtbench.sh ../../vgeo/vgeo ${NEVENTS_VGEO_X} vgeo_x18
+fi
 
 # ======================================================================
 # vgeo-e20
@@ -138,7 +150,9 @@ cat << EOD > g4bench.conf
 }
 EOD
 
-../mtbench.sh ../../vgeo/vgeo ${NEVENTS_VGEO_E} vgeo_e20
+if [ ${run_vgeo_e20} = 1 ]; then
+  ../mtbench.sh ../../vgeo/vgeo ${NEVENTS_VGEO_E} vgeo_e20
+fi
 
 # ======================================================================
 # vgeo-p200
@@ -164,7 +178,9 @@ cat << EOD > g4bench.conf
 }
 EOD
 
-../mtbench.sh ../../vgeo/vgeo ${NEVENTS_VGEO_P} vgeo_p200
+if [ ${run_vgeo_p200} = 1 ]; then
+  ../mtbench.sh ../../vgeo/vgeo ${NEVENTS_VGEO_P} vgeo_p200
+fi
 
 # ======================================================================
 cd ..

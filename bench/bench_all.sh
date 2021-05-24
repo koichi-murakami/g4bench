@@ -8,6 +8,7 @@ export LANG=C
 # run parameters
 # ======================================================================
 export G4DATA=/opt/geant4/data/10.7.1
+
 run_ecal=1
 run_hcal=1
 run_vgeo_x18=1
