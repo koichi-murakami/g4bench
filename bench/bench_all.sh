@@ -64,13 +64,13 @@ if [ ${run_vgeo_x18} = 1 ]; then
 fi
 
 # ======================================================================
-if [ ${vgeo_e20} = 1 ]; then
+if [ ${run_vgeo_e20} = 1 ]; then
   ../vgeo_e20.sh
   mv g4bench.json vgeo_e20.json
 fi
 
 # ======================================================================
-if [ ${vgeo_p200} = 1 ]; then
+if [ ${run_vgeo_p200} = 1 ]; then
   ../vgeo_p200.sh
   mv g4bench.json vgeo_p200.json
 fi
