@@ -7,7 +7,7 @@ export LANG=C
 # ======================================================================
 # run parameters
 # ======================================================================
-export G4DATA=/opt/geant4/data/10.7.1
+export G4DATA=/opt/geant4/data
 
 run_ecal=1
 run_hcal=1

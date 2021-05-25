@@ -40,7 +40,7 @@ cat << EOD > g4bench_x18.conf
 {
   Run : {
     Seed : 123456789,
-    G4DATA : "/opt/geant4/data/${G4VERSION}"
+    G4DATA : "/opt/geant4/data"
   },
   Primary : {
     type : "beam",

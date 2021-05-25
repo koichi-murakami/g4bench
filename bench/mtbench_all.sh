@@ -7,7 +7,7 @@ export LANG=C
 # ======================================================================
 # run parameters
 # ======================================================================
-G4DATA=/opt/geant4/data/10.7.1
+G4DATA=/opt/geant4/data
 
 NEVENTS_ECAL=100000
 NEVENTS_HCAL=20000
@@ -108,6 +108,7 @@ cat << EOD > g4bench.conf
 {
   Run : {
     Seed : 123456789,
+    //SeedOnece : true,
     G4DATA : "${G4DATA}"
   },
   Primary : {
@@ -136,6 +137,7 @@ cat << EOD > g4bench.conf
 {
   Run : {
     Seed : 123456789,
+    SeedOnece : true,
     G4DATA : "${G4DATA}"
   },
   Primary : {
@@ -164,6 +166,7 @@ cat << EOD > g4bench.conf
 {
   Run : {
     Seed : 123456789,
+    SeedOnce : true,
     G4DATA : "${G4DATA}"
   },
   Primary : {
