@@ -1,7 +1,7 @@
 #
 #  CMakeLists.txt for buidlig G4Bench
 #
-#  Copyright 2017-2019 Koichi Murakami
+#  Copyright 2017-2021 Koichi Murakami
 #
 #  ***************************
 #  !! DONOT EDIT THIS FILE  !!
