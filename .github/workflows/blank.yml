@@ -30,4 +30,4 @@ jobs:
         run: |
           docker pull koichimurakamik6/geant4-runtime:latest
           docker run -itd --name g4runtime -v /home/runner/work/g4bench/g4bench:/home/runner/work/g4bench/g4bench koichimurakamik6/geant4-runtime:latest 
-          docker exec -w /tmp g4runtime ls
+          docker exec -w /home/runner/work/g4bench/g4bench g4runtime ls
