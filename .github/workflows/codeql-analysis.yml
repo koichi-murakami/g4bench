@@ -46,6 +46,8 @@ jobs:
          docker pull koichimurakamik6/geant4-runtime:latest
          docker run -itd --name g4runtime koichimurakamik6/geant4-runtime:latest
          docker cp g4runtime:/opt/geant4 /opt
+         ls /opt
+         ls /opt/geant4
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
