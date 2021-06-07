@@ -5,6 +5,8 @@
 [![geant4](https://img.shields.io/badge/geant4-10.7-blue.svg)](http://www.geant4.org/)
 
 [![Test Ecal](https://github.com/koichi-murakami/g4bench/actions/workflows/test_ecal.yml/badge.svg)](https://github.com/koichi-murakami/g4bench/actions/workflows/test_ecal.yml)
+[![Test Hcal](https://github.com/koichi-murakami/g4bench/actions/workflows/test_hcal.yml/badge.svg)](https://github.com/koichi-murakami/g4bench/actions/workflows/test_hcal.yml)
+[![Test Vgeo_X18](https://github.com/koichi-murakami/g4bench/actions/workflows/test_vgeo_x18.yml/badge.svg)](https://github.com/koichi-murakami/g4bench/actions/workflows/test_vgeo_x18.yml)
 
 G4Bench is a set of benchmark tests of Geant4 detector simulation toolkit.
 
