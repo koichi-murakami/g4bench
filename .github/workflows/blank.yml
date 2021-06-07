@@ -25,15 +25,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
           docker pull koichimurakamik6/geant4-runtime:latest
-          docker run -itd --name g4runtime koichimurakamik6/geant4-runtime:latest 
+          docker run -itd --name g4runtime -v /home/runner/work/g4bench/g4bench:/home/runner/work/g4bench/g4bench koichimurakamik6/geant4-runtime:latest 
           docker exec -w /tmp g4runtime ls
