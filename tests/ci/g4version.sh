@@ -2,4 +2,6 @@
 # set Geant4 version for testing
 #
 
-export G4VERSION=10.7.1
+if [ -z $NOG4VERSION ]; then
+  export G4VERSION=10.7.1
+fi
