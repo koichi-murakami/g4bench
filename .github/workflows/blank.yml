@@ -35,6 +35,5 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           docker pull koichimurakamik6/geant4-runtime:latest
-          docker run -it -d --name geant4-runtime bash
-          docker exec geant4-runtime ls
-
+          docker run -itd --name g4runtime koichimurakamik6/geant4-runtime:latest 
+          docker exec -w /tmp g4runtime ls
