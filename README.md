@@ -9,6 +9,8 @@
 [![Test Vgeo_X18](https://github.com/koichi-murakami/g4bench/actions/workflows/test_vgeo_x18.yml/badge.svg)](https://github.com/koichi-murakami/g4bench/actions/workflows/test_vgeo_x18.yml)
 
 [![Test Ecal-MT](https://github.com/koichi-murakami/g4bench/actions/workflows/test_ecal_mt.yml/badge.svg)](https://github.com/koichi-murakami/g4bench/actions/workflows/test_ecal_mt.yml)
+[![Test Hcal-MT](https://github.com/koichi-murakami/g4bench/actions/workflows/test_hcal_mt.yml/badge.svg)](https://github.com/koichi-murakami/g4bench/actions/workflows/test_hcal_mt.yml)
+[![Test Vgeo_X18-MT](https://github.com/koichi-murakami/g4bench/actions/workflows/test_vgeo_x18_mt.yml/badge.svg)](https://github.com/koichi-murakami/g4bench/actions/workflows/test_vgeo_x18_mt.yml)
 
 G4Bench is a set of benchmark tests of Geant4 detector simulation toolkit.
 
