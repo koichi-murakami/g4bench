@@ -22,9 +22,15 @@ echo "========================================================================"
 # ======================================================================
 . ./tests/ci/g4version.sh
 
+if [ -z $NOG4VERSION ]; then
+  g4path=/opt/geant4/${G4VERSION}-mt
+else
+  g4path=/opt/geant4
+fi
+
 show_line
 echo "@@ Configure a program..."
-./configure --with-geant4-dir=/opt/geant4/${G4VERSION}-mt --enable-mt --disable-vis
+./configure --with-geant4-dir=${g4path} --enable-mt --disable-vis
 
 show_line
 echo "@@ Build a program..."
