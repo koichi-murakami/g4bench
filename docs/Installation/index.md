@@ -83,6 +83,7 @@ file (`g4bench.conf` by default).
   // Run Configuration
   Run : {
     Seed : 123456789,
+    G4DATA : "/opt/geant4/data"
   },
   // -----------------------------------------------------------------
   // Primary setting (Generic)
@@ -97,25 +98,13 @@ file (`g4bench.conf` by default).
 
 In the configuration file, random number seed and
 the condition of primary particles can be modified as simulation parameters.
-
-You need to set Geant4 environment variables to specify the paths for
-data tables before running applications.
-
-~~~~
-$ env | grep G4
-G4DATA=/opt/geant4/data/10.5.0
-G4ABLADATA=/opt/geant4/data/10.5.0/G4ABLA3.1
-G4LEDATA=/opt/geant4/data/10.5.0/G4EMLOW7.7
-G4ENSDFSTATEDATA=/opt/geant4/data/10.5.0/G4ENSDFSTATE2.2
-G4INCLDATA=/opt/geant4/data/10.5.0/G4INCL1.0
-G4NEUTRONHPDATA=/opt/geant4/data/10.5.0/G4NDL4.5
-G4PARTICLEXSDATA=/opt/geant4/data/10.5.0/G4PARTICLEXS1.1
-G4PIIDATA=/opt/geant4/data/10.5.0/G4PII1.3
-G4SAIDXSDATA=/opt/geant4/data/10.5.0/G4SAIDDATA2.0
-G4LEVELGAMMADATA=/opt/geant4/data/10.5.0/PhotonEvaporation5.3
-G4RADIOACTIVEDATA=/opt/geant4/data/10.5.0/RadioactiveDecay5.3
-G4REALSURFACEDATA=/opt/geant4/data/10.5.0/RealSurface2.1.1
-~~~~
+Also you need to specify the Geant4 data directory in the configuration file
+with `G4DATA` key.
+The program loads the corresponding data libraries according to
+a Geant4 version automatically.
+Note that you can set Geant4 environment variables in the
+conventional way.
+In that case, the environment variables override the above setting.
 
 
 ## Results
