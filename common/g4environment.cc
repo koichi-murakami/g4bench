@@ -203,20 +203,32 @@ void G4Environment::CheckEnvironment()
 // --------------------------------------------------------------------------
 void G4Environment::SetEnvironment()
 {
-  if ( data_dir_ == "none" ) {
-    std::cout << "[ Error ] G4Data directory is not set." << std::endl;
-    std::exit(EXIT_FAILURE);
-  }
-
   int g4ver = G4VERSION_NUMBER;
 
+  // set env vars
   for ( auto i = 0; i < ::kNumEnvironmentVars; i++ ) {
     auto envvar = ::kG4ENV_LIST[i];
     auto envstr = std::getenv(envvar.c_str());
     if ( envstr == nullptr ) {
+      if ( data_dir_ == "none" ) {
+        std::cout << "[ Error ] G4Data directory is not set." << std::endl;
+        std::exit(EXIT_FAILURE);
+      }
+
       auto var = data_dir_ + "/" + ::kG4ENV_PREFIX_LSIT[i] +
                                    ::kVer_LIST[i][g4ver];
       setenv(::kG4ENV_LIST[i].c_str(), var.c_str(), 1);
+
+    } else {
+      std::string user_var(envstr);
+      std::string valid_var = ::kG4ENV_PREFIX_LSIT[i] + ::kVer_LIST[i][g4ver];
+      if ( user_var.find(valid_var) == std::string::npos ) {
+        std::cout << "[ Error ] Invalid data environment variable for "
+                  << ::kG4ENV_LIST[i] << std::endl;
+        std::cout << " * " << user_var << " is set against expected "
+                  << valid_var << std::endl;
+        std::exit(EXIT_FAILURE);
+      }
     }
   }
 }
