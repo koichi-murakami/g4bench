@@ -78,7 +78,7 @@ G4VUserPrimaryGeneratorAction* SetupParticleGun()
   gun-> SetParticleEnergy(pkin*MeV);
 
   std::vector<double> dvec;
-  if ( ::jparser-> Contains("Primary/direction") ) {
+  if ( ::jparser-> Contains("Primary/Gun/direction") ) {
     dvec.clear();
     ::jparser-> GetDoubleArray("Primary/Gun/direction", dvec);
     G4ThreeVector pvec(dvec[0], dvec[1], dvec[2]);
