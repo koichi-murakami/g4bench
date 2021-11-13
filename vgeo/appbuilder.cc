@@ -54,11 +54,15 @@ void SetupGeomtry(SimData* data)
 G4ThreeVector GetPrimaryPosition()
 {
   G4ThreeVector pos = G4ThreeVector();
-  if ( ::jparser-> Contains("Primary/position") ) {
+  if ( ::jparser-> Contains("Primary/Gun/position") ) {
     std::vector<double> dvec;
     dvec.clear();
     ::jparser-> GetDoubleArray("Primary/Gun/position", dvec);
     pos = G4ThreeVector(dvec[0]*cm, dvec[1]*cm, dvec[2]*cm);
+  } else {
+    std::cout << "[ WARNING ] AppBuilder::GetPrimaryPosition() "
+                 "/Primary/Gun/position Not found in JSON, "
+              << std::endl;
   }
   return pos;
 }
@@ -83,6 +87,10 @@ G4VUserPrimaryGeneratorAction* SetupParticleGun()
     ::jparser-> GetDoubleArray("Primary/Gun/direction", dvec);
     G4ThreeVector pvec(dvec[0], dvec[1], dvec[2]);
     gun-> SetParticleMomentumDirection(pvec);
+  } else {
+    std::cout << "[ WARNING ] AppBuilder::SetupParticleGun() "
+                 "/Primary/Gun/direction Not found in JSON, "
+              << std::endl;
   }
 
   auto pos = GetPrimaryPosition();
