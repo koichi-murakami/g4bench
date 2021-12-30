@@ -19,15 +19,15 @@ class SimData;
 class AppBuilder : public G4VUserActionInitialization {
 public:
   AppBuilder();
-  ~AppBuilder();
+  ~AppBuilder() override;
 
   void BuildApplication();
 
   void SetTestingFlag(bool val);
   void SetTestingFlag(bool val, const std::string& bname,
                                 const std::string& cname);
-  virtual void Build() const;
-  virtual void BuildForMaster() const;
+  void Build() const override;
+  void BuildForMaster() const override;
 
 private:
   SimData* simdata_;

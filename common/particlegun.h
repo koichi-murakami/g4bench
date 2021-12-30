@@ -18,14 +18,14 @@ class G4ParticleGun;
 class ParticleGun : public G4VUserPrimaryGeneratorAction {
 public:
   ParticleGun();
-  ~ParticleGun();
+  ~ParticleGun() override;
 
   ParticleGun(const ParticleGun&) = delete;
   void operator=(const ParticleGun&) = delete;
 
   G4ParticleGun* GetGun() const;
 
-  virtual void GeneratePrimaries(G4Event* event);
+  void GeneratePrimaries(G4Event* event) override;
 
 private:
   G4ParticleGun* gun_;

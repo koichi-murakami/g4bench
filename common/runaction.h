@@ -19,14 +19,14 @@ class SimData;
 class RunAction : public G4UserRunAction {
 public:
   RunAction();
-  virtual ~RunAction() = default;
+  ~RunAction() override = default;
 
   void SetSimData(SimData* data);
   void SetDataSize(int n);
   void SetTestingFlag(bool val);
 
-  virtual void BeginOfRunAction(const G4Run* run);
-  virtual void EndOfRunAction(const G4Run* run);
+  void BeginOfRunAction(const G4Run* run) override;
+  void EndOfRunAction(const G4Run* run) override;
 
   void ReduceResult();
 

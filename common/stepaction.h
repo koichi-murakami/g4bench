@@ -18,11 +18,11 @@ class SimData;
 class StepAction : public G4UserSteppingAction {
 public:
   StepAction();
-  virtual ~StepAction() = default;
+  ~StepAction() override = default;
 
   void SetSimData(SimData* data);
 
-  virtual void UserSteppingAction(const G4Step* step);
+  void UserSteppingAction(const G4Step* step) override;
 
 private:
   SimData* simdata_;

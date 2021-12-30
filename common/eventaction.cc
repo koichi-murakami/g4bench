@@ -26,7 +26,6 @@ void ShowProgress(int nprocessed, const std::string& key)
 {
   std::cout << "[MESSAGE] event-loop check point: "
             << nprocessed << " events processed." << std::endl;
-  //::gtimer-> ShowHistory(key);
 }
 
 } // end of namespace
@@ -41,7 +40,7 @@ EventAction::EventAction()
 // --------------------------------------------------------------------------
 void EventAction::BeginOfEventAction(const G4Event* event)
 {
-  int ievent = event-> GetEventID();
+  auto ievent = event-> GetEventID();
   if ( ievent == 0 ) {
     ::gtimer-> TakeSplit("FirstEventStart");
   }
@@ -50,7 +49,7 @@ void EventAction::BeginOfEventAction(const G4Event* event)
 // --------------------------------------------------------------------------
 void EventAction::EndOfEventAction(const G4Event* event)
 {
-  int ievent = event-> GetEventID();
+  auto ievent = event-> GetEventID();
   constexpr int kKiloEvents = 1000;
 
   if ( ievent % check_counter_ == 0 && ievent != 0 ) {

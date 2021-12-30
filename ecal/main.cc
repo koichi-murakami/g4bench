@@ -252,7 +252,7 @@ int main(int argc, char** argv)
 
   // do init macro
   if (init_macro != "" ) {
-    G4String command = "/control/execute ";
+    std::string command = "/control/execute ";
     ui_manager-> ApplyCommand(command + init_macro);
   }
 
