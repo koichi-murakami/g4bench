@@ -19,23 +19,22 @@ class G4VPhysicalVolume;
 class PhantomPVP : public G4VNestedParameterisation {
 public:
   PhantomPVP();
-  virtual ~PhantomPVP();
+  ~PhantomPVP() override;
 
-  virtual G4Material* ComputeMaterial(G4VPhysicalVolume* physvol,
-                                      const int idx,
-                                      const G4VTouchable* parent = 0);
+  G4Material* ComputeMaterial(G4VPhysicalVolume* physvol,
+                              const int idx,
+                              const G4VTouchable* parent = 0) override;
 
-  virtual int GetNumberOfMaterials() const;
+  int GetNumberOfMaterials() const override;
 
-  virtual G4Material* GetMaterial(int idx) const;
+  G4Material* GetMaterial(int idx) const override;
 
-  virtual void ComputeTransformation(const int idx,
-                                     G4VPhysicalVolume* physvol) const;
+  void ComputeTransformation(const int idx,
+                             G4VPhysicalVolume* physvol) const override;
 
   void SetSegment(int n, double dx);
 
 private:
-  // segment info
   int nx_;
   double dx_;
 

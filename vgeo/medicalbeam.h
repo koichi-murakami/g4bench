@@ -18,7 +18,7 @@ class G4ParticleDefinition;
 class MedicalBeam : public G4VUserPrimaryGeneratorAction {
 public:
   MedicalBeam();
-  ~MedicalBeam() = default;
+  ~MedicalBeam() override = default;
 
   MedicalBeam(const MedicalBeam&) = delete;
   void operator=(const MedicalBeam&) = delete;
@@ -41,7 +41,7 @@ public:
   void SetFieldSize(double val_xy);
   double GetFieldSize() const;
 
-  virtual void GeneratePrimaries(G4Event* event);
+  void GeneratePrimaries(G4Event* event) override;
 
 private:
   int particle_type_;

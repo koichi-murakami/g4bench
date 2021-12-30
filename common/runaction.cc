@@ -135,6 +135,8 @@ void RunAction::ShowRunSummary(const G4Run* run) const
             << std::endl << std::endl;
 
   // testing output
+  //int nthreads =
+
   if ( qtest_ ) {
     std::ofstream outfile("jtest.out", std::ios::out);
     outfile << "EPS1000,  Edep" << std::endl

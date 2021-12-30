@@ -21,7 +21,7 @@ See the License for more information.
 // --------------------------------------------------------------------------
 G4VPhysicalVolume* HcalGeom::Construct()
 {
-  G4NistManager* nist_manager = G4NistManager::Instance();
+  auto nist_manager = G4NistManager::Instance();
 
   // world volume
   const double kDXY_World = 100.*cm;

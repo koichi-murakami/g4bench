@@ -237,9 +237,9 @@ int main(int argc, char** argv)
   auto run_manager = new G4RunManager();
 #endif
 
-  G4UImanager* ui_manager = G4UImanager::GetUIpointer();
+  auto ui_manager = G4UImanager::GetUIpointer();
 
-  AppBuilder* appbuilder = new AppBuilder();
+  auto appbuilder = new AppBuilder();
   appbuilder-> SetTestingFlag(qtest, str_bench, str_cpu);
   appbuilder-> BuildApplication();
 
@@ -251,7 +251,7 @@ int main(int argc, char** argv)
 
   // do init macro
   if (init_macro != "" ) {
-    G4String command = "/control/execute ";
+    std::string command = "/control/execute ";
     ui_manager-> ApplyCommand(command + init_macro);
   }
 

@@ -35,12 +35,12 @@ using namespace kut;
 namespace {
 
 #ifdef ENABLE_MT
-G4MTRunManager* run_manager = nullptr;
+G4MTRunManager* run_manager {nullptr};
 #else
-G4RunManager* run_manager = nullptr;
+G4RunManager* run_manager {nullptr};
 #endif
 
-JsonParser* jparser = nullptr;
+JsonParser* jparser {nullptr};
 
 // --------------------------------------------------------------------------
 void SetupGeomtry(SimData* data)
@@ -68,12 +68,12 @@ void SetupParticleGun(ParticleGun* pga)
 {
   auto gun = pga-> GetGun();
 
-  std::string pname = ::jparser-> GetStringValue("Primary/particle");
+  auto pname = ::jparser-> GetStringValue("Primary/particle");
   auto ptable = G4ParticleTable::GetParticleTable();
   auto pdef = ptable-> FindParticle(pname);
   if ( pdef != nullptr ) gun-> SetParticleDefinition(pdef);
 
-  double pkin = ::jparser-> GetDoubleValue("Primary/energy");
+  auto pkin = ::jparser-> GetDoubleValue("Primary/energy");
   gun-> SetParticleEnergy(pkin*MeV);
 
   std::vector<double> dvec;
@@ -107,7 +107,7 @@ AppBuilder::~AppBuilder()
 // --------------------------------------------------------------------------
 void AppBuilder::BuildApplication()
 {
-  CLHEP::MTwistEngine* rand_engine = new CLHEP::MTwistEngine();
+  auto rand_engine = new CLHEP::MTwistEngine();
   G4Random::setTheEngine(rand_engine);
 
 #ifdef ENABLE_MT

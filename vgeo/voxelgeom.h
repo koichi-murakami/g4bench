@@ -18,12 +18,12 @@ class SimData;
 class VoxelGeom : public G4VUserDetectorConstruction {
 public:
   VoxelGeom() = default;
-  ~VoxelGeom() = default;
+  ~VoxelGeom() override = default;
 
   void SetSimData(SimData* data);
 
-  virtual G4VPhysicalVolume* Construct();
-  virtual void ConstructSDandField();
+  G4VPhysicalVolume* Construct() override;
+  void ConstructSDandField() override;
 
 private:
   SimData* simdata_;
