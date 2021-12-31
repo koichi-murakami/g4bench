@@ -2,6 +2,7 @@
 
 # G4Bench
 
+[![geant4](https://img.shields.io/badge/geant4-11.0-blue.svg)](http://www.geant4.org/)
 [![geant4](https://img.shields.io/badge/geant4-10.7-blue.svg)](http://www.geant4.org/)
 [![geant4](https://img.shields.io/badge/geant4-10.6-blue.svg)](http://www.geant4.org/)
 [![geant4](https://img.shields.io/badge/geant4-10.5-blue.svg)](http://www.geant4.org/)
