@@ -230,6 +230,7 @@ void AppBuilder::Build() const
   runaction-> SetTestingFlag(qtest_);
   runaction-> SetBenchName(bench_name_);
   runaction-> SetCPUName(cpu_name_);
+  runaction-> SetNThreads(nvec_);
   SetUserAction(runaction);
 
   auto eventaction = new EventAction();
