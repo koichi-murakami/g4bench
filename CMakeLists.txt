@@ -86,6 +86,7 @@ message(STATUS "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
 message(STATUS "GEANT4_LIBRARY_DIR: ${GEANT4_LIBRARY_DIR}")
 message(STATUS "ENABLE_MT: ${ENABLE_MT}")
 message(STATUS "ENABLE_VIS: ${ENABLE_VIS}")
+message(STATUS "GEANT4_MT: ${GEANT4_MT}")
 message(STATUS "GEANT4_STATIC : ${GEANT4_STATIC}")
 message(STATUS "--------------------------------------------------------")
 
