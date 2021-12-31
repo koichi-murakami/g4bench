@@ -7,7 +7,7 @@
 #  !! DONOT EDIT THIS FILE  !!
 #  ***************************
 #==============================================================================
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.16)
 
 #==============================================================================
 project(G4Bench CXX)
@@ -43,9 +43,9 @@ endif()
 find_package(Geant4 REQUIRED)
 find_package(OpenGL)
 
-# c++14
+# c++17
 add_library(global_cflags INTERFACE)
-target_compile_features(global_cflags INTERFACE cxx_std_14)
+target_compile_features(global_cflags INTERFACE cxx_std_17)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # build options
@@ -86,6 +86,7 @@ message(STATUS "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}")
 message(STATUS "GEANT4_LIBRARY_DIR: ${GEANT4_LIBRARY_DIR}")
 message(STATUS "ENABLE_MT: ${ENABLE_MT}")
 message(STATUS "ENABLE_VIS: ${ENABLE_VIS}")
+message(STATUS "GEANT4_MT: ${GEANT4_MT}")
 message(STATUS "GEANT4_STATIC : ${GEANT4_STATIC}")
 message(STATUS "--------------------------------------------------------")
 
@@ -93,7 +94,7 @@ message(STATUS "--------------------------------------------------------")
 # version.h (#.##d# + rev# / dev flag d/a/b/rc)
 if(NOT SKIP_VERSION)
 set(G4BENCH_VERSION_MAJOR 1)
-set(G4BENCH_VERSION_MINOR 6.2)
+set(G4BENCH_VERSION_MINOR 7.0)
 execute_process (COMMAND git rev-parse --short HEAD OUTPUT_VARIABLE
                  G4BENCH_VERSION_BUILD OUTPUT_STRIP_TRAILING_WHITESPACE)
 configure_file(

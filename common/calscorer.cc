@@ -23,12 +23,12 @@ CalScorer::CalScorer()
 bool CalScorer::ProcessHits(G4Step* step, G4TouchableHistory*)
 {
 #ifdef ENABLE_MT
-  int tid = G4Threading::G4GetThreadId();
+  auto tid = G4Threading::G4GetThreadId();
 #else
   int tid = 0;
 #endif
 
-  double edep = step-> GetTotalEnergyDeposit();
+  auto edep = step-> GetTotalEnergyDeposit();
   simdata_[tid].AddEdep(edep);
 
   return true;

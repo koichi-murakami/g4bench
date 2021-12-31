@@ -104,15 +104,15 @@ void InitializePhotnSpectrum()
 // --------------------------------------------------------------------------
 double GeneratePhotonEnergy6MV()
 {
-  double rand_max = vec_cprob6[kSize6-1];
-  double psampled = G4RandFlat::shoot(0., rand_max);
-  std::vector<double>::iterator low =
-    std::lower_bound( vec_cprob6.begin(), vec_cprob6.end(), psampled );
+  auto rand_max = vec_cprob6[kSize6-1];
+  auto psampled = G4RandFlat::shoot(0., rand_max);
+  auto low = std::lower_bound( vec_cprob6.begin(),
+                               vec_cprob6.end(), psampled );
 
-  size_t idx = low - vec_cprob6.begin();
-  double rpos = ( psampled - vec_cprob6[idx-1] ) /
-                ( vec_cprob6[idx] - vec_cprob6[idx-1] );
-  double egen = vec_energy6[idx-1] + kEbin * rpos;
+  auto idx = low - vec_cprob6.begin();
+  auto rpos = ( psampled - vec_cprob6[idx-1] ) /
+              ( vec_cprob6[idx] - vec_cprob6[idx-1] );
+  auto egen = vec_energy6[idx-1] + kEbin * rpos;
 
   return egen;
 }
@@ -120,15 +120,15 @@ double GeneratePhotonEnergy6MV()
 // --------------------------------------------------------------------------
 double GeneratePhotonEnergy18MV()
 {
-  double rand_max = vec_cprob18[kSize18-1];
-  double psampled = G4RandFlat::shoot(0., rand_max);
-  std::vector<double>::iterator low =
-    std::lower_bound( vec_cprob18.begin(), vec_cprob18.end(), psampled );
+  auto rand_max = vec_cprob18[kSize18-1];
+  auto psampled = G4RandFlat::shoot(0., rand_max);
+  auto low = std::lower_bound( vec_cprob18.begin(),
+                               vec_cprob18.end(), psampled );
 
-  size_t idx = low - vec_cprob18.begin();
-  double rpos = ( psampled - vec_cprob18[idx-1] ) /
-                ( vec_cprob18[idx] - vec_cprob18[idx-1] );
-  double egen = vec_energy18[idx-1] + kEbin * rpos;
+  auto idx = low - vec_cprob18.begin();
+  auto rpos = ( psampled - vec_cprob18[idx-1] ) /
+              ( vec_cprob18[idx] - vec_cprob18[idx-1] );
+  auto egen = vec_energy18[idx-1] + kEbin * rpos;
 
   return egen;
 }
@@ -159,7 +159,7 @@ void MedicalBeam::SetPhotonVoltage(int volt)
 // --------------------------------------------------------------------------
 void MedicalBeam::GeneratePrimaries(G4Event* event)
 {
-  G4ParticleDefinition* particle = nullptr;
+  G4ParticleDefinition* particle {nullptr};
   switch ( particle_type_ ) {
     case kElectron :
       particle = G4Electron::Electron();
@@ -190,8 +190,8 @@ void MedicalBeam::GeneratePrimaries(G4Event* event)
     }
     pvec = energy * ::GenerateBeamDirection(ssd_, field_xy_);
   } else {
-    G4double mass = particle-> GetPDGMass();
-    G4double momemtum = std::sqrt(sqr(mass+kinetic_energy_) - sqr(mass));
+    auto mass = particle-> GetPDGMass();
+    auto momemtum = std::sqrt(sqr(mass+kinetic_energy_) - sqr(mass));
     pvec = momemtum * ::GenerateBeamDirection(ssd_, field_xy_);
   }
 

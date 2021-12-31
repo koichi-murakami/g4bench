@@ -21,7 +21,7 @@ See the License for more information.
 // --------------------------------------------------------------------------
 G4VPhysicalVolume* EcalGeom::Construct()
 {
-  G4NistManager* nist_manager = G4NistManager::Instance();
+  auto nist_manager = G4NistManager::Instance();
 
   // world volume
   const double kDXYZ_World = 100.*cm;
@@ -48,8 +48,8 @@ G4VPhysicalVolume* EcalGeom::Construct()
   int index = 0;
   for (auto iz = 0; iz < kNzTracker; iz++) {
     for (auto ix = -kNxTracker; ix <= kNxTracker; ix++) {
-      double x0 = kDXZ_Voxel*ix;
-      double z0 = kZTracker + kDXZ_Voxel*iz;
+      auto x0 = kDXZ_Voxel * ix;
+      auto z0 = kZTracker + kDXZ_Voxel*iz;
       auto pvoxel = new G4PVPlacement(0, G4ThreeVector(x0, 0., z0), voxel_lv,
                                       "voxel", world_lv, false, index);
       index++;
@@ -83,8 +83,8 @@ G4VPhysicalVolume* EcalGeom::Construct()
   const double kZ_Cal = 20.*cm;
   for (auto ix = -kNxyCal; ix <= kNxyCal; ix++) {
     for (auto iy = -kNxyCal; iy <= kNxyCal; iy++) {
-      double x0 = kDXY_Cal*ix;
-      double y0 = kDXY_Cal*iy;
+      auto x0 = kDXY_Cal * ix;
+      auto y0 = kDXY_Cal * iy;
       auto cal_pv = new G4PVPlacement(0, G4ThreeVector(x0, y0, kZ_Cal),
                                       cal_lv, "cal", world_lv, false, index);
       index++;
@@ -97,15 +97,15 @@ G4VPhysicalVolume* EcalGeom::Construct()
   va-> SetVisibility(true);
   world_lv-> SetVisAttributes(va);
 
-  va= new G4VisAttributes(G4Color(0.,0.8,0.8));
+  va = new G4VisAttributes(G4Color(0.,0.8,0.8));
   va-> SetVisibility(false);
   voxel_lv-> SetVisAttributes(va);
 
-  va= new G4VisAttributes(G4Color(0.,0.8,0.8));
+  va = new G4VisAttributes(G4Color(0.,0.8,0.8));
   va-> SetVisibility(true);
   tube_lv-> SetVisAttributes(va);
 
-  va= new G4VisAttributes(G4Color(0.5,0.5,0.));
+  va = new G4VisAttributes(G4Color(0.5,0.5,0.));
   cal_lv-> SetVisAttributes(va);
 
   return world_pv;

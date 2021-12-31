@@ -35,12 +35,12 @@ using namespace kut;
 namespace {
 
 #ifdef ENABLE_MT
-G4MTRunManager* run_manager = nullptr;
+G4MTRunManager* run_manager {nullptr};
 #else
-G4RunManager* run_manager = nullptr;
+G4RunManager* run_manager {nullptr};
 #endif
 
-JsonParser* jparser = nullptr;
+JsonParser* jparser {nullptr};
 
 // --------------------------------------------------------------------------
 void SetupGeomtry(SimData* data)
@@ -53,7 +53,7 @@ void SetupGeomtry(SimData* data)
 // --------------------------------------------------------------------------
 G4ThreeVector GetPrimaryPosition()
 {
-  G4ThreeVector pos = G4ThreeVector();
+  auto pos = G4ThreeVector();
   if ( ::jparser-> Contains("Primary/Gun/position") ) {
     std::vector<double> dvec;
     dvec.clear();
@@ -73,12 +73,12 @@ G4VUserPrimaryGeneratorAction* SetupParticleGun()
   auto pga = new ParticleGun();
   auto gun = pga-> GetGun();
 
-  std::string pname = ::jparser-> GetStringValue("Primary/Gun/particle");
+  auto pname = ::jparser-> GetStringValue("Primary/Gun/particle");
   auto ptable = G4ParticleTable::GetParticleTable();
   auto pdef = ptable-> FindParticle(pname);
   if ( pdef != nullptr ) gun-> SetParticleDefinition(pdef);
 
-  double pkin = ::jparser-> GetDoubleValue("Primary/Gun/energy");
+  auto pkin = ::jparser-> GetDoubleValue("Primary/Gun/energy");
   gun-> SetParticleEnergy(pkin*MeV);
 
   std::vector<double> dvec;
@@ -104,7 +104,7 @@ G4VUserPrimaryGeneratorAction* SetupMedicalBeam()
 {
   auto beam = new MedicalBeam();
 
-  std::string pname = ::jparser-> GetStringValue("Primary/Beam/particle");
+  auto pname = ::jparser-> GetStringValue("Primary/Beam/particle");
   if ( pname != "gamma" && pname != "e-" && pname != "proton") {
    std::cout << "[ ERROR ] AppBuilder::SetupMedicalBeam() "
                 "invalid particle in setup, " << pname
@@ -114,27 +114,27 @@ G4VUserPrimaryGeneratorAction* SetupMedicalBeam()
 
  if ( pname  == "gamma" ) {
    beam-> SetParticle(MedicalBeam::kPhoton);
-   int voltage = ::jparser-> GetIntValue("Primary/Beam/photon_voltage");
+   auto voltage = ::jparser-> GetIntValue("Primary/Beam/photon_voltage");
    beam-> SetPhotonVoltage(voltage);
  } else if ( pname == "e-") {
    beam-> SetParticle(MedicalBeam::kElectron);
-   double ekin = ::jparser-> GetDoubleValue("Primary/Beam/energy");
+   auto ekin = ::jparser-> GetDoubleValue("Primary/Beam/energy");
    beam-> SetEnergy(ekin * MeV);
  } else if ( pname == "proton") {
    beam-> SetParticle(MedicalBeam::kProton);
-   double ekin = ::jparser-> GetDoubleValue("Primary/Beam/energy");
+   auto ekin = ::jparser-> GetDoubleValue("Primary/Beam/energy");
    beam-> SetEnergy(ekin * MeV);
  }
 
  // SSD
  if ( ::jparser-> Contains("Primary/Beam/ssd") ) {
-   double ssd = ::jparser-> GetDoubleValue("Primary/Beam/ssd");
+   auto ssd = ::jparser-> GetDoubleValue("Primary/Beam/ssd");
    beam-> SetSSD(ssd * cm);
  }
 
  // field size
  if ( ::jparser-> Contains("Primary/Beam/field_size") ) {
-   double fxy = ::jparser-> GetDoubleValue("Primary/Beam/field_size");
+   auto fxy = ::jparser-> GetDoubleValue("Primary/Beam/field_size");
    beam-> SetFieldSize(fxy * cm);
  }
 
@@ -144,9 +144,9 @@ G4VUserPrimaryGeneratorAction* SetupMedicalBeam()
 // --------------------------------------------------------------------------
 G4VUserPrimaryGeneratorAction* SetupPGA()
 {
-  G4VUserPrimaryGeneratorAction* pga { nullptr };
+  G4VUserPrimaryGeneratorAction* pga {nullptr};
 
-  std::string primary_type = ::jparser-> GetStringValue("Primary/type");
+  auto primary_type = ::jparser-> GetStringValue("Primary/type");
   if ( primary_type == "gun" ) {
     std::cout << "[ MESSAGE ] primary type : gun" << std::endl;
     pga = SetupParticleGun();
@@ -180,7 +180,7 @@ AppBuilder::~AppBuilder()
 // --------------------------------------------------------------------------
 void AppBuilder::BuildApplication()
 {
-  CLHEP::MTwistEngine* rand_engine = new CLHEP::MTwistEngine();
+  auto rand_engine = new CLHEP::MTwistEngine();
   G4Random::setTheEngine(rand_engine);
 
 #ifdef ENABLE_MT
@@ -230,6 +230,7 @@ void AppBuilder::Build() const
   runaction-> SetTestingFlag(qtest_);
   runaction-> SetBenchName(bench_name_);
   runaction-> SetCPUName(cpu_name_);
+  runaction-> SetNThreads(nvec_);
   SetUserAction(runaction);
 
   auto eventaction = new EventAction();
