@@ -19,9 +19,9 @@ class SimData;
 class CalScorer : public G4VSensitiveDetector {
 public:
   CalScorer();
-  virtual ~CalScorer() = default;
+  ~CalScorer() override = default;
 
-  virtual bool ProcessHits(G4Step* step, G4TouchableHistory*);
+  bool ProcessHits(G4Step* step, G4TouchableHistory*) override;
 
   void SetSimData(SimData* data);
 

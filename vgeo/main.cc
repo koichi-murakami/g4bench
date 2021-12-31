@@ -36,7 +36,7 @@ void show_version()
   const char* version_str = G4BENCH_VERSION_MAJOR "."
                             G4BENCH_VERSION_MINOR ".";
 
-  std::cout << "G4Bench/vgeo version 1.6.0"
+  std::cout << "G4Bench/vgeo version 1.7.0"
             << " (" << version_str << ::build_head << "."
             << ::build_tail << ")" << std::endl;
 }
@@ -249,7 +249,7 @@ int main(int argc, char** argv)
 
 // do init macro
   if (init_macro != "" ) {
-    G4String command = "/control/execute ";
+    std::string command = "/control/execute ";
     ui_manager-> ApplyCommand(command + init_macro);
   }
 

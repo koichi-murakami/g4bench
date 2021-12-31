@@ -14,7 +14,7 @@ See the License for more information.
 class SimData {
 public:
   SimData() = default;
-  virtual ~SimData() = default;
+  ~SimData() = default;
 
   SimData(const SimData&) = delete;
   void operator=(const SimData&) = delete;

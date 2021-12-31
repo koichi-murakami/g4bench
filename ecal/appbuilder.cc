@@ -67,12 +67,12 @@ void SetupParticleGun(ParticleGun* pga)
 {
   auto gun = pga-> GetGun();
 
-  std::string pname = ::jparser-> GetStringValue("Primary/particle");
+  auto pname = ::jparser-> GetStringValue("Primary/particle");
   auto ptable = G4ParticleTable::GetParticleTable();
   auto pdef = ptable-> FindParticle(pname);
   if ( pdef != nullptr ) gun-> SetParticleDefinition(pdef);
 
-  double pkin = ::jparser-> GetDoubleValue("Primary/energy");
+  auto pkin = ::jparser-> GetDoubleValue("Primary/energy");
   gun-> SetParticleEnergy(pkin*MeV);
 
   std::vector<double> dvec;
@@ -106,7 +106,7 @@ AppBuilder::~AppBuilder()
 // --------------------------------------------------------------------------
 void AppBuilder::BuildApplication()
 {
-  CLHEP::MTwistEngine* rand_engine = new CLHEP::MTwistEngine();
+  auto rand_engine = new CLHEP::MTwistEngine();
   G4Random::setTheEngine(rand_engine);
 
 #ifdef ENABLE_MT
@@ -158,6 +158,7 @@ void AppBuilder::Build() const
   runaction-> SetTestingFlag(qtest_);
   runaction-> SetBenchName(bench_name_);
   runaction-> SetCPUName(cpu_name_);
+  runaction-> SetNThreads(nvec_);
   SetUserAction(runaction);
 
   SetUserAction(new EventAction);
