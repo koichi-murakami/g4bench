@@ -34,6 +34,7 @@ public:
 
   void SetBenchName(const std::string& name);
   void SetCPUName(const std::string& name);
+  void SetNThreads(int nt);
 
 private:
   SimData* simdata_;
@@ -45,6 +46,7 @@ private:
 
   std::string bench_name_;
   std::string cpu_name_;
+  int nthreads_;
 };
 
 // ==========================================================================
@@ -71,6 +73,11 @@ inline void RunAction::SetBenchName(const std::string& name)
 inline void RunAction::SetCPUName(const std::string& name)
 {
   cpu_name_ = name;
+}
+
+inline void RunAction::SetNThreads(int nt)
+{
+  nthreads_ = nt;
 }
 
 #endif

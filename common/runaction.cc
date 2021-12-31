@@ -11,6 +11,7 @@ See the License for more information.
 #include <fstream>
 #include "G4Run.hh"
 #include "G4SystemOfUnits.hh"
+#include "G4Version.hh"
 #include "common/runaction.h"
 #include "common/simdata.h"
 #include "util/timehistory.h"
@@ -135,19 +136,27 @@ void RunAction::ShowRunSummary(const G4Run* run) const
             << std::endl << std::endl;
 
   // testing output
-  //int nthreads =
-
   if ( qtest_ ) {
     std::ofstream outfile("jtest.out", std::ios::out);
     outfile << "EPS1000,  Edep" << std::endl
             << proc_eps*1.e3 << ",  " << edep_cal << std::endl;
     outfile.close();
 
+    Stopwatch sw;
+    auto date_str = sw.GetClockTime();
+    date_str.erase(--date_str.end());
+
+    int g4version = G4VERSION_NUMBER;
+
     // json output
     std::ofstream jsonfile("g4bench.json", std::ios::out);
     jsonfile << "{" << std::endl
              << "  \"name\" : \"" << bench_name_ << "\"," << std::endl
+             << "  \"date\" : \"" << date_str << "\"," << std::endl
              << "  \"cpu\" : \"" << cpu_name_ << "\"," << std::endl
+             << "  \"g4version\" : " << g4version << "," << std::endl
+             << "  \"thread\" : " << nthreads_ << "," << std::endl
+             << "  \"event\"  : " << nevents << "," << std::endl
              << "  \"time\" : " << elapsed_time << "," << std::endl
              << "  \"init\" : " << init_time << "," << std::endl
              << "  \"tpe\" : " << average_time_per_event << "," << std::endl
