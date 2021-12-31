@@ -25,7 +25,7 @@ target_sources(${APP} PRIVATE
 )
 
 if(ENABLE_MT)
-  target_compile_definitions(${APP} PRIVATE ENABLE_MT G4MULTITHREADED)
+  target_compile_definitions(${APP} PRIVATE ENABLE_MT)
 endif()
 
 if(ENABLE_VIS)
