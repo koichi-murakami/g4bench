@@ -1,0 +1,14 @@
+{
+  "name" : "hcal_p10",
+  "date" : "Sun Jan  2 08:17:51 2022",
+  "cpu" : "Apple M1",
+  "g4version" : 1073,
+  "thread" : 1,
+  "event"  : 4000,
+  "time" : 72.2961,
+  "init" : 0.84561,
+  "tpe" : 18.074,
+  "eps" : 0.0559828,
+  "sps" : 855.65,
+  "edep" : 839.238
+}

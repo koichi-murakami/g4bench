@@ -1,0 +1,14 @@
+{
+  "name" : "ecal_e1000",
+  "date" : "Sun Jan  2 07:57:31 2022",
+  "cpu" : "AMD Ryzen Threadripper PRO 3995WX 64-Cores",
+  "g4version" : 1073,
+  "thread" : 1,
+  "event"  : 20000,
+  "time" : 110.446,
+  "init" : 0.986446,
+  "tpe" : 5.52228,
+  "eps" : 0.182717,
+  "sps" : 795.269,
+  "edep" : 967.384
+}

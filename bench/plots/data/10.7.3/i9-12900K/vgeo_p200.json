@@ -1,0 +1,14 @@
+{
+  "name" : "vgeo_p200",
+  "date" : "Sun Jan  2 08:09:17 2022",
+  "cpu" : "12th Gen Intel(R) Core(TM) i9-12900K",
+  "g4version" : 1073,
+  "thread" : 1,
+  "event"  : 200000,
+  "time" : 56.4848,
+  "init" : 0.234287,
+  "tpe" : 0.282424,
+  "eps" : 3.55552,
+  "sps" : 1090.75,
+  "edep" : 187.888
+}

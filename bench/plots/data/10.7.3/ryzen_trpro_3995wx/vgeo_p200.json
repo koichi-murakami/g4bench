@@ -1,0 +1,14 @@
+{
+  "name" : "vgeo_p200",
+  "date" : "Sun Jan  2 08:04:24 2022",
+  "cpu" : "AMD Ryzen Threadripper PRO 3995WX 64-Cores",
+  "g4version" : 1073,
+  "thread" : 1,
+  "event"  : 200000,
+  "time" : 109.603,
+  "init" : 0.43372,
+  "tpe" : 0.548017,
+  "eps" : 1.83201,
+  "sps" : 562.015,
+  "edep" : 187.888
+}

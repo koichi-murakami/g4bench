@@ -1,0 +1,14 @@
+{
+  "name" : "vgeo_p200",
+  "date" : "Sun Jan  2 08:20:42 2022",
+  "cpu" : "Apple M1",
+  "g4version" : 1073,
+  "thread" : 1,
+  "event"  : 200000,
+  "time" : 65.5024,
+  "init" : 0.286464,
+  "tpe" : 0.327512,
+  "eps" : 3.06673,
+  "sps" : 942.601,
+  "edep" : 187.885
+}
