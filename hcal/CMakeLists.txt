@@ -1,6 +1,10 @@
 # executable
 #------------------------------------------------------------------------------
-set(APP hcal)
+if(ENABLE_MT)
+  set(APP hcal-mt)
+else()
+  set(APP hcal)
+endif()
 #------------------------------------------------------------------------------
 if(ENABLE_VIS)
   set(G4LIBS ${GEANT4_LIBRARIES_WITH_VIS})
