@@ -17,7 +17,7 @@ th_list=(1 2 4 8)
 #th_list=(1 2 4 8 16 24 32 40 48 60 72 96 128 160)
 
 app=$1
-nevent=$2
+uevent=$2
 log=$3
 
 # ======================================================================
@@ -26,7 +26,9 @@ echo "thread, eps, edep" > $log.dat
 for t in "${th_list[@]}"
 do
   echo "running... #threads = $t"
+  nevent=`expr $uevent \* $t`
   $app -n $t -j $nevent > $log-n$t.log 2>&1
   echo -n "$t,  " >> $log.dat
   sed -n 2p jtest.out >> $log.dat
+  mv g4bench.json $log-n$t.json
 done
