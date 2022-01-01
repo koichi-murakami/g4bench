@@ -60,6 +60,6 @@ cat << EOD > g4bench_x18.conf
 }
 EOD
 #
-./vgeo -c g4bench_x18.conf -n 10 -j 1000000
+./vgeo-mt -c g4bench_x18.conf -n 10 -j 1000000
 
 exit $?

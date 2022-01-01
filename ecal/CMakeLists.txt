@@ -1,6 +1,10 @@
 # executable
 #------------------------------------------------------------------------------
-set(APP ecal)
+if(ENABLE_MT)
+  set(APP ecal-mt)
+else()
+  set(APP ecal)
+endif()
 #------------------------------------------------------------------------------
 if(ENABLE_VIS)
   set(G4LIBS ${GEANT4_LIBRARIES_WITH_VIS})
