@@ -40,6 +40,6 @@ check_error
 
 show_line
 echo "@@ Run a program..."
-./hcal -n 10 -j 20000
+./hcal-mt -n 10 -j 20000
 
 exit $?

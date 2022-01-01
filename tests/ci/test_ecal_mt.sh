@@ -40,6 +40,6 @@ check_error
 
 show_line
 echo "@@ Run a program..."
-./ecal -n 10 -j 100000
+./ecal-mt -n 10 -j 100000
 
 exit $?
