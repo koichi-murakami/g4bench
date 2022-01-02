@@ -1,0 +1,14 @@
+{
+  "name" : "hcal_p10",
+  "date" : "Sun Jan  2 08:06:44 2022",
+  "cpu" : "Intel(R) Xeon(R) Gold 6240 CPU @ 2.60GHz",
+  "g4version" : 1073,
+  "thread" : 1,
+  "event"  : 4000,
+  "time" : 134.285,
+  "init" : 1.25055,
+  "tpe" : 33.5713,
+  "eps" : 0.0300673,
+  "sps" : 459.346,
+  "edep" : 839.368
+}

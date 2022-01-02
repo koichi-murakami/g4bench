@@ -1,0 +1,14 @@
+{
+  "name" : "vgeo_e20",
+  "date" : "Sun Jan  2 08:19:36 2022",
+  "cpu" : "Apple M1",
+  "g4version" : 1073,
+  "thread" : 1,
+  "event"  : 200000,
+  "time" : 53.575,
+  "init" : 0.286339,
+  "tpe" : 0.267875,
+  "eps" : 3.75314,
+  "sps" : 1436.93,
+  "edep" : 18.7491
+}

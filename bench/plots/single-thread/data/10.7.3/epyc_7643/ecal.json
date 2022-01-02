@@ -1,0 +1,14 @@
+{
+  "name" : "ecal_e1000",
+  "date" : "Sun Jan  2 08:08:50 2022",
+  "cpu" : "AMD EPYC 7643 48-Core Processor",
+  "g4version" : 1073,
+  "thread" : 1,
+  "event"  : 20000,
+  "time" : 102.502,
+  "init" : 1.3433,
+  "tpe" : 5.12508,
+  "eps" : 0.19771,
+  "sps" : 860.526,
+  "edep" : 967.384
+}

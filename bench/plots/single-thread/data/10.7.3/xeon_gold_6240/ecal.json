@@ -1,0 +1,14 @@
+{
+  "name" : "ecal_e1000",
+  "date" : "Sun Jan  2 08:04:29 2022",
+  "cpu" : "Intel(R) Xeon(R) Gold 6240 CPU @ 2.60GHz",
+  "g4version" : 1073,
+  "thread" : 1,
+  "event"  : 20000,
+  "time" : 116.791,
+  "init" : 1.11428,
+  "tpe" : 5.83954,
+  "eps" : 0.172896,
+  "sps" : 752.525,
+  "edep" : 967.384
+}

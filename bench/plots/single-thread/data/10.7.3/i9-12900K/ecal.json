@@ -1,0 +1,14 @@
+{
+  "name" : "ecal_e1000",
+  "date" : "Sun Jan  2 08:05:49 2022",
+  "cpu" : "12th Gen Intel(R) Core(TM) i9-12900K",
+  "g4version" : 1073,
+  "thread" : 1,
+  "event"  : 20000,
+  "time" : 56.6919,
+  "init" : 0.52012,
+  "tpe" : 2.83459,
+  "eps" : 0.356051,
+  "sps" : 1549.7,
+  "edep" : 967.384
+}

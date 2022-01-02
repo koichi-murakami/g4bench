@@ -1,0 +1,14 @@
+{
+  "name" : "ecal_e1000",
+  "date" : "Sun Jan  2 08:16:38 2022",
+  "cpu" : "Apple M1",
+  "g4version" : 1073,
+  "thread" : 1,
+  "event"  : 20000,
+  "time" : 66.584,
+  "init" : 0.837856,
+  "tpe" : 3.3292,
+  "eps" : 0.3042,
+  "sps" : 1324.02,
+  "edep" : 967.384
+}

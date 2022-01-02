@@ -1,0 +1,72 @@
+[
+  {
+    "name": "ecal_e1000",
+    "date": "Sun Jan  2 08:43:32 2022",
+    "cpu": "Apple M1",
+    "g4version": 1073,
+    "thread": 1,
+    "event": 20000,
+    "time": 64.6472,
+    "init": 0.000721,
+    "tpe": 3.23236,
+    "eps": 0.309375,
+    "sps": 1346.7,
+    "edep": 967.144
+  },
+  {
+    "name": "ecal_e1000",
+    "date": "Sun Jan  2 08:44:40 2022",
+    "cpu": "Apple M1",
+    "g4version": 1073,
+    "thread": 2,
+    "event": 40000,
+    "time": 67.4182,
+    "init": 0.000472,
+    "tpe": 1.68546,
+    "eps": 0.593315,
+    "sps": 2582.33,
+    "edep": 967.343
+  },
+  {
+    "name": "ecal_e1000",
+    "date": "Sun Jan  2 08:45:51 2022",
+    "cpu": "Apple M1",
+    "g4version": 1073,
+    "thread": 4,
+    "event": 80000,
+    "time": 70.5411,
+    "init": 0.000599,
+    "tpe": 0.881764,
+    "eps": 1.1341,
+    "sps": 4937.2,
+    "edep": 967.365
+  },
+  {
+    "name": "ecal_e1000",
+    "date": "Sun Jan  2 08:47:23 2022",
+    "cpu": "Apple M1",
+    "g4version": 1073,
+    "thread": 6,
+    "event": 120000,
+    "time": 91.0439,
+    "init": 0.000868,
+    "tpe": 0.758699,
+    "eps": 1.31806,
+    "sps": 5737.45,
+    "edep": 967.298
+  },
+  {
+    "name": "ecal_e1000",
+    "date": "Sun Jan  2 08:49:12 2022",
+    "cpu": "Apple M1",
+    "g4version": 1073,
+    "thread": 8,
+    "event": 160000,
+    "time": 108.076,
+    "init": 0.001064,
+    "tpe": 0.675475,
+    "eps": 1.48045,
+    "sps": 6444.01,
+    "edep": 967.353
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "name" : "hcal_p10",
+  "date" : "Sun Jan  2 07:59:40 2022",
+  "cpu" : "AMD Ryzen Threadripper PRO 3995WX 64-Cores",
+  "g4version" : 1073,
+  "thread" : 1,
+  "event"  : 4000,
+  "time" : 129.305,
+  "init" : 1.12091,
+  "tpe" : 32.3263,
+  "eps" : 0.0312051,
+  "sps" : 476.727,
+  "edep" : 839.368
+}

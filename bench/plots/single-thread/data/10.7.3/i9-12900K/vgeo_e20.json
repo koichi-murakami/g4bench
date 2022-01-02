@@ -1,0 +1,14 @@
+{
+  "name" : "vgeo_e20",
+  "date" : "Sun Jan  2 08:08:21 2022",
+  "cpu" : "12th Gen Intel(R) Core(TM) i9-12900K",
+  "g4version" : 1073,
+  "thread" : 1,
+  "event"  : 200000,
+  "time" : 46.1602,
+  "init" : 0.234197,
+  "tpe" : 0.230801,
+  "eps" : 4.35483,
+  "sps" : 1667.25,
+  "edep" : 18.7489
+}
