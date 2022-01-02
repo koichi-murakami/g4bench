@@ -1,6 +1,10 @@
 # executable
 #------------------------------------------------------------------------------
-set(APP vgeo)
+if(ENABLE_MT)
+  set(APP vgeo-mt)
+else()
+  set(APP vgeo)
+endif()
 #------------------------------------------------------------------------------
 if(ENABLE_VIS)
   set(G4LIBS ${GEANT4_LIBRARIES_WITH_VIS})

@@ -1,0 +1,14 @@
+{
+  "name" : "vgeo_e20",
+  "date" : "Sun Jan  2 08:02:34 2022",
+  "cpu" : "AMD Ryzen Threadripper PRO 3995WX 64-Cores",
+  "g4version" : 1073,
+  "thread" : 1,
+  "event"  : 200000,
+  "time" : 86.5874,
+  "init" : 0.435245,
+  "tpe" : 0.432937,
+  "eps" : 2.32147,
+  "sps" : 888.779,
+  "edep" : 18.7489
+}

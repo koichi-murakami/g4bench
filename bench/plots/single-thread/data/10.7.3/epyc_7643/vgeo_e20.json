@@ -1,0 +1,14 @@
+{
+  "name" : "vgeo_e20",
+  "date" : "Sun Jan  2 08:13:41 2022",
+  "cpu" : "AMD EPYC 7643 48-Core Processor",
+  "g4version" : 1073,
+  "thread" : 1,
+  "event"  : 200000,
+  "time" : 83.8826,
+  "init" : 0.827261,
+  "tpe" : 0.419413,
+  "eps" : 2.40803,
+  "sps" : 921.918,
+  "edep" : 18.7489
+}

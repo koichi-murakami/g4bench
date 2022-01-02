@@ -9,11 +9,11 @@ export LANG=C
 # ======================================================================
 G4DATA=/opt/geant4/data
 
-NEVENTS_ECAL=100000
-NEVENTS_HCAL=20000
-NEVENTS_VGEO_X=10000000
-NEVENTS_VGEO_E=10000000
-NEVENTS_VGEO_P=400000
+UNIT_NEVENTS_ECAL=20000
+UNIT_NEVENTS_HCAL=4000
+UNIT_NEVENTS_VGEO_X=500000
+UNIT_NEVENTS_VGEO_E=200000
+UNIT_NEVENTS_VGEO_P=200000
 
 run_ecal=1
 run_hcal=1
@@ -70,7 +70,7 @@ cat << EOD > g4bench.conf
 EOD
 
 if [ ${run_ecal} = 1 ]; then
-  ../mtbench.sh ../../ecal/ecal ${NEVENTS_ECAL} ecal_e1000
+  ../mtbench.sh ../../ecal/ecal-mt ${UNIT_NEVENTS_ECAL} ecal_e1000
 fi
 
 # ======================================================================
@@ -95,7 +95,7 @@ cat << EOD > g4bench.conf
 EOD
 
 if [ ${run_hcal} = 1 ]; then
-  ../mtbench.sh ../../hcal/hcal ${NEVENTS_HCAL} hcal_p10
+  ../mtbench.sh ../../hcal/hcal-mt ${UNIT_NEVENTS_HCAL} hcal_p10
 fi
 
 # ======================================================================
@@ -124,7 +124,7 @@ cat << EOD > g4bench.conf
 EOD
 
 if [ ${run_vgeo_x18} = 1 ]; then
-  ../mtbench.sh ../../vgeo/vgeo ${NEVENTS_VGEO_X} vgeo_x18
+  ../mtbench.sh ../../vgeo/vgeo-mt ${UNIT_NEVENTS_VGEO_X} vgeo_x18
 fi
 
 # ======================================================================
@@ -153,7 +153,7 @@ cat << EOD > g4bench.conf
 EOD
 
 if [ ${run_vgeo_e20} = 1 ]; then
-  ../mtbench.sh ../../vgeo/vgeo ${NEVENTS_VGEO_E} vgeo_e20
+  ../mtbench.sh ../../vgeo/vgeo-mt ${UNIT_NEVENTS_VGEO_E} vgeo_e20
 fi
 
 # ======================================================================
@@ -182,7 +182,7 @@ cat << EOD > g4bench.conf
 EOD
 
 if [ ${run_vgeo_p200} = 1 ]; then
-  ../mtbench.sh ../../vgeo/vgeo ${NEVENTS_VGEO_P} vgeo_p200
+  ../mtbench.sh ../../vgeo/vgeo-mt ${UNIT_NEVENTS_VGEO_P} vgeo_p200
 fi
 
 # ======================================================================

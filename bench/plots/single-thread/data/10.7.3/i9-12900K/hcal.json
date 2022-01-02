@@ -1,0 +1,14 @@
+{
+  "name" : "hcal_p10",
+  "date" : "Sun Jan  2 08:06:51 2022",
+  "cpu" : "12th Gen Intel(R) Core(TM) i9-12900K",
+  "g4version" : 1073,
+  "thread" : 1,
+  "event"  : 4000,
+  "time" : 61.5838,
+  "init" : 0.562633,
+  "tpe" : 15.3959,
+  "eps" : 0.065551,
+  "sps" : 1001.44,
+  "edep" : 839.368
+}

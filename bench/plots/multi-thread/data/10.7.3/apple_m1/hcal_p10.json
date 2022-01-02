@@ -1,0 +1,72 @@
+[
+  {
+    "name": "hcal_p10",
+    "date": "Sun Jan  2 08:50:25 2022",
+    "cpu": "Apple M1",
+    "g4version": 1073,
+    "thread": 1,
+    "event": 4000,
+    "time": 71.9475,
+    "init": 0.000292,
+    "tpe": 17.9869,
+    "eps": 0.0555963,
+    "sps": 850.087,
+    "edep": 846.51
+  },
+  {
+    "name": "hcal_p10",
+    "date": "Sun Jan  2 08:51:40 2022",
+    "cpu": "Apple M1",
+    "g4version": 1073,
+    "thread": 2,
+    "event": 8000,
+    "time": 74.3893,
+    "init": 0.000359,
+    "tpe": 9.29866,
+    "eps": 0.107543,
+    "sps": 1643.04,
+    "edep": 843.05
+  },
+  {
+    "name": "hcal_p10",
+    "date": "Sun Jan  2 08:52:58 2022",
+    "cpu": "Apple M1",
+    "g4version": 1073,
+    "thread": 4,
+    "event": 16000,
+    "time": 77.5029,
+    "init": 0.000508,
+    "tpe": 4.84393,
+    "eps": 0.206445,
+    "sps": 3162.1,
+    "edep": 843.451
+  },
+  {
+    "name": "hcal_p10",
+    "date": "Sun Jan  2 08:54:39 2022",
+    "cpu": "Apple M1",
+    "g4version": 1073,
+    "thread": 6,
+    "event": 24000,
+    "time": 99.9637,
+    "init": 0.000589,
+    "tpe": 4.16516,
+    "eps": 0.240088,
+    "sps": 3672.01,
+    "edep": 841.136
+  },
+  {
+    "name": "hcal_p10",
+    "date": "Sun Jan  2 08:56:38 2022",
+    "cpu": "Apple M1",
+    "g4version": 1073,
+    "thread": 8,
+    "event": 32000,
+    "time": 117.819,
+    "init": 0.000724,
+    "tpe": 3.68185,
+    "eps": 0.271605,
+    "sps": 4163.67,
+    "edep": 842.804
+  }
+]

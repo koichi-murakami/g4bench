@@ -1,0 +1,14 @@
+{
+  "name" : "vgeo_p200",
+  "date" : "Sun Jan  2 08:11:46 2022",
+  "cpu" : "Intel(R) Xeon(R) Gold 6240 CPU @ 2.60GHz",
+  "g4version" : 1073,
+  "thread" : 1,
+  "event"  : 200000,
+  "time" : 116.492,
+  "init" : 0.508362,
+  "tpe" : 0.582461,
+  "eps" : 1.72438,
+  "sps" : 528.996,
+  "edep" : 187.888
+}
