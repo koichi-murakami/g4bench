@@ -1,0 +1,72 @@
+[
+  {
+    "name": "vgeo_p200",
+    "date": "Sun Jan  2 09:11:43 2022",
+    "cpu": "Apple M1",
+    "g4version": 1073,
+    "thread": 1,
+    "event": 200000,
+    "time": 65.8094,
+    "init": 0.000253,
+    "tpe": 0.329047,
+    "eps": 3.03909,
+    "sps": 933.522,
+    "edep": 187.859
+  },
+  {
+    "name": "vgeo_p200",
+    "date": "Sun Jan  2 09:12:50 2022",
+    "cpu": "Apple M1",
+    "g4version": 1073,
+    "thread": 2,
+    "event": 400000,
+    "time": 67.0453,
+    "init": 0.00028,
+    "tpe": 0.167613,
+    "eps": 5.96614,
+    "sps": 1831.72,
+    "edep": 187.833
+  },
+  {
+    "name": "vgeo_p200",
+    "date": "Sun Jan  2 09:14:01 2022",
+    "cpu": "Apple M1",
+    "g4version": 1073,
+    "thread": 4,
+    "event": 800000,
+    "time": 70.1645,
+    "init": 0.000373,
+    "tpe": 0.0877057,
+    "eps": 11.4018,
+    "sps": 3503.08,
+    "edep": 187.84
+  },
+  {
+    "name": "vgeo_p200",
+    "date": "Sun Jan  2 09:15:33 2022",
+    "cpu": "Apple M1",
+    "g4version": 1073,
+    "thread": 6,
+    "event": 1200000,
+    "time": 91.568,
+    "init": 0.000508,
+    "tpe": 0.0763067,
+    "eps": 13.1051,
+    "sps": 4026.56,
+    "edep": 187.812
+  },
+  {
+    "name": "vgeo_p200",
+    "date": "Sun Jan  2 09:17:22 2022",
+    "cpu": "Apple M1",
+    "g4version": 1073,
+    "thread": 8,
+    "event": 1600000,
+    "time": 108.897,
+    "init": 0.000568,
+    "tpe": 0.0680609,
+    "eps": 14.6928,
+    "sps": 4514.8,
+    "edep": 187.803
+  }
+]
