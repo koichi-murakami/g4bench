@@ -19,6 +19,7 @@ jobs:
       - run:
           name: test_ecal
           command: |
+            echo $NOG4VERSION
             ./tests/ci/test_ecal.sh
 
 workflows:
