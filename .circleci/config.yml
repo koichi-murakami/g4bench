@@ -18,6 +18,8 @@ jobs:
           docker_layer_caching: true
       - run: |
           name: test_ecal
+          pwd
+          ls
           /root/work/g4bench/g4bench/tests/ci/test_ecal.sh
 
 workflows:
