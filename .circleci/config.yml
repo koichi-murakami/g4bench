@@ -16,11 +16,12 @@ jobs:
       - setup_remote_docker:
           version: 20.10.14
           docker_layer_caching: true
-      - run: |
+      - run:
           name: test_ecal
-          pwd
-          ls
-          /root/work/g4bench/g4bench/tests/ci/test_ecal.sh
+          command: |
+            pwd
+            ls
+            /root/work/g4bench/g4bench/tests/ci/test_ecal.sh
 
 workflows:
   build_and_run:
