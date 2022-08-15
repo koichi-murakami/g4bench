@@ -8,17 +8,17 @@ jobs:
     docker:
       - image: koichimurakamik6/geant4-runtime:10.7.3
     working_directory: ~/work/g4bench
-    environment:
-      - NOG4VERSION: "1"
 
     steps:
       - checkout
       - setup_remote_docker:
           version: 20.10.14
           docker_layer_caching: true
+      - environment:
+        - NOG4VERSION: "1"
       - run: |
           name: test_ecal
-          /root/work/g4bench/tests/ci/test_ecal.sh
+          /root/work/g4bench/g4bench/tests/ci/test_ecal.sh
 
 workflows:
   build_and_run:
