@@ -15,7 +15,7 @@ jobs:
             export NOG4VERSION=1
             ./tests/ci/test_ecal.sh
       - store_artifacts:
-          path: ./tests/ci/jtest.out
+          path: ./build/ecal/jtest.out
 
 workflows:
   build_and_run:
