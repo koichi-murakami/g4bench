@@ -19,9 +19,7 @@ jobs:
       - run:
           name: test_ecal
           command: |
-            pwd
-            ls
-            /root/work/g4bench/g4bench/tests/ci/test_ecal.sh
+            ./tests/ci/test_ecal.sh
 
 workflows:
   build_and_run:
