@@ -1,0 +1,25 @@
+version: 2.1
+
+jobs:
+  ecal_v107:
+    docker:
+      - image: koichimurakamik6/geant4-runtime:10.7.3
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.14
+          docker_layer_caching: true
+      - run:
+          name: test_ecal
+          command: |
+            export NOG4VERSION=1
+            ./tests/ci/test_ecal.sh
+      - store_artifacts:
+          path: ./build/ecal/g4bench.json
+      - store_artifacts:
+          path: ./build/ecal/jtest.out
+
+workflows:
+  build_and_run:
+    jobs:
+      - ecal_v107
