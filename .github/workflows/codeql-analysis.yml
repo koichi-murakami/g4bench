@@ -63,7 +63,7 @@ jobs:
     #  uses: github/codeql-action/autobuild@v1
     - name: Build G4Bench
       run: |
-        ./configure --with-geant4-dir=/opt/geant4
+        ./configure --with-geant4-dir=/opt/geant4 --disable-vis
         cd build
         make
 
