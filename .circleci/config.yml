@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   ecal_v107:
     docker:
-      - image: koichimurakamik6/geant4-runtime:10.7.3
+      - image: koichimurakamik6/geant4-runtime:10.7.4
     steps:
       - checkout
       - setup_remote_docker:

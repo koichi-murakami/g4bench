@@ -11,7 +11,7 @@ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 endif()
 
 # Geant4 installation path
-set(GEANT4_INSTALL /opt/geant4/10.7.3
+set(GEANT4_INSTALL /opt/geant4/10.7.4
     CACHE STRING "Geant4 installation path")
 
 # MT flag

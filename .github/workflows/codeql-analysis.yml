@@ -43,13 +43,13 @@ jobs:
 
     - name: Initialize Geant4
       run: |
-         docker pull koichimurakamik6/geant4-runtime:latest
-         docker run -itd --name g4runtime koichimurakamik6/geant4-runtime:latest
+         docker pull koichimurakamik6/geant4-runtime:10.6.3
+         docker run -itd --name g4runtime koichimurakamik6/geant4-runtime:10.6.3
          docker cp g4runtime:/opt/geant4 /opt
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
+      uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
         # If you wish to specify custom queries, you can do so here or in a config file.
@@ -79,4 +79,4 @@ jobs:
     #   make release
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+      uses: github/codeql-action/analyze@v2
