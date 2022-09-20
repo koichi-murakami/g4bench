@@ -43,8 +43,8 @@ jobs:
 
     - name: Initialize Geant4
       run: |
-         docker pull koichimurakamik6/geant4-runtime:10.7.4
-         docker run -itd --name g4runtime koichimurakamik6/geant4-runtime:10.7.4
+         docker pull koichimurakamik6/geant4-runtime:10.6.3
+         docker run -itd --name g4runtime koichimurakamik6/geant4-runtime:10.6.3
          docker cp g4runtime:/opt/geant4 /opt
 
     # Initializes the CodeQL tools for scanning.
@@ -63,7 +63,7 @@ jobs:
     #  uses: github/codeql-action/autobuild@v1
     - name: Build G4Bench
       run: |
-        ./configure --with-geant4-dir=/opt/geant4 --disable-vis
+        ./configure --with-geant4-dir=/opt/geant4
         cd build
         make
 
