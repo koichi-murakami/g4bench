@@ -29,5 +29,10 @@ build*/
 *zzz/
 .vscode/
 
+# windows visual studio
+.vs/
+out/
+CmakeSettings.json
+
 # static analysis
 compile_flags.txt
