@@ -8,8 +8,7 @@ This software is distributed WITHOUT ANY WARRANTY; without even the
 implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License for more information.
 ============================================================================*/
-#include <cstdlib>
-#include <getopt.h>
+//#include <cstdlib>
 #ifdef ENABLE_MT
 #include "G4MTRunManager.hh"
 #else
@@ -17,7 +16,9 @@ See the License for more information.
 #endif
 #include "G4UIExecutive.hh"
 #include "G4UImanager.hh"
+#ifndef _MSC_VER
 #include "G4UItcsh.hh"
+#endif
 #ifdef ENABLE_VIS
 #include "G4VisExecutive.hh"
 #endif
@@ -27,6 +28,11 @@ See the License for more information.
 #include "common/g4environment.h"
 #include "util/jsonparser.h"
 #include "util/timehistory.h"
+#ifdef _MSC_VER
+#include "util/getopt.h"
+#else
+#include <getopt.h>
+#endif
 
 using namespace kut;
 
