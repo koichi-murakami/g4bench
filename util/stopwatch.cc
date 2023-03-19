@@ -57,14 +57,14 @@ Stopwatch::Stopwatch()
 // --------------------------------------------------------------------------
 void Stopwatch::Reset()
 {
-  times(&start_time_);
+  ::times(&start_time_);
   start_clock_ = g_clock::now();
 }
 
 // --------------------------------------------------------------------------
 void Stopwatch::Split()
 {
-  times(&end_time_);
+  ::times(&end_time_);
   end_clock_ = g_clock::now();
 }
 
@@ -80,14 +80,14 @@ double Stopwatch::GetRealElapsed() const
 double Stopwatch::GetSystemElapsed() const
 {
   double diff = end_time_.tms_stime - start_time_.tms_stime;
-  return diff / sysconf(_SC_CLK_TCK);
+  return diff / ::sysconf(_SC_CLK_TCK);
 }
 
 // --------------------------------------------------------------------------
 double Stopwatch::GetUserElapsed() const
 {
   double diff = end_time_.tms_utime - start_time_.tms_utime;
-  return diff / sysconf(_SC_CLK_TCK);
+  return diff / ::sysconf(_SC_CLK_TCK);
 }
 
 // --------------------------------------------------------------------------
