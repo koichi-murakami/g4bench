@@ -28,6 +28,23 @@ target_sources(${APP} PRIVATE
   ../util/timehistory.cc
 )
 
+if(WIN32)
+  target_sources(${APP} PRIVATE
+    appbuilder.cc main.cc medicalbeam.cc phantom_pvp.cc voxelgeom.cc
+    ../common/calscorer.cc
+    ../common/eventaction.cc
+    ../common/g4environment.cc
+    ../common/particlegun.cc
+    ../common/runaction.cc
+    ../common/stepaction.cc
+    ../util/jsonparser.cc
+    ../util/stopwatch.cc
+    ../util/timehistory.cc
+    ../util/getopt.c
+    ../util/getopt_long.c
+  )
+endif()
+
 if(ENABLE_MT)
   target_compile_definitions(${APP} PRIVATE ENABLE_MT)
 endif()
