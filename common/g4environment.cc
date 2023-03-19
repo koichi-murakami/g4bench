@@ -231,8 +231,11 @@ void G4Environment::SetEnvironment()
 
       auto var = data_dir_ + "/" + ::kG4ENV_PREFIX_LSIT[i] +
                                    ::kVer_LIST[i][g4ver];
+#ifdef _MSC_VER
+      _putenv_s(::kG4ENV_LIST[i].c_str(), var.c_str());
+#else
       setenv(::kG4ENV_LIST[i].c_str(), var.c_str(), 1);
-
+#endif
     } else {
       std::string user_var(envstr);
       std::string valid_var = ::kG4ENV_PREFIX_LSIT[i] + ::kVer_LIST[i][g4ver];
