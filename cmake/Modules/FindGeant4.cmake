@@ -42,10 +42,24 @@ if(GEANT4_CONFIG)
     set(GEANT4_VIS false)
   endif()
 
-  message(STATUS "Found Geant4: ${GEANT4_PREFIX} (${GEANT4_VERSION})")
-  message(STATUS "Geant4 MT: ${GEANT4_MT}")
-  message(STATUS "Geant4 Visualization: ${GEANT4_VIS}")
+elseif(WIN32)
+   find_file(GEANT4_WIN NAMES G4run.dll PATHS ${GEANT4_INSTALL}/bin)
 
+  if(GEANT4_WIN)
+    set(GEANT4_PREFIX ${GEANT4_INSTALL})
+    set(GEANT4_FOUND TRUE)
+    set(GEANT4_MT FALSE)
+    set(GEANT4_VIS FALSE)
+
+  else()
+    set(GEANT4_FOUND FALSE)
+    if (Geant4_FIND_REQUIRED)
+      message(FATAL_ERROR "NOT Found Geant4: set GEANT4_INSTALL.")
+    else()
+      message(WARNING "NOT Found Geant4: set GEANT4_INSTALL.")
+    endif()
+  endif()
+ 
 else()
   set(GEANT4_FOUND FALSE)
   if (Geant4_FIND_REQUIRED)
@@ -56,32 +70,49 @@ else()
 
 endif()
 
+message(STATUS "Found Geant4: ${GEANT4_PREFIX} (${GEANT4_VERSION})")
+message(STATUS "Geant4 MT: ${GEANT4_MT}")
+message(STATUS "Geant4 Visualization: ${GEANT4_VIS}")
+
 set(GEANT4_INCLUDE_DIR ${GEANT4_PREFIX}/include/Geant4)
-set(GEANT4_LIBRARY_DIR ${GEANT4_PREFIX}/${_LIBDIR_DEFAULT})
+if(WIN32)
+  set(GEANT4_LIBRARY_DIR ${GEANT4_PREFIX}/lib)
+else()
+  set(GEANT4_LIBRARY_DIR ${GEANT4_PREFIX}/${_LIBDIR_DEFAULT})
+endif()
 
 if (GEANT4_STATIC)
-set(GEANT4_LIBRARIES  ${GEANT4_LIBRARY_DIR}/libG4interfaces.a
-                      ${GEANT4_LIBRARY_DIR}/libG4persistency.a
-                      ${GEANT4_LIBRARY_DIR}/libG4analysis.a
-                      ${GEANT4_LIBRARY_DIR}/libG4error_propagation.a
-                      ${GEANT4_LIBRARY_DIR}/libG4readout.a
-                      ${GEANT4_LIBRARY_DIR}/libG4physicslists.a
-                      ${GEANT4_LIBRARY_DIR}/libG4run.a
-                      ${GEANT4_LIBRARY_DIR}/libG4event.a
-                      ${GEANT4_LIBRARY_DIR}/libG4tracking.a
-                      ${GEANT4_LIBRARY_DIR}/libG4parmodels.a
-                      ${GEANT4_LIBRARY_DIR}/libG4processes.a
-                      ${GEANT4_LIBRARY_DIR}/libG4digits_hits.a
-                      ${GEANT4_LIBRARY_DIR}/libG4track.a
-                      ${GEANT4_LIBRARY_DIR}/libG4particles.a
-                      ${GEANT4_LIBRARY_DIR}/libG4geometry.a
-                      ${GEANT4_LIBRARY_DIR}/libG4materials.a
-                      ${GEANT4_LIBRARY_DIR}/libG4graphics_reps.a
-                      ${GEANT4_LIBRARY_DIR}/libG4intercoms.a
-                      ${GEANT4_LIBRARY_DIR}/libG4global.a
-                      ${GEANT4_LIBRARY_DIR}/libG4clhep.a
-                      ${GEANT4_LIBRARY_DIR}/libG4zlib.a
-                      expat pthread)
+if(WIN32)
+  set(GEANT4_LIBRARIES  G4interfaces-static G4persistency-static G4analysis-static
+                        G4error_propagation-static G4readout-static G4physicslists-static
+                        G4run-static G4event-static G4tracking-static G4parmodels-static G4processes-static
+                        G4digits_hits-static G4track-static G4particles-static G4geometry-static
+                        G4materials-static G4graphics_reps-static G4intercoms-static
+                        G4global-static G4clhep-static G4expat-static G4zlib-static)
+else()
+  set(GEANT4_LIBRARIES  ${GEANT4_LIBRARY_DIR}/libG4interfaces.a
+                        ${GEANT4_LIBRARY_DIR}/libG4persistency.a
+                        ${GEANT4_LIBRARY_DIR}/libG4analysis.a
+                        ${GEANT4_LIBRARY_DIR}/libG4error_propagation.a
+                        ${GEANT4_LIBRARY_DIR}/libG4readout.a
+                        ${GEANT4_LIBRARY_DIR}/libG4physicslists.a
+                        ${GEANT4_LIBRARY_DIR}/libG4run.a
+                        ${GEANT4_LIBRARY_DIR}/libG4event.a
+                        ${GEANT4_LIBRARY_DIR}/libG4tracking.a
+                        ${GEANT4_LIBRARY_DIR}/libG4parmodels.a
+                        ${GEANT4_LIBRARY_DIR}/libG4processes.a
+                        ${GEANT4_LIBRARY_DIR}/libG4digits_hits.a
+                        ${GEANT4_LIBRARY_DIR}/libG4track.a
+                        ${GEANT4_LIBRARY_DIR}/libG4particles.a
+                        ${GEANT4_LIBRARY_DIR}/libG4geometry.a
+                        ${GEANT4_LIBRARY_DIR}/libG4materials.a
+                        ${GEANT4_LIBRARY_DIR}/libG4graphics_reps.a
+                        ${GEANT4_LIBRARY_DIR}/libG4intercoms.a
+                        ${GEANT4_LIBRARY_DIR}/libG4global.a
+                        ${GEANT4_LIBRARY_DIR}/libG4clhep.a
+                        ${GEANT4_LIBRARY_DIR}/libG4zlib.a
+                        expat pthread)
+ endif()
 
 else()
 set(GEANT4_LIBRARIES  G4interfaces G4persistency G4analysis

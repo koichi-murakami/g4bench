@@ -13,6 +13,8 @@ endif()
 # Geant4 installation path
 set(GEANT4_INSTALL /opt/geant4/10.7.4
     CACHE STRING "Geant4 installation path")
+#set(GEANT4_INSTALL c:/Users/koich/opt/geant4/10.7.4
+#   CACHE STRING "Geant4 installation path")
 
 # MT flag
 set(ENABLE_MT FALSE CACHE BOOL "Enable multi-threading flag")

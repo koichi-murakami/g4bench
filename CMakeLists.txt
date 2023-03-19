@@ -12,6 +12,9 @@ cmake_minimum_required(VERSION 3.16)
 #==============================================================================
 project(G4Bench CXX)
 #==============================================================================
+if(WIN32)
+  ENABLE_LANGUAGE(C)
+endif()
 
 include(config.cmake)
 
